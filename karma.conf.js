@@ -10,6 +10,7 @@ module.exports = function (config) {
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
+      require("karma-spec-reporter"),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
@@ -17,15 +18,19 @@ module.exports = function (config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, './coverage/chessmanager'),
-      reports: ['html', 'lcovonly', 'text-summary'],
+      reports: ['lcovonly', 'text-summary'],
       fixWebpackSourcePaths: true
     },
-    reporters: ['progress', 'kjhtml'],
+    specReporter: {
+      suppressSkipped: true,
+      showSpecTiming: true
+    },
+    reporters: ['spec'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
     singleRun: false,
     restartOnFileChange: true
   });
