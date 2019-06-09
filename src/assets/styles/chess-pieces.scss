@@ -1,0 +1,177 @@
+@font-face {
+  font-family: "chess-pieces";
+  src: url("/assets/fonts/chess-pieces.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]::before,
+[class*="icon-"]::before {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "chess-pieces";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-maya {
+  &-wr::before {
+    content: "\e900";
+    color: black;
+  }
+  &-wq::before {
+    content: "\e911";
+    color: black;
+  }
+  &-wp::before {
+    content: "\e917";
+    color: black;
+  }
+  &-wn::before {
+    content: "\e91c";
+    color: black;
+  }
+  &-wk::before {
+    content: "\e920";
+    color: black;
+  }
+  &-wb::before {
+    content: "\e926";
+    color: black;
+  }
+  &-br::before {
+    content: "\e92b";
+    color: black;
+  }
+  &-bq::before {
+    content: "\e92d";
+    color: black;
+  }
+  &-bp::before {
+    content: "\e936";
+    color: black;
+  }
+  &-bn::before {
+    content: "\e93a";
+    color: black;
+  }
+  &-bb::before {
+    content: "\e940";
+    color: black;
+  }
+  &-bk::before {
+    content: "\e944";
+    color: white;
+  }
+}
+
+.icon-leipzig {
+  font-family: "leipzig";
+
+  &-wr::before {
+    content: "\e951";
+    color: white;
+  }
+  &-wq::before {
+    content: "\e965";
+    color: white;
+  }
+  &-wp::before {
+    content: "\e978";
+    color: white;
+  }
+  &-wn::before {
+    content: "\e97e";
+    color: white;
+  }
+  &-wk::before {
+    content: "\e983";
+    color: white;
+  }
+  &-wb::before {
+    content: "\e998";
+    color: white;
+  }
+  &-br::before {
+    content: "\e9a6";
+    color: white;
+  }
+  &-bq::before {
+    content: "\e9b2";
+    color: white;
+  }
+  &-bp::before {
+    content: "\e9bb";
+  }
+  &-bn::before {
+    content: "\e9bc";
+    color: white;
+  }
+  &-bk::before {
+    content: "\e9c4";
+    color: white;
+  }
+  &-bb::before {
+    content: "\e9d1";
+    color: white;
+  }
+}
+
+.icon-alpha {
+  font-family: "alpha";
+
+  &-wr::before {
+    content: "\e9da";
+    color: black;
+  }
+  &-wq::before {
+    content: "\e9de";
+    color: black;
+  }
+  &-wp::before {
+    content: "\e9e5";
+    color: black;
+  }
+  &-wn::before {
+    content: "\e9e9";
+    color: black;
+  }
+  &-wk::before {
+    content: "\e9eb";
+    color: black;
+  }
+  &-wb::before {
+    content: "\e9f1";
+    color: black;
+  }
+  &-br::before {
+    content: "\e9f7";
+    color: black;
+  }
+  &-bq::before {
+    content: "\e9fa";
+    color: black;
+  }
+  &-bp::before {
+    content: "\ea00";
+  }
+  &-bn::before {
+    content: "\ea01";
+    color: black;
+  }
+  &-bk::before {
+    content: "\ea05";
+    color: black;
+  }
+  &-bb::before {
+    content: "\ea0d";
+    color: black;
+  }
+}
