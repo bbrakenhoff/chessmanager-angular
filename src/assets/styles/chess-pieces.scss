@@ -1,15 +1,20 @@
 @font-face {
-  font-family: "chess-pieces";
-  src: url("/assets/fonts/chess-pieces.ttf");
+  font-family: 'chess-pieces';
+  src:  url('/assets/fonts/chess-pieces.eot');
+  src:  url('/assets/fonts/chess-pieces.eot#iefix') format('embedded-opentype'),
+    url('/assets/fonts/chess-pieces.ttf') format('truetype'),
+    url('/assets/fonts/chess-pieces.woff') format('woff'),
+    url('/assets/fonts/chess-pieces.svg#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-[class^="icon-"]::before,
-[class*="icon-"]::before {
+[class^='icon-']::before,
+[class*='icon-']::before {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: "chess-pieces";
+  font-family: 'chess-pieces';
   speak: none;
+  font-size: 3rem;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -23,155 +28,119 @@
 
 .icon-maya {
   &-wr::before {
-    content: "\e900";
-    color: black;
+    content: '\e900';
   }
   &-wq::before {
-    content: "\e911";
-    color: black;
+    content: '\e911';
   }
   &-wp::before {
-    content: "\e917";
-    color: black;
+    content: '\e917';
   }
   &-wn::before {
-    content: "\e91c";
-    color: black;
+    content: '\e91c';
   }
   &-wk::before {
-    content: "\e920";
-    color: black;
+    content: '\e920';
   }
   &-wb::before {
-    content: "\e926";
-    color: black;
+    content: '\e926';
   }
   &-br::before {
-    content: "\e92b";
-    color: black;
+    content: '\e92b';
   }
   &-bq::before {
-    content: "\e92d";
-    color: black;
+    content: '\e92d';
   }
   &-bp::before {
-    content: "\e936";
-    color: black;
+    content: '\e936';
   }
   &-bn::before {
-    content: "\e93a";
-    color: black;
+    content: '\e93a';
   }
   &-bb::before {
-    content: "\e940";
-    color: black;
+    content: '\e940';
   }
   &-bk::before {
-    content: "\e944";
-    color: white;
+    content: '\e950';
   }
 }
 
 .icon-leipzig {
-  font-family: "leipzig";
 
   &-wr::before {
-    content: "\e951";
-    color: white;
+    content: '\e964';
   }
   &-wq::before {
-    content: "\e965";
-    color: white;
+    content: '\e977';
   }
   &-wp::before {
-    content: "\e978";
-    color: white;
+    content: '\e97d';
   }
   &-wn::before {
-    content: "\e97e";
-    color: white;
+    content: '\e982';
   }
   &-wk::before {
-    content: "\e983";
-    color: white;
+    content: '\e997';
   }
   &-wb::before {
-    content: "\e998";
-    color: white;
+    content: '\e9a5';
   }
   &-br::before {
-    content: "\e9a6";
-    color: white;
+    content: '\e9a6';
   }
   &-bq::before {
-    content: "\e9b2";
-    color: white;
+    content: '\e9b2';
   }
   &-bp::before {
-    content: "\e9bb";
+    content: '\e9bb';
   }
   &-bn::before {
-    content: "\e9bc";
-    color: white;
+    content: '\e9c3';
   }
   &-bk::before {
-    content: "\e9c4";
-    color: white;
+    content: '\e9d0';
   }
   &-bb::before {
-    content: "\e9d1";
-    color: white;
+    content: '\e9d9';
   }
 }
 
 .icon-alpha {
-  font-family: "alpha";
 
   &-wr::before {
-    content: "\e9da";
-    color: black;
+    content: '\e9da';
   }
   &-wq::before {
-    content: "\e9de";
-    color: black;
+    content: '\e9de';
   }
   &-wp::before {
-    content: "\e9e5";
-    color: black;
+    content: '\e9e5';
   }
   &-wn::before {
-    content: "\e9e9";
-    color: black;
+    content: '\e9e9';
   }
   &-wk::before {
-    content: "\e9eb";
-    color: black;
+    content: '\e9eb';
   }
   &-wb::before {
-    content: "\e9f1";
-    color: black;
+    content: '\e9f1';
   }
   &-br::before {
-    content: "\e9f7";
-    color: black;
+    content: '\e9f7';
   }
   &-bq::before {
-    content: "\e9fa";
-    color: black;
+    content: '\e9fa';
   }
   &-bp::before {
-    content: "\ea00";
+    content: '\ea00';
   }
   &-bn::before {
-    content: "\ea01";
-    color: black;
+    content: '\ea01';
   }
   &-bk::before {
-    content: "\ea05";
-    color: black;
+    content: '\ea05';
   }
   &-bb::before {
-    content: "\ea0d";
-    color: black;
+    content: '\ea0d';
   }
 }
