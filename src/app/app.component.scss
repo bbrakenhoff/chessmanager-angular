@@ -1,0 +1,25 @@
+@import '../assets/styles/_bootstrap.scss';
+
+.app {
+  @include make-container();
+  @include make-container-max-widths();
+
+  &__row {
+    @include make-row();
+  }
+
+  &__welcome, &__intro, &__icons-preview {
+    @include make-col(12);
+
+    text-align: center;
+  }
+
+  &__links {
+    display: inline-block;
+    text-align: left;
+  }
+
+  &__icon-set {
+    @include make-col(12);
+  }
+}
