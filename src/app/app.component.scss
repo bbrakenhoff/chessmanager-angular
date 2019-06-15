@@ -21,5 +21,7 @@
 
   &__icon-set {
     @include make-col(12);
+
+    font-size: 3rem;
   }
 }
