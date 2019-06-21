@@ -1,31 +1,27 @@
 @font-face {
   font-family: 'chess-pieces';
-  src:  url('/assets/fonts/chess-pieces.eot');
-  src:  url('/assets/fonts/chess-pieces.eot#iefix') format('embedded-opentype'),
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/chess-pieces.eot');
+  src: url('/assets/fonts/chess-pieces.eot#iefix') format('embedded-opentype'),
     url('/assets/fonts/chess-pieces.ttf') format('truetype'),
     url('/assets/fonts/chess-pieces.woff') format('woff'),
     url('/assets/fonts/chess-pieces.svg#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
 }
 
-[class^='icon-']::before,
-[class*='icon-']::before {
-  /* use !important to prevent issues with browser extensions that change fonts */
+[class*='cp-icon-'] {
   font-family: 'chess-pieces';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1;
+  speak: none;
+  text-transform: none;
 }
 
-.icon-maya {
+.cp-icon-maya {
   &-wr::before {
     content: '\e900';
   }
@@ -64,7 +60,7 @@
   }
 }
 
-.icon-leipzig {
+.cp-icon-leipzig {
 
   &-wr::before {
     content: '\e964';
@@ -104,7 +100,7 @@
   }
 }
 
-.icon-alpha {
+.cp-icon-alpha {
 
   &-wr::before {
     content: '\e9da';
