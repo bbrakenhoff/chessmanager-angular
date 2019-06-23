@@ -1,9 +1,21 @@
 @import '../assets/styles/_bootstrap.scss';
 
 .app {
-  background-color: #f4f3ef;
-  font-family: $font-family-sans-serif;
+  // Position
   position: relative;
   top: 0;
   height: 100vh;
+
+  // Other
+  background-color: #f4f3ef;
+  font-family: $font-family-sans-serif;
+
+  & ._routeroutlet {
+    position: fixed;
+    z-index: 999;
+    top: 53px; // Navbar min height
+    bottom: 0;
+    width: 100%;
+
+  }
 }

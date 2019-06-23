@@ -1,11 +1,7 @@
 <nav class="app-navbar" role="navigation">
   <div class="_container" [ngClass]="{ '-togglerisopen': togglerIsOpen }">
     <div class="_brand">Chess manager</div>
-    <button
-      class="_toggler"
-      type="button"
-      (click)="onTogglerClicked()"
-    >
+    <button class="_toggler" type="button" (click)="onTogglerClicked()">
       <span class="_togglerkebab"></span>
       <span class="_togglerkebab"></span>
       <span class="_togglerkebab"></span>
@@ -13,8 +9,10 @@
     <div class="_collapse" *ngIf="togglerIsOpen" @togglerAnim>
       <ul class="_nav">
         <li class="_navitem">
-          <i class="_navitemicon nc-icon-settings-gear"></i>
-          <p class="_navitemtext">Settings</p>
+          <a routerLink="settings"  (click)="onTogglerClicked()">
+            <i class="_navitemicon nc-icon-settings-gear"></i>
+            <p class="_navitemtext">Settings</p>
+          </a>
         </li>
       </ul>
     </div>
