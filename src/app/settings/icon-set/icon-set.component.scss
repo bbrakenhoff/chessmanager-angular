@@ -1,0 +1,27 @@
+@import '../../../assets/styles/_bootstrap.scss';
+
+.icon-set {
+  @include make-row();
+
+  & ._col {
+    @include make-col-ready();
+    @include make-col(12);
+
+    @include media-breakpoint-up('md'){
+      @include make-col(6);
+
+      &:first-child {
+        padding-right: 0;
+      }
+
+      &:last-child{
+        padding-left: 0;
+      }
+    }
+  }
+
+  & ._icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}

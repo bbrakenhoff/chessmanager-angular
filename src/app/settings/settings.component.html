@@ -5,8 +5,8 @@
         <div class="_cardbody">
           <div class="_row">
             <div class="_cardleftcol">
-              <div class="_row">
-                <!-- White icons -->
+              <app-icon-set></app-icon-set>
+              <!-- <div class="_row">
                 <div class="_iconsetcol" *ngIf="!iconSetCardIsOpen">
                   <svg viewBox="0 0 32 32" class="_iconseticon">
                     <use xlink:href="/assets/icons/icons.svg#alpha-wr" />
@@ -27,7 +27,6 @@
                     <use xlink:href="/assets/icons/icons.svg#alpha-wp" />
                   </svg>
                 </div>
-                <!-- Black icons -->
                 <div class="_iconsetcol" *ngIf="!iconSetCardIsOpen">
                   <svg viewBox="0 0 32 32" class="_iconseticon">
                     <use xlink:href="/assets/icons/icons.svg#alpha-br" />
@@ -47,15 +46,15 @@
                   <svg viewBox="0 0 32 32" class="_iconseticon">
                     <use xlink:href="/assets/icons/icons.svg#alpha-bp" />
                   </svg>
-                </div>
+                </div> -->
 
                 <!-- Select options -->
-                <form [formGroup]="form" novalidate="novalidate" class="_iconsetcol" *ngIf="iconSetCardIsOpen">
+                <!-- <form [formGroup]="form" novalidate="novalidate" class="_iconsetcol" *ngIf="iconSetCardIsOpen">
                   <input type="radio" name="iconSet" formControlName="iconSet" value="'maya'">
                   <input type="radio" name="iconSet" formControlName="iconSet" value="'alpha'">
                   <input type="radio" name="iconSet" formControlName="iconSet" value="'leipzig'">
-                </form>
-              </div>
+                </!-
+              </div> -->
             </div>
             <div class="_cardrightcol">
               <p class="_cardcategory">Icon set</p>
