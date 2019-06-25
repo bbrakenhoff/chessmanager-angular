@@ -13,7 +13,7 @@
     @include make-col-ready();
     @include make-col(12);
 
-    @include media-breakpoint-up('lg') {
+    @include media-breakpoint-up('md') {
       @include make-col(6);
     }
   }
@@ -70,8 +70,6 @@
     @include make-col-ready();
     @include make-col(12);
 
-    // Positioning
-
     // Display & Box Model
     display: flex;
     flex-direction: row;
@@ -111,8 +109,11 @@
   }
 
   & ._cardfooterbutton {
+    // Display & Box Model
     display: flex;
     align-items: center;
+
+    cursor: pointer;
   }
 
   & ._cardfootericon {
