@@ -5,56 +5,36 @@
         <div class="_cardbody">
           <div class="_row">
             <div class="_cardleftcol">
-              <app-icon-set></app-icon-set>
-              <!-- <div class="_row">
-                <div class="_iconsetcol" *ngIf="!iconSetCardIsOpen">
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-wr" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-wn" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-wb" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-wq" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-wk" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-wp" />
-                  </svg>
-                </div>
-                <div class="_iconsetcol" *ngIf="!iconSetCardIsOpen">
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-br" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-bn" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-bb" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-bq" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-bk" />
-                  </svg>
-                  <svg viewBox="0 0 32 32" class="_iconseticon">
-                    <use xlink:href="/assets/icons/icons.svg#alpha-bp" />
-                  </svg>
-                </div> -->
+              <app-icon-set [iconSet]="IconSet.Maya" *ngIf="!iconSetCardIsOpen"></app-icon-set>
 
-                <!-- Select options -->
-                <!-- <form [formGroup]="form" novalidate="novalidate" class="_iconsetcol" *ngIf="iconSetCardIsOpen">
-                  <input type="radio" name="iconSet" formControlName="iconSet" value="'maya'">
-                  <input type="radio" name="iconSet" formControlName="iconSet" value="'alpha'">
-                  <input type="radio" name="iconSet" formControlName="iconSet" value="'leipzig'">
-                </!-
-              </div> -->
+              <!-- Select options -->
+              <div class="_row">
+                <form
+                  [formGroup]="form"
+                  novalidate="novalidate"
+                  class="_iconsetcol"
+                  *ngIf="iconSetCardIsOpen"
+                >
+                  <input
+                    type="radio"
+                    name="iconSet"
+                    formControlName="iconSet"
+                    value="'maya'"
+                  />
+                  <input
+                    type="radio"
+                    name="iconSet"
+                    formControlName="iconSet"
+                    value="'alpha'"
+                  />
+                  <input
+                    type="radio"
+                    name="iconSet"
+                    formControlName="iconSet"
+                    value="'leipzig'"
+                  />
+                </form>
+              </div>
             </div>
             <div class="_cardrightcol">
               <p class="_cardcategory">Icon set</p>

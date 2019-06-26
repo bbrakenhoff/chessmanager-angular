@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
+import { EnumAware } from 'src/app/util/enum-aware.decorator';
 
 @Component({
   selector: 'app-icon-set',
@@ -12,5 +13,15 @@ export class IconSetComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(
+      `%cBijoya: icon-set.component -> ngOnInit`,
+      'color: deeppink;',
+      this.iconSet
+    );
+  }
+
+  getLinkForIcon(icon: string) {
+    return `/assets/icons/icons.svg#${this.iconSet}-${icon}`;
+  }
 }
