@@ -12,27 +12,39 @@
                 <form
                   [formGroup]="form"
                   novalidate="novalidate"
-                  class="_iconsetcol"
+                  class="_iconsetform"
                   *ngIf="iconSetCardIsOpen"
                 >
+                <div class="_iconsetradiobutton">
                   <input
                     type="radio"
                     name="iconSet"
                     formControlName="iconSet"
                     value="'maya'"
                   />
+                  <label>Maya</label>
+                  <app-icon-set [iconSet]="IconSet.Maya"></app-icon-set>
+                  </div>
+                  <div class="_iconsetradiobutton -checked">
                   <input
                     type="radio"
                     name="iconSet"
                     formControlName="iconSet"
                     value="'alpha'"
                   />
+                  <label>Alpha</label>
+                  <app-icon-set [iconSet]="IconSet.Alpha"></app-icon-set>
+                  </div>
+                  <div class="_iconsetradiobutton">
                   <input
                     type="radio"
                     name="iconSet"
                     formControlName="iconSet"
                     value="'leipzig'"
                   />
+                  <label>Leipzig</label>
+                  <app-icon-set [iconSet]="IconSet.Leipzig"></app-icon-set>
+                  </div>
                 </form>
               </div>
             </div>
