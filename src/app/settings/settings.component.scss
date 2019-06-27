@@ -75,13 +75,17 @@
     flex-direction: column;
   }
 
+  & ._iconsetlabel {
+    margin-bottom: 0.5rem;
+  }
+
   & ._iconsetradiobutton {
     position: relative;
 
     display: flex;
     flex-direction: column;
     padding-left: 2rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
 
     cursor: pointer;
     line-height: 1.4rem;
@@ -95,6 +99,8 @@
     &::before,
     &::after {
       position: absolute;
+      top: 50%;
+      left: 0;
 
       display: block;
 
@@ -103,21 +109,17 @@
     }
 
     &::before {
-      top: 0;
-      left: 0;
-
       width: 1.2rem;
       height: 1.2rem;
       border: 0.1rem solid #51cbce;
+      margin-top: -0.6rem;
     }
 
     &.-checked::after {
-      top: 0;
-      left: 0;
-
-      width: .6rem;
-      height: .6rem;
+      width: 0.6rem;
+      height: 0.6rem;
       margin: 0.4rem;
+      margin-top: -0.2rem;
 
       background-color: #51cbce;
     }

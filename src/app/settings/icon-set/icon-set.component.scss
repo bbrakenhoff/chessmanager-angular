@@ -1,11 +1,11 @@
 @import '../../../assets/styles/_bootstrap.scss';
 
 .icon-set {
-  @include make-row();
+  display: flex;
+  flex-direction: column;
 
-  & ._col {
-    @include make-col-ready();
-    @include make-col(12);
+  & ._colorsubset {
+    display: flex;
   }
 
   & ._icon {
