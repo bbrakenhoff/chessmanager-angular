@@ -18,7 +18,9 @@ export class SettingsComponent implements OnInit {
       iconSet: ['', Validators.required]
     });
 
-    this.form.valueChanges.subscribe(value => this._onIconSetChanged(value));
+    this.form.controls.iconSet.valueChanges.subscribe(value =>
+      this._onIconSetChanged(value)
+    );
   }
 
   ngOnInit() {}
@@ -34,5 +36,17 @@ export class SettingsComponent implements OnInit {
       value
     );
     this.iconSetCardIsOpen = false;
+  }
+
+  selectIconSet(iconSet: IconSet) {
+    this.form.controls.iconSet.setValue(iconSet);
+  }
+
+  isIconSetSelected(iconSet: IconSet): boolean {
+    console.log(
+      `%cBijoya: settings.component -> _isIconSetSelected`,
+      'color: orange;'
+    );
+    return this.form.controls.iconSet.value === iconSet;
   }
 }
