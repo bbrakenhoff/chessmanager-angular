@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
 
-fdescribe('SettingsComponent', () => {
+describe('SettingsComponent', () => {
   let fixture: ComponentFixture<SettingsComponent>;
   let component: SettingsComponent;
   beforeEach(() => {
@@ -48,15 +48,6 @@ fdescribe('SettingsComponent', () => {
       expect(component.iconSetCardIsOpen).toEqual(true);
       (component as any)._onIconSetChanged('');
       expect(component.iconSetCardIsOpen).toEqual(false);
-    });
-  });
-
-  describe('selectIconSet(iconSet: IconSet)', () => {
-    it('should set the given icon set as selected', () => {
-      component.form.controls.iconSet.setValue(IconSet.Alpha);
-      expect(component.form.controls.iconSet.value).toEqual(IconSet.Alpha);
-      component.selectIconSet(IconSet.Maya);
-      expect(component.form.controls.iconSet.value).toEqual(IconSet.Maya);
     });
   });
 

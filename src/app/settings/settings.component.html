@@ -20,42 +20,39 @@
                 >
                   <div
                     class="_iconsetradiobutton"
-                    (click)="selectIconSet(IconSet.Maya)"
                     [ngClass]="{ '-checked': isIconSetSelected(IconSet.Maya) }"
                   >
                     <input
                       type="radio"
                       name="iconSet"
                       formControlName="iconSet"
-                      value="IconSet.Maya"
+                      [value]="IconSet.Maya"
                     />
                     <label class="_iconsetlabel">Maya</label>
                     <app-icon-set [iconSet]="IconSet.Maya"></app-icon-set>
                   </div>
                   <div
                     class="_iconsetradiobutton"
-                    (click)="selectIconSet(IconSet.Alpha)"
                     [ngClass]="{ '-checked': isIconSetSelected(IconSet.Alpha) }"
-                  >
+                    >
                     <input
                       type="radio"
                       name="iconSet"
                       formControlName="iconSet"
-                      value="IconSet.Alpha"
+                      [value]="IconSet.Alpha"
                     />
                     <label class="_iconsetlabel">Alpha</label>
                     <app-icon-set [iconSet]="IconSet.Alpha"></app-icon-set>
                   </div>
                   <div
                     class="_iconsetradiobutton"
-                    (click)="selectIconSet(IconSet.Leipzig)"
                     [ngClass]="{ '-checked': isIconSetSelected(IconSet.Leipzig) }"
                   >
                     <input
                       type="radio"
                       name="iconSet"
                       formControlName="iconSet"
-                      value="IconSet.Leipzig"
+                      [value]="IconSet.Leipzig"
                     />
                     <label class="_iconsetlabel">Leipzig</label>
                     <app-icon-set [iconSet]="IconSet.Leipzig"></app-icon-set>

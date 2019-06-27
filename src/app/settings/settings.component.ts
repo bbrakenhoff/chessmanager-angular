@@ -30,23 +30,10 @@ export class SettingsComponent implements OnInit {
   }
 
   private _onIconSetChanged(value) {
-    console.log(
-      `%cBijoya: settings.component -> valueChanges`,
-      'color: deeppink;',
-      value
-    );
     this.iconSetCardIsOpen = false;
   }
 
-  selectIconSet(iconSet: IconSet) {
-    this.form.controls.iconSet.setValue(iconSet);
-  }
-
   isIconSetSelected(iconSet: IconSet): boolean {
-    console.log(
-      `%cBijoya: settings.component -> _isIconSetSelected`,
-      'color: orange;'
-    );
     return this.form.controls.iconSet.value === iconSet;
   }
 }
