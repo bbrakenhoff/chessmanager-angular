@@ -18,19 +18,21 @@ export class SettingsComponent implements OnInit {
       iconSet: ['', Validators.required]
     });
 
-    this.form.valueChanges.subscribe(value => {
-      console.log(
-        `%cBijoya: settings.component -> valueChanges`,
-        'color: deeppink;',
-        value
-      );
-      this.iconSetCardIsOpen = false;
-    });
+    this.form.valueChanges.subscribe(value => this._onIconSetChanged(value));
   }
 
   ngOnInit() {}
 
   openIconSetCard() {
     this.iconSetCardIsOpen = true;
+  }
+
+  private _onIconSetChanged(value) {
+    console.log(
+      `%cBijoya: settings.component -> valueChanges`,
+      'color: deeppink;',
+      value
+    );
+    this.iconSetCardIsOpen = false;
   }
 }
