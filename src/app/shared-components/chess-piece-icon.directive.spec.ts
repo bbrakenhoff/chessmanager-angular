@@ -1,17 +1,13 @@
 import { ChessPieceIconDirective } from './chess-piece-icon.directive';
 
-fdescribe('ChessPieceIconDirective', () => {
+describe('ChessPieceIconDirective', () => {
   let directive: ChessPieceIconDirective;
 
   beforeEach(() => {
     directive = new ChessPieceIconDirective(null, null);
   });
 
-  it('should create an instance', () => {
-    expect(directive).toBeTruthy();
-  });
-
-  fdescribe('_iconPath(): string', () => {
+  describe('_iconPath(): string', () => {
     it('should return the svg path to the icon', () => {
       directive.fenChar = 'R';
       const iconPath: string = (directive as any)._iconPath();
