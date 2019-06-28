@@ -1,77 +1,68 @@
 import { TestBed } from '@angular/core/testing';
-import * as TypeMoq from 'typemoq';
 
 import { StorageService, StorageKey } from './storage.service';
+import { spy, anyString, when, verify, resetCalls, reset } from 'ts-mockito';
 import { IconSet } from 'src/models/icon-set.model';
 
 describe('StorageService', () => {
   const valueMock = 'Storage key value';
 
-  const localStorageMock: TypeMoq.IGlobalMock<Storage> = TypeMoq.GlobalMock.ofInstance(localStorage, 'localStorage');
+  const localStorageSpy: Storage = spy(localStorage);
   let storageService: StorageService;
+  let storageServiceSpy: StorageService;
 
   beforeEach(() => {
-    localStorageMock.reset();
-    TypeMoq.GlobalScope.using(localStorageMock);
-
     TestBed.configureTestingModule({});
     storageService = TestBed.get(StorageService);
+    storageServiceSpy = spy(storageService);
+  });
+
+  afterEach(() => {
+    resetCalls(localStorageSpy);
   });
 
   describe('get iconSet', () => {
-
     it('should return the stored icon set when in storage', () => {
-      localStorageMock.setup(instance => instance.getItem(TypeMoq.It.isAnyString()))
-        .returns(() => IconSet.Maya);
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(
+        IconSet.Maya
+      );
 
-      TypeMoq.GlobalScope.using(localStorageMock).with(() => {
-        expect(storageService.iconSet).toEqual(IconSet.Maya);
-        localStorageMock.verify(instance => instance.getItem(StorageKey.PrefIconSet), TypeMoq.Times.once());
-      });
+      expect(storageService.iconSet).toEqual(IconSet.Maya);
+      verify((storageServiceSpy as any)._get(StorageKey.PrefIconSet)).once();
     });
 
     it('should return the default icon set IconSet.Alpha when nothing in storage', () => {
-      localStorageMock.setup(instance => instance.getItem(TypeMoq.It.isAnyString()))
-        .returns(() => null);
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(null);
 
-      TypeMoq.GlobalScope.using(localStorageMock).with(() => {
-        localStorageMock.verify(instance => instance.getItem(StorageKey.PrefIconSet), TypeMoq.Times.once());
-        expect(storageService.iconSet).toEqual(IconSet.Alpha);
-      });
+      expect(storageService.iconSet).toEqual(IconSet.Alpha);
+      verify((storageServiceSpy as any)._get(StorageKey.PrefIconSet)).once();
     });
   });
 
   describe('setIconSet(value: IconSet)', () => {
-
     it('should store the given value', () => {
-      TypeMoq.GlobalScope.using(localStorageMock).with(() => {
-        storageService.setIconSet(IconSet.Maya);
-        localStorageMock.verify(instance => instance.setItem(StorageKey.PrefIconSet, TypeMoq.It.isAny()), TypeMoq.Times.once());
-      });
+      storageService.setIconSet(IconSet.Maya);
+
+      verify(
+        (storageServiceSpy as any)._set(StorageKey.PrefIconSet, IconSet.Maya)
+      ).once();
     });
   });
 
   describe('_get(key: StorageKey): any', () => {
-
     it('should retrieve the value matching with the given key', () => {
-      localStorageMock.setup(instance => instance.getItem(TypeMoq.It.isAnyString()))
-        .returns(() => valueMock);
+      when(localStorageSpy.getItem(anyString())).thenReturn(valueMock);
 
-      TypeMoq.GlobalScope.using(localStorageMock).with(() => {
-        const value = (storageService as any)._get(StorageKey.PrefIconSet);
-        localStorageMock.verify(instance => instance.getItem(TypeMoq.It.isAnyString()), TypeMoq.Times.once());
-        expect(value).toEqual(valueMock);
-      });
+      const value = (storageService as any)._get(StorageKey.PrefIconSet);
+      verify(localStorageSpy.getItem(StorageKey.PrefIconSet)).once();
+      expect(value).toEqual(valueMock);
     });
   });
 
   describe('_set(key: StorageKey, value: any)', () => {
-
     it('should save the new value under the given key', () => {
-      TypeMoq.GlobalScope.using(localStorageMock).with(() => {
-        (storageService as any)._set(StorageKey.PrefIconSet, valueMock);
-        localStorageMock.verify(instance => instance.setItem(StorageKey.PrefIconSet, valueMock), TypeMoq.Times.once());
-      });
+      (storageService as any)._set(StorageKey.PrefIconSet, valueMock);
+      verify(localStorageSpy.setItem(StorageKey.PrefIconSet, valueMock)).once();
     });
   });
 });

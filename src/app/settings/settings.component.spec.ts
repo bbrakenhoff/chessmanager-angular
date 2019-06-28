@@ -26,12 +26,6 @@ describe('SettingsComponent', () => {
         Validators.required
       );
     });
-
-    // it('should close the form when icon set has been selected', () => {
-    //   spyOn(component as any, '_onIconSetChanged').and.callThrough();
-    //   component.form.controls.iconSet.setValue(IconSet.Maya);
-    //   expect((component as any)._onIconSetChanged).toHaveBeenCalled();
-    // });
   });
 
   describe('openIconSetCard()', () => {
