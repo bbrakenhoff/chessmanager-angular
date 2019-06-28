@@ -17,10 +17,6 @@ export class SettingsComponent implements OnInit {
     this.form = this._formBuilder.group({
       iconSet: ['', Validators.required]
     });
-
-    this.form.controls.iconSet.valueChanges.subscribe(value =>
-      this._onIconSetChanged(value)
-    );
   }
 
   ngOnInit() {}
@@ -29,7 +25,7 @@ export class SettingsComponent implements OnInit {
     this.iconSetCardIsOpen = true;
   }
 
-  private _onIconSetChanged(value) {
+  onFormSubmit() {
     this.iconSetCardIsOpen = false;
   }
 

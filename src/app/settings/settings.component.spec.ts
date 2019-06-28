@@ -27,11 +27,11 @@ describe('SettingsComponent', () => {
       );
     });
 
-    it('should close the form when icon set has been selected', () => {
-      spyOn(component as any, '_onIconSetChanged').and.callThrough();
-      component.form.controls.iconSet.setValue(IconSet.Maya);
-      expect((component as any)._onIconSetChanged).toHaveBeenCalled();
-    });
+    // it('should close the form when icon set has been selected', () => {
+    //   spyOn(component as any, '_onIconSetChanged').and.callThrough();
+    //   component.form.controls.iconSet.setValue(IconSet.Maya);
+    //   expect((component as any)._onIconSetChanged).toHaveBeenCalled();
+    // });
   });
 
   describe('openIconSetCard()', () => {
@@ -42,11 +42,11 @@ describe('SettingsComponent', () => {
     });
   });
 
-  describe('_onIconSetChanged(value)', () => {
+  describe('onIconSetChanged(value)', () => {
     it('should close the icon card after the icon set changed', () => {
       component.iconSetCardIsOpen = true;
       expect(component.iconSetCardIsOpen).toEqual(true);
-      (component as any)._onIconSetChanged('');
+      component.onFormSubmit();
       expect(component.iconSetCardIsOpen).toEqual(false);
     });
   });
