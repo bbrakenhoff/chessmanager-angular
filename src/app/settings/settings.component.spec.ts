@@ -3,19 +3,37 @@ import { SettingsComponent } from './settings.component';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
+import { mock, instance, reset, verify, when, anyString } from 'ts-mockito';
+import { StorageService } from '../core/storage.service';
 
 describe('SettingsComponent', () => {
   let fixture: ComponentFixture<SettingsComponent>;
   let component: SettingsComponent;
+
+  const storageServiceMock = mock(StorageService);
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SettingsComponent],
-      providers: [FormBuilder],
+      providers: [
+        FormBuilder,
+        {
+          provide: StorageService,
+          useFactory: () => {
+            when(storageServiceMock.iconSet).thenReturn(IconSet.Maya);
+            return instance(storageServiceMock);
+          }
+        }
+      ],
       schemas: [NO_ERRORS_SCHEMA]
     });
 
     fixture = TestBed.createComponent(SettingsComponent);
     component = fixture.componentInstance;
+  });
+
+  afterEach(() => {
+    reset(storageServiceMock);
   });
 
   describe('constructor', () => {
@@ -25,6 +43,8 @@ describe('SettingsComponent', () => {
       expect(component.form.controls.iconSet.validator).toEqual(
         Validators.required
       );
+      verify(storageServiceMock.iconSet).once();
+      expect(component.form.controls.iconSet.value).toEqual(IconSet.Maya);
     });
   });
 
@@ -36,11 +56,12 @@ describe('SettingsComponent', () => {
     });
   });
 
-  describe('onIconSetChanged(value)', () => {
+  describe('onFormSubmit()', () => {
     it('should close the icon card after the icon set changed', () => {
       component.iconSetCardIsOpen = true;
       expect(component.iconSetCardIsOpen).toEqual(true);
       component.onFormSubmit();
+      verify(storageServiceMock.setIconSet(anyString())).once();
       expect(component.iconSetCardIsOpen).toEqual(false);
     });
   });

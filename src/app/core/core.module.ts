@@ -8,6 +8,5 @@ import { StorageService } from './storage.service';
     CommonModule
   ],
   providers: [StorageService],
-  exports: [StorageService]
 })
 export class CoreModule { }

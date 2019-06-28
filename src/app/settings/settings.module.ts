@@ -4,12 +4,14 @@ import { SettingsComponent } from './settings.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IconSetComponent } from './icon-set/icon-set.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [SettingsComponent, IconSetComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    CoreModule,
     SharedComponentsModule
   ]
 })
