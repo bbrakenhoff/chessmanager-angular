@@ -14,6 +14,7 @@
               <div class="_row">
                 <form
                   [formGroup]="form"
+                  id="form"
                   novalidate="novalidate"
                   class="_iconsetform"
                   *ngIf="iconSetCardIsOpen"
@@ -34,7 +35,7 @@
                   <div
                     class="_iconsetradiobutton"
                     [ngClass]="{ '-checked': isIconSetSelected(IconSet.Alpha) }"
-                    >
+                  >
                     <input
                       type="radio"
                       name="iconSet"
@@ -46,7 +47,9 @@
                   </div>
                   <div
                     class="_iconsetradiobutton"
-                    [ngClass]="{ '-checked': isIconSetSelected(IconSet.Leipzig) }"
+                    [ngClass]="{
+                      '-checked': isIconSetSelected(IconSet.Leipzig)
+                    }"
                   >
                     <input
                       type="radio"
@@ -66,13 +69,29 @@
             </div>
           </div>
         </div>
-        <div class="_cardfooter" *ngIf="!iconSetCardIsOpen">
-          <hr class="_cardfooterdivider" />
-          <div class="_cardfooterbutton" (click)="openIconSetCard()">
-            <svg viewBox="0 0 32 32" class="_cardfootericon">
-              <use xlink:href="/assets/icons/icons.svg#chess" />
-            </svg>
-            Change icon set
+        <div class="_cardfooter">
+          <div
+            class="_cardbuttonwrapper"
+            [ngClass]="{ '-cardisopen': iconSetCardIsOpen }"
+          >
+            <button
+              class="_cardfooterbutton"
+              (click)="openIconSetCard()"
+              *ngIf="!iconSetCardIsOpen"
+            >
+              <svg viewBox="0 0 32 32" class="_cardfootericon">
+                <use xlink:href="/assets/icons/icons.svg#chess" />
+              </svg>
+              Change icon set
+            </button>
+            <button
+              type="submit"
+              form="form"
+              class="_cardfootersubmit -rounded"
+              *ngIf="iconSetCardIsOpen"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>
