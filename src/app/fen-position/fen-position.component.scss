@@ -1,0 +1,20 @@
+@import '../../assets/styles/_bootstrap.scss';
+
+.fen-position {
+  @include make-container();
+
+  padding-top: 2rem;
+
+  & ._row {
+    @include make-row();
+  }
+
+  & ._col {
+    @include make-col-ready();
+    @include make-col(12);
+
+    @include media-breakpoint-up('md') {
+      @include make-col(6);
+    }
+  }
+}

@@ -36,7 +36,11 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {}
 
-  public onTogglerClicked(): void {
-    this.togglerIsOpen = !this.togglerIsOpen;
+  public onTogglerClicked() {
+    this.togglerIsOpen = true;
+  }
+
+  public onNavItemClicked() {
+    this.togglerIsOpen = false;
   }
 }

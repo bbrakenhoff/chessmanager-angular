@@ -53,9 +53,11 @@ $navbar-padding-base: 0.625rem;
 
     // Other
     color: #66615b;
-    cursor: default;
+    cursor: pointer;
     line-height: 1.625rem;
+    outline: none;
     text-transform: capitalize;
+    user-select: none;
   }
 
   & ._toggler {
@@ -71,7 +73,7 @@ $navbar-padding-base: 0.625rem;
     cursor: pointer;
     font-size: 1.25rem;
     line-height: 1;
-    outline: 0;
+    outline: none;
     user-select: none;
     vertical-align: middle;
 
@@ -82,7 +84,7 @@ $navbar-padding-base: 0.625rem;
       background-color: transparent;
     }
 
-    @include media-breakpoint-up('lg') {
+    @include media-breakpoint-up('md') {
       display: none;
     }
   }
@@ -112,12 +114,20 @@ $navbar-padding-base: 0.625rem;
     align-items: center;
     justify-content: flex-end;
 
+    @include media-breakpoint-up('md') {
+      flex-basis: auto;
+    }
+
     & ._nav {
       display: flex;
       flex-direction: column;
       padding-left: 0;
       margin: 0;
       list-style: none;
+
+      @include media-breakpoint-up('md') {
+        flex-direction: row-reverse;
+      }
     }
 
     & ._navitem {
@@ -128,6 +138,7 @@ $navbar-padding-base: 0.625rem;
 
       cursor: pointer;
       line-height: 1.5rem;
+      outline: none;
       user-select: none;
 
       &:first-child {
@@ -152,8 +163,10 @@ $navbar-padding-base: 0.625rem;
       line-height: 1;
       opacity: 0.5;
 
-      & .-settings {
-        @extend .nc-icon-settings-gear;
+      &.-settings {
+        @include media-breakpoint-up('md') {
+          margin-right: 0;
+        }
       }
     }
 
@@ -166,6 +179,10 @@ $navbar-padding-base: 0.625rem;
       color: #66615b;
       font-size: 0.85rem;
       text-transform: uppercase;
+
+      @include media-breakpoint-up('md') {
+        display: none;
+      }
     }
   }
 }

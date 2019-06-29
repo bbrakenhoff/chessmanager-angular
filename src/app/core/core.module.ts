@@ -7,6 +7,6 @@ import { StorageService } from './storage.service';
   imports: [
     CommonModule
   ],
-  providers: [StorageService],
+  providers: [StorageService]
 })
 export class CoreModule { }
