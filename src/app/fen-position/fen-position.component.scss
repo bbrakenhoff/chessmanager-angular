@@ -1,4 +1,5 @@
 @import '../../assets/styles/_bootstrap.scss';
+@import '../../assets/styles//_card.scss';
 
 .fen-position {
   @include make-container();
@@ -15,6 +16,40 @@
 
     @include media-breakpoint-up('md') {
       @include make-col(6);
+    }
+  }
+
+  & ._form {
+    @include app-card();
+
+    padding: 1rem;
+  }
+
+  & ._formfieldset {
+    padding: 0;
+    border: none;
+    margin-bottom: 1.2rem;
+  }
+
+  & ._formlabel {
+    display: block;
+    margin-bottom: .4rem;
+
+    color: #9a9a9a;
+    font-size: .75rem;
+  }
+
+  & ._forminput {
+    display: block;
+    width: 100%;
+    padding: .65rem;
+    border: 1px solid #dddddd;
+
+    border-radius: .25rem;
+
+    &::placeholder {
+      color: #6c757d;
+      font-size: .85rem;
     }
   }
 }
