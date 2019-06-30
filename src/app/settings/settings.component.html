@@ -70,7 +70,10 @@
             </div>
           </div>
         </div>
-        <div class="_cardfooter">
+        <div
+          class="_cardfooter"
+          [ngClass]="{ '-cardisopen': iconSetCardIsOpen }"
+        >
           <div
             class="_cardbuttonwrapper"
             [ngClass]="{ '-cardisopen': iconSetCardIsOpen }"
@@ -88,7 +91,7 @@
             <button
               type="submit"
               form="form"
-              class="_cardfootersubmit -rounded"
+              class="_cardfootersubmit"
               *ngIf="iconSetCardIsOpen"
             >
               Save

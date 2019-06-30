@@ -1,5 +1,6 @@
 @import '../../assets/styles/_bootstrap.scss';
 @import '../../assets/styles/_card.scss';
+@import '../../assets/styles/_button.scss';
 
 .settings {
   @include make-container();
@@ -147,6 +148,10 @@
     font-size: 0.9rem;
     font-weight: 400;
     line-height: 1rem;
+
+    &.-cardisopen{
+      border-width:0;
+    }
   }
 
   & ._cardbuttonwrapper {
@@ -185,41 +190,6 @@
   }
 
   & ._cardfootersubmit {
-    // Positioning
-
-    // Display & Box Model
-    padding: 0.7rem 1.4rem;
-    border: none;
-
-    // Other
-    background-color: #51cbce;
-    border-radius: 0.2rem;
-    color: white;
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 600;
-    line-height: 1rem;
-    outline: none;
-    text-align: center;
-    text-transform: uppercase;
-    transition: all 0.15s linear;
-    user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-
-    &:active,
-    &:hover,
-    &:focus {
-      background-color: #34b5b8;
-    }
-
-    &.-rounded {
-      // Display & Box Model
-      padding-right: 1.5rem;
-      padding-left: 1.5rem;
-
-      // Other
-      border-radius: 2rem;
-    }
+    @include app-button();
   }
 }

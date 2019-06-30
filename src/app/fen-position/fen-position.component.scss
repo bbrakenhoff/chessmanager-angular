@@ -1,5 +1,6 @@
 @import '../../assets/styles/_bootstrap.scss';
 @import '../../assets/styles//_card.scss';
+@import '../../assets/styles//_button.scss';
 
 .fen-position {
   @include make-container();
@@ -22,6 +23,8 @@
   & ._form {
     @include app-card();
 
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
   }
 
@@ -51,5 +54,11 @@
       color: #6c757d;
       font-size: .85rem;
     }
+  }
+
+  & ._formsubmit {
+    @include app-button();
+
+    align-self: flex-end;
   }
 }
