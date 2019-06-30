@@ -15,29 +15,31 @@
     @include make-col-ready();
     @include make-col(12);
 
-    @include media-breakpoint-up('md') {
-      @include make-col(6);
+    &.-half {
+      @include media-breakpoint-up('md') {
+        @include make-col(6);
+      }
     }
   }
 
   & ._form {
     @include app-card();
-
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
   }
 
   & ._formfieldset {
+    // Display & Box Model
     padding: 0;
     border: none;
+    margin: 0;
     margin-bottom: 1.2rem;
   }
 
   & ._formlabel {
+    // Display & Box Model
     display: block;
     margin-bottom: .4rem;
 
+    // Other
     color: #9a9a9a;
     font-size: .75rem;
   }

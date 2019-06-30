@@ -9,6 +9,11 @@
 
   & ._row {
     @include make-row();
+
+    // &.-iconset {
+    //   padding-bottom: 1rem;
+    //   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    // }
   }
 
   & ._col {
@@ -22,23 +27,58 @@
 
   & ._card {
     @include app-card();
+
   }
 
-  & ._cardbody {
-    padding: 1rem;
+  & ._selectediconsetwrapper {
+    display: flex;
+    flex-wrap: wrap;
   }
 
-  & ._cardleftcol {
-    @include make-col-ready();
+  & ._iconsetwrapper {
     @include make-col(7);
   }
 
-  & ._cardrightcol {
-    @include make-col-ready();
+  & ._headerwrapper {
     @include make-col(5);
 
     text-align: right;
   }
+
+  & ._openformbutton {
+    width: 100%;
+    padding: 0;
+    padding-top: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+    background: none;
+    text-align: left;
+  }
+
+  & ._openformbuttonicon  {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+
+    fill: #66615b;
+  }
+
+  // & ._cardbody {
+  //   padding: 1rem;
+  // }
+
+  // & ._cardleftcol {
+  //   @include make-col-ready();
+  //   @include make-col(7);
+  // }
+
+  // & ._cardrightcol {
+  //   @include make-col-ready();
+  //   @include make-col(5);
+
+  //   text-align: right;
+  // }
 
   & ._cardcategory {
     // Display & Box Model
@@ -58,138 +98,138 @@
     font-size: 1.5rem;
   }
 
-  & ._iconsetform {
-    @include make-col-ready();
-    @include make-col(12);
+  // & ._iconsetform {
+  //   @include make-col-ready();
+  //   @include make-col(12);
 
-    // Display & Box Model
-    display: flex;
-    flex-direction: column;
-  }
+  //   // Display & Box Model
+  //   display: flex;
+  //   flex-direction: column;
+  // }
 
-  & ._iconsetlabel {
-    margin-bottom: 0.5rem;
-  }
+  // & ._iconsetlabel {
+  //   margin-bottom: 0.5rem;
+  // }
 
-  & ._iconsetradiobutton {
-    // Positioning
-    position: relative;
+  // & ._iconsetradiobutton {
+  //   // Positioning
+  //   position: relative;
 
-    // Display & Box Model
-    display: flex;
-    flex-direction: column;
-    padding-left: 2rem;
-    margin-bottom: 1.5rem;
+  //   // Display & Box Model
+  //   display: flex;
+  //   flex-direction: column;
+  //   padding-left: 2rem;
+  //   margin-bottom: 1.5rem;
 
-    // Other
-    cursor: pointer;
-    line-height: 1.4rem;
+  //   // Other
+  //   cursor: pointer;
+  //   line-height: 1.4rem;
 
-    & input {
-      // Positioning
-      position: absolute;
-      z-index: 999;
+  //   & input {
+  //     // Positioning
+  //     position: absolute;
+  //     z-index: 999;
 
-      // Display & Box Model
-      display: block;
-      width: 100%;
-      height: 100%;
-      margin: 0 0 0 -2rem;
+  //     // Display & Box Model
+  //     display: block;
+  //     width: 100%;
+  //     height: 100%;
+  //     margin: 0 0 0 -2rem;
 
-      // Other
-      cursor: pointer;
-      opacity: 0;
-    }
+  //     // Other
+  //     cursor: pointer;
+  //     opacity: 0;
+  //   }
 
-    &::before,
-    &::after {
-      // Positioning
-      position: absolute;
-      top: 50%;
-      left: 0;
+  //   &::before,
+  //   &::after {
+  //     // Positioning
+  //     position: absolute;
+  //     top: 50%;
+  //     left: 0;
 
-      // Display & Box Model
-      display: block;
+  //     // Display & Box Model
+  //     display: block;
 
-      // Other
-      border-radius: 50%;
-      content: '';
-    }
+  //     // Other
+  //     border-radius: 50%;
+  //     content: '';
+  //   }
 
-    &::before {
-      width: 1.2rem;
-      height: 1.2rem;
-      border: 0.1rem solid #51cbce;
-      margin-top: -0.6rem;
-    }
+  //   &::before {
+  //     width: 1.2rem;
+  //     height: 1.2rem;
+  //     border: 0.1rem solid #51cbce;
+  //     margin-top: -0.6rem;
+  //   }
 
-    &.-checked::after {
-      // Display & Box Model
-      width: 0.6rem;
-      height: 0.6rem;
-      margin: 0.4rem;
-      margin-top: -0.2rem;
+  //   &.-checked::after {
+  //     // Display & Box Model
+  //     width: 0.6rem;
+  //     height: 0.6rem;
+  //     margin: 0.4rem;
+  //     margin-top: -0.2rem;
 
-      // Other
-      background-color: #51cbce;
-    }
-  }
+  //     // Other
+  //     background-color: #51cbce;
+  //   }
+  // }
 
-  & ._cardfooter {
-    @include make-row();
+  // & ._cardfooter {
+  //   @include make-row();
 
-    // Display & Box Model
-    padding: 1rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    margin: 0;
+  //   // Display & Box Model
+  //   padding: 1rem 0;
+  //   margin: 0;
 
-    // Other
-    color: #9a9a9a;
-    font-size: 0.9rem;
-    font-weight: 400;
-    line-height: 1rem;
+  //   // Other
+  //   color: #9a9a9a;
+  //   font-size: 0.9rem;
+  //   font-weight: 400;
+  //   line-height: 1rem;
 
-    &.-cardisopen{
-      border-width:0;
-    }
-  }
+  //   &.-cardisopen {
+  //     border-width: 0;
+  //   }
+  // }
 
-  & ._cardbuttonwrapper {
-    @include make-col-ready();
-    @include make-col(12);
+  // & ._cardbuttonwrapper {
+  //   @include make-col-ready();
+  //   @include make-col(12);
 
-    display: flex;
+  //   display: flex;
 
-    &.-cardisopen {
-      flex-direction: row-reverse;
-    }
-  }
+  //   &.-cardisopen {
+  //     flex-direction: row-reverse;
+  //   }
+  // }
 
-  & ._cardfooterbutton {
-    // Display & Box Model
-    display: flex;
-    width: 100%;
-    align-items: center;
-    padding: 0.7rem 0;
-    border: none;
+  // & ._cardfooterbutton {
+  //   // Display & Box Model
+  //   display: flex;
+  //   width: 100%;
+  //   align-items: center;
+  //   padding: 0;
+  //   padding-top: 1rem;
+  //   border-width: 0;
 
-    // Other
-    background-color: transparent;
-    cursor: pointer;
-    font-size: 0.8rem;
-    outline: none;
-    user-select: none;
-  }
+  //   // Other
+  //   background-color: transparent;
+  //   cursor: pointer;
+  //   font-size: 0.8rem;
+  //   outline: none;
+  //   user-select: none;
+  // }
 
-  & ._cardfootericon {
-    width: 1rem;
-    height: 1rem;
-    margin-right: 0.4rem;
+  // & ._cardfootericon {
+  //   width: 1rem;
+  //   height: 1rem;
+  //   margin-right: 0.4rem;
 
-    fill: #66615b;
-  }
+  //   fill: #66615b;
+  // }
 
-  & ._cardfootersubmit {
-    @include app-button();
-  }
+  // & ._cardfootersubmit {
+  //   @include app-button();
+  // }
 }
