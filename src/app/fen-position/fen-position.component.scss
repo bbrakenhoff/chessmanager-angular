@@ -24,6 +24,10 @@
 
   & ._form {
     @include app-card();
+
+    // Display & Box Model
+    display: flex;
+    flex-direction: column;
   }
 
   & ._formfieldset {
@@ -37,24 +41,24 @@
   & ._formlabel {
     // Display & Box Model
     display: block;
-    margin-bottom: .4rem;
+    margin-bottom: 0.4rem;
 
     // Other
     color: #9a9a9a;
-    font-size: .75rem;
+    font-size: 0.75rem;
   }
 
   & ._forminput {
     display: block;
     width: 100%;
-    padding: .65rem;
+    padding: 0.65rem;
     border: 1px solid #dddddd;
 
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 
     &::placeholder {
       color: #6c757d;
-      font-size: .85rem;
+      font-size: 0.85rem;
     }
   }
 

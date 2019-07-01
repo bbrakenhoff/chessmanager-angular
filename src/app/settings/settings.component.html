@@ -2,108 +2,48 @@
   <div class="_row">
     <div class="_col">
       <div class="_card">
+        <!-- Selected icon set -->
         <div class="_selectediconsetwrapper" *ngIf="!iconSetCardIsOpen">
           <div class="_iconsetwrapper">
-            <app-icon-set
-              [iconSet]="IconSet.Maya"
-            ></app-icon-set>
+            <app-icon-set [iconSet]="IconSet.Maya"></app-icon-set>
           </div>
           <div class="_headerwrapper">
             <p class="_cardcategory">Icon set</p>
             <p class="_cardtitle">Alpha</p>
           </div>
-
-          <button
-          class="_openformbutton"
-          (click)="openIconSetCard()"
+          <button class="_openformbutton" (click)="openIconSetCard()">
+            <svg viewBox="0 0 32 32" class="_openformbuttonicon">
+              <use xlink:href="/assets/icons/icons.svg#chess" />
+            </svg>
+            Change icon set
+          </button>
+        </div>
+        <!-- Select icon set form -->
+        <form
+          [formGroup]="form"
+          id="form"
+          novalidate="novalidate"
+          *ngIf="iconSetCardIsOpen"
+          (ngSubmit)="onFormSubmit()"
+          class="_form"
         >
-          <svg viewBox="0 0 32 32" class="_openformbuttonicon">
-            <use xlink:href="/assets/icons/icons.svg#chess" />
-          </svg>
-          Change icon set
-        </button>
-        </div>
-        <!--
-            <div class="_row">
-              <form
-                [formGroup]="form"
-                id="form"
-                novalidate="novalidate"
-                class="_iconsetform"
-                *ngIf="iconSetCardIsOpen"
-                (ngSubmit)="onFormSubmit()"
-              >
-                <div
-                  class="_iconsetradiobutton"
-                  [ngClass]="{ '-checked': isIconSetSelected(IconSet.Maya) }"
-                >
-                  <input
-                    type="radio"
-                    name="iconSet"
-                    formControlName="iconSet"
-                    [value]="IconSet.Maya"
-                  />
-                  <label class="_iconsetlabel">Maya</label>
-                  <app-icon-set [iconSet]="IconSet.Maya"></app-icon-set>
-                </div>
-                <div
-                  class="_iconsetradiobutton"
-                  [ngClass]="{ '-checked': isIconSetSelected(IconSet.Alpha) }"
-                >
-                  <input
-                    type="radio"
-                    name="iconSet"
-                    formControlName="iconSet"
-                    [value]="IconSet.Alpha"
-                  />
-                  <label class="_iconsetlabel">Alpha</label>
-                  <app-icon-set [iconSet]="IconSet.Alpha"></app-icon-set>
-                </div>
-                <div
-                  class="_iconsetradiobutton"
-                  [ngClass]="{
-                    '-checked': isIconSetSelected(IconSet.Leipzig)
-                  }"
-                >
-                  <input
-                    type="radio"
-                    name="iconSet"
-                    formControlName="iconSet"
-                    [value]="IconSet.Leipzig"
-                  />
-                  <label class="_iconsetlabel">Leipzig</label>
-                  <app-icon-set [iconSet]="IconSet.Leipzig"></app-icon-set>
-                </div>
-              </form>
-            </div>
+          <div
+            class="_radiobutton"
+            *ngFor="let iconSet of IconSet | keyvalue"
+            [ngClass]="{ '-checked': isIconSetSelected(iconSet.value) }"
+          >
+            <input
+              type="radio"
+              name="iconSet"
+              formControlName="iconSet"
+              [value]="iconSet.value"
+              class="_radiobuttoninput"
+            />
+            <label class="_radiobuttonlabel">{{ iconSet.key }}</label>
+            <app-icon-set [iconSet]="iconSet.value"></app-icon-set>
           </div>
-          <div class="_cardrightcol">
-            <p class="_cardcategory">Icon set</p>
-            <p class="_cardtitle">Alpha</p>
-          </div>
-        </div>
-        <div class="_row">
-          <div class="_col -fullwidth">
-            <button
-              class="_cardfooterbutton"
-              (click)="openIconSetCard()"
-              *ngIf="!iconSetCardIsOpen"
-            >
-              <svg viewBox="0 0 32 32" class="_cardfootericon">
-                <use xlink:href="/assets/icons/icons.svg#chess" />
-              </svg>
-              Change icon set
-            </button>
-            <button
-              type="submit"
-              form="form"
-              class="_cardfootersubmit"
-              *ngIf="iconSetCardIsOpen"
-            >
-              Save
-            </button>
-          </div>
-        </div> -->
+          <button type="submit" class="_formsubmit">Save</button>
+        </form>
       </div>
     </div>
   </div>
