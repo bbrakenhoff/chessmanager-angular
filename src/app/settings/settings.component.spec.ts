@@ -58,10 +58,14 @@ describe('SettingsComponent', () => {
 
   describe('onFormSubmit()', () => {
     it('should close the icon card after the icon set changed', () => {
+      const newIconSet = IconSet.Maya;
+      component.form.controls.iconSet.setValue(newIconSet);
+
       component.iconSetCardIsOpen = true;
       expect(component.iconSetCardIsOpen).toEqual(true);
       component.onFormSubmit();
       verify(storageServiceMock.setIconSet(anyString())).once();
+      expect(component.currenticonSet).toEqual(newIconSet);
       expect(component.iconSetCardIsOpen).toEqual(false);
     });
   });

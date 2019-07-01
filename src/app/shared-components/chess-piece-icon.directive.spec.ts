@@ -1,4 +1,5 @@
 import { ChessPieceIconDirective } from './chess-piece-icon.directive';
+import { IconSet } from 'src/models/icon-set.model';
 
 describe('ChessPieceIconDirective', () => {
   let directive: ChessPieceIconDirective;
@@ -10,11 +11,12 @@ describe('ChessPieceIconDirective', () => {
   describe('_iconPath(): string', () => {
     it('should return the svg path to the icon', () => {
       directive.fenChar = 'R';
+      directive.iconSet = IconSet.Maya;
       const iconPath: string = (directive as any)._iconPath();
       expect(
         iconPath.startsWith((ChessPieceIconDirective as any).iconsSvg)
       ).toEqual(true);
-      expect(iconPath.includes(directive.iconSet)).toEqual(true);
+      expect(iconPath.includes(directive.iconSet.toLowerCase())).toEqual(true);
       expect(iconPath.includes((directive as any)._fenCharToChessPieceIconName())).toEqual(true);
     });
   });

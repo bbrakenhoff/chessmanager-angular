@@ -1,5 +1,5 @@
 export enum IconSet {
-  Alpha = 'alpha',
-  Leipzig= 'leipzig',
-  Maya= 'maya'
+  Alpha = 'Alpha',
+  Leipzig= 'Leipzig',
+  Maya= 'Maya'
 }

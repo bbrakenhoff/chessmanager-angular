@@ -39,7 +39,7 @@ export class ChessPieceIconDirective implements OnInit {
 
   private _iconPath(): string {
     return `${ChessPieceIconDirective.iconsSvg}${
-      this.iconSet
+      this.iconSet.toLowerCase()
     }-${this._fenCharToChessPieceIconName()}`;
   }
 

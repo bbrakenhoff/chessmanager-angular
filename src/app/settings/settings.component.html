@@ -5,11 +5,11 @@
         <!-- Selected icon set -->
         <div class="_selectediconsetwrapper" *ngIf="!iconSetCardIsOpen">
           <div class="_iconsetwrapper">
-            <app-icon-set [iconSet]="IconSet.Maya"></app-icon-set>
+            <app-icon-set [iconSet]="currenticonSet"></app-icon-set>
           </div>
           <div class="_headerwrapper">
             <p class="_cardcategory">Icon set</p>
-            <p class="_cardtitle">Alpha</p>
+            <p class="_cardtitle">{{ currenticonSet }}</p>
           </div>
           <button class="_openformbutton" (click)="openIconSetCard()">
             <svg viewBox="0 0 32 32" class="_openformbuttonicon">

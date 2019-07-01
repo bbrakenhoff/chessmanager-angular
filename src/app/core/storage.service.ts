@@ -9,12 +9,23 @@ export enum StorageKey {
   providedIn: 'root'
 })
 export class StorageService {
+  constructor() {}
 
-  constructor() { }
-
-  public get iconSet() {
+  /**
+   * Return the stored icon set.
+   * Return IconSet.Alpha when storage is empty.
+   */
+  public get iconSet(): IconSet {
     const value = this._get(StorageKey.PrefIconSet);
-    return value ? value : IconSet.Alpha;
+
+    switch (value) {
+      case IconSet.Leipzig:
+        return IconSet.Leipzig;
+      case IconSet.Maya:
+        return IconSet.Maya;
+      default:
+        return IconSet.Alpha;
+    }
   }
 
   public setIconSet(value: IconSet) {

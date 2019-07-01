@@ -7,21 +7,7 @@ import { EnumAware } from 'src/app/util/enum-aware.decorator';
   templateUrl: './icon-set.component.html',
   styleUrls: ['./icon-set.component.scss']
 })
-export class IconSetComponent implements OnInit {
+export class IconSetComponent {
   @Input()
   iconSet: IconSet;
-
-  constructor() {}
-
-  ngOnInit() {
-    console.log(
-      `%cBijoya: icon-set.component -> ngOnInit`,
-      'color: deeppink;',
-      this.iconSet
-    );
-  }
-
-  getLinkForIcon(icon: string) {
-    return `/assets/icons/icons.svg#${this.iconSet}-${icon}`;
-  }
 }
