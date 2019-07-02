@@ -4,6 +4,10 @@
       *ngFor="let square of rank"
       class="_square"
       [ngClass]="{ '-rankeven': isEven, '-rankodd': isOdd }"
-    ></div>
+    >
+    <svg viewBox="0 0 32 32" class="_piece">
+        <use  [appChessPieceIcon]="square.piece?.type" />
+      </svg>
+  </div>
   </div>
 </div>

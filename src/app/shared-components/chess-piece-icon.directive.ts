@@ -14,7 +14,7 @@ import { EnumAware } from '../util/enum-aware.decorator';
 })
 @EnumAware([{ name: 'IconSet', type: IconSet }])
 export class ChessPieceIconDirective implements OnInit {
-  private static readonly iconsSvg = '/assets/icons/icons.svg#';
+  private static readonly IconsSvg = '/assets/icons/icons.svg#';
 
   @Input('appChessPieceIcon')
   fenChar: string;
@@ -38,12 +38,19 @@ export class ChessPieceIconDirective implements OnInit {
   }
 
   private _iconPath(): string {
-    return `${ChessPieceIconDirective.iconsSvg}${
-      this.iconSet.toLowerCase()
-    }-${this._fenCharToChessPieceIconName()}`;
+    return this.fenChar
+      ? `${
+          ChessPieceIconDirective.IconsSvg
+        }${this.iconSet.toLowerCase()}-${this._fenCharToChessPieceIconName()}`
+      : '';
   }
 
   private _fenCharToChessPieceIconName(): string {
+    console.log(
+      `%cBijoya: chess-piece-icon.directive -> _fenCharToChessPieceIconName`,
+      'color: deeppink;',
+      this.fenChar
+    );
     return (
       (this.fenChar === this.fenChar.toUpperCase() ? 'w' : 'b') +
       this.fenChar.toLowerCase()

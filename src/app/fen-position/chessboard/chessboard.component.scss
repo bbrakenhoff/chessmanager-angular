@@ -10,6 +10,8 @@
   }
 
   & ._square {
+    position: relative;
+
     width: 12.5%;
     max-width: 12.5%;
 
@@ -39,5 +41,9 @@
 
       content: "";
     }
+  }
+
+  & ._piece {
+    position: absolute;
   }
 }
