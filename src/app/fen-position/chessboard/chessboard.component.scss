@@ -1,0 +1,43 @@
+@import "../../../assets/styles/_bootstrap.scss";
+
+.chessboard {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dddddd;
+
+  & ._rank {
+    display: flex;
+  }
+
+  & ._square {
+    width: 12.5%;
+    max-width: 12.5%;
+
+    &.-rankeven {
+      &:nth-child(even) {
+        background-color: white;
+      }
+
+      &:nth-child(odd) {
+        background-color: deeppink;
+      }
+    }
+
+    &.-rankodd {
+      &:nth-child(even) {
+        background-color: deeppink;
+      }
+
+      &:nth-child(odd) {
+        background-color: white;
+      }
+    }
+
+    &::after {
+      display: block;
+      padding-bottom: 100%;
+
+      content: "";
+    }
+  }
+}

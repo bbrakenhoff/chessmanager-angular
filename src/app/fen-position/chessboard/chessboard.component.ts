@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FenPosition } from 'src/models/fen-position.model';
+import { Chessboard } from 'src/models/chessboard.model';
 
 @Component({
   selector: 'app-chessboard',
@@ -11,8 +12,11 @@ export class ChessboardComponent implements OnInit {
   @Input()
   fenPosition: FenPosition;
 
+  readonly chessboard: Chessboard = new Chessboard();
+
   constructor() { }
 
   ngOnInit() {
+    this.chessboard.reflectFenPosition(this.fenPosition);
   }
 }

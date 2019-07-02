@@ -1,0 +1,9 @@
+<div class="chessboard">
+  <div class="_rank" *ngFor="let rank of chessboard.squares; let isOdd=odd; let isEven=even">
+    <div
+      *ngFor="let square of rank"
+      class="_square"
+      [ngClass]="{ '-rankeven': isEven, '-rankodd': isOdd }"
+    ></div>
+  </div>
+</div>
