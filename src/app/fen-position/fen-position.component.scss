@@ -15,6 +15,8 @@
     @include make-col-ready();
     @include make-col(12);
 
+    margin-bottom: 2rem;
+
     &.-half {
       @include media-breakpoint-up('md') {
         @include make-col(6);

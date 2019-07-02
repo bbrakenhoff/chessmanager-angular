@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FenPosition } from 'src/models/fen-position.model';
+import { MockData } from 'src/models/mock-data';
 
 @Component({
   selector: 'app-fen-position',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FenPositionComponent implements OnInit {
 
-  constructor() { }
+  fenPosition = new FenPosition();
+
+
+  constructor() {
+    this.fenPosition.description ='Starting position';
+    this.fenPosition.notation  = MockData.fenNotations.startingPosition;
+  }
 
   ngOnInit() {
   }

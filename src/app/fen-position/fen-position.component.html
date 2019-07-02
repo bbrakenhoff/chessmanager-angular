@@ -1,15 +1,17 @@
 <div class="fen-position">
   <div class="_row">
-    <div class="_col -half">chessboardcomponent placeholder</div>
+    <div class="_col -half">
+      <app-chessboard [fenPosition]="fenPosition"></app-chessboard>
+    </div>
     <div class="_col -half">
       <form class="_form">
         <fieldset class="_formfieldset">
           <label class="_formlabel">Notation</label>
-          <input class="_forminput" type="text" placeholder="Notation" />
+          <input class="_forminput" type="text" placeholder="Notation" [value]="fenPosition.notation" />
         </fieldset>
         <fieldset class="_formfieldset">
           <label class="_formlabel">Description</label>
-          <input class="_forminput" type="text" placeholder="Description" />
+          <input class="_forminput" type="text" placeholder="Description" [value]="fenPosition.description" />
         </fieldset>
         <button type="submit" class="_formsubmit">Save</button>
       </form>
