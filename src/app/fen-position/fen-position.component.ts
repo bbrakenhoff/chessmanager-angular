@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FenPosition } from 'src/models/fen-position.model';
 import { MockData } from 'src/models/mock-data';
 
@@ -13,11 +13,20 @@ export class FenPositionComponent implements OnInit {
 
 
   constructor() {
-    this.fenPosition.description ='Starting position';
-    this.fenPosition.notation  = MockData.fenNotations.startingPosition;
+    this.fenPosition.description = 'Starting position';
+    this.fenPosition.notation = MockData.fenNotations.startingPosition;
   }
 
   ngOnInit() {
   }
 
+  applyStartingPosition() {
+    this.fenPosition.notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+    this.fenPosition.description = 'Starting position';
+  }
+
+  applyEmptyBoard() {
+    this.fenPosition.notation = '8/8/8/8/8/8/8/8';
+    this.fenPosition.description = 'Empty board';
+  }
 }

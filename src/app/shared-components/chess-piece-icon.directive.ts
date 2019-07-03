@@ -46,11 +46,6 @@ export class ChessPieceIconDirective implements OnInit {
   }
 
   private _fenCharToChessPieceIconName(): string {
-    console.log(
-      `%cBijoya: chess-piece-icon.directive -> _fenCharToChessPieceIconName`,
-      'color: deeppink;',
-      this.fenChar
-    );
     return (
       (this.fenChar === this.fenChar.toUpperCase() ? 'w' : 'b') +
       this.fenChar.toLowerCase()

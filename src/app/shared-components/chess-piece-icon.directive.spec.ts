@@ -14,7 +14,7 @@ describe('ChessPieceIconDirective', () => {
       directive.iconSet = IconSet.Maya;
       const iconPath: string = (directive as any)._iconPath();
       expect(
-        iconPath.startsWith((ChessPieceIconDirective as any).iconsSvg)
+        iconPath.startsWith((ChessPieceIconDirective as any).IconsSvg)
       ).toEqual(true);
       expect(iconPath.includes(directive.iconSet.toLowerCase())).toEqual(true);
       expect(iconPath.includes((directive as any)._fenCharToChessPieceIconName())).toEqual(true);

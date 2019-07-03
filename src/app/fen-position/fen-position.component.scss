@@ -73,4 +73,25 @@
 
     align-self: flex-end;
   }
+
+  & ._wrapperbuttons {
+    display: flex;
+    margin: 0 -1rem;
+  }
+
+  & ._standardnotationbutton {
+    @include app-button();
+
+    flex-basis: 100%;
+    margin: 0 1rem;
+
+    background-color: #66615b;
+    border-radius: 0.2rem;
+
+    &:active,
+    &:hover,
+    &:focus {
+      background-color: #403d39;
+    }
+  }
 }
