@@ -131,7 +131,9 @@
     opacity: 0;
     user-select: none;
 
-    &:hover, &:active,&:focus {
+    &:hover,
+    &:active,
+    &:focus {
       background: none;
     }
   }
@@ -144,6 +146,14 @@
     @include app-button();
 
     align-self: flex-end;
+    background-color: $app-button-primary;
+    border-radius: $app-button-border-radius-rounded;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: $app-button-primary-active;
+    }
   }
 
   & ._cardcategory {

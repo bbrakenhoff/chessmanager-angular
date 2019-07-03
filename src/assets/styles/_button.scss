@@ -1,17 +1,16 @@
-@mixin app-button() {
+$app-button-primary: #51cbce;
+$app-button-primary-active: #34b5b8;
 
-  // Display & Box Model
-  padding: 0.7rem 1.5rem;
+$app-button-secondary: #66615b;
+$app-button-secondary-active: #403d39;
+
+$app-button-border-radius: 0.2rem;
+$app-button-border-radius-rounded: 2rem;
+
+@mixin app-button-base() {
   border: none;
-
-  // Other
-  background-color: #51cbce;
-  border-radius: 2rem;
   color: white;
   cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1rem;
   outline: none;
   text-align: center;
   text-transform: uppercase;
@@ -19,10 +18,27 @@
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+}
 
-  &:active,
-  &:hover,
-  &:focus {
-    background-color: #34b5b8;
-  }
+@mixin app-button() {
+  @include app-button-base();
+
+  // Display & Box Model
+  padding: 0.7rem 1.5rem;
+  border: none;
+
+  // Other
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1rem;
+}
+
+@mixin app-button-small() {
+  @include app-button-base();
+
+  padding: 0.25rem 0.5rem;
+
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5rem;
 }

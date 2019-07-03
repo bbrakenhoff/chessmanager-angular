@@ -72,6 +72,14 @@
     @include app-button();
 
     align-self: flex-end;
+    background-color: $app-button-primary;
+    border-radius: $app-button-border-radius-rounded;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: $app-button-primary-active;
+    }
   }
 
   & ._wrapperbuttons {
@@ -80,18 +88,18 @@
   }
 
   & ._standardnotationbutton {
-    @include app-button();
+    @include app-button-small();
 
-    flex-basis: 100%;
-    margin: 0 1rem;
+    width: 100%;
+    margin: 0.25rem 0;
 
-    background-color: #66615b;
-    border-radius: 0.2rem;
+    background-color: $app-button-secondary;
+    border-radius: $app-button-border-radius;
 
     &:active,
     &:hover,
     &:focus {
-      background-color: #403d39;
+      background-color: $app-button-secondary-active;
     }
   }
 }
