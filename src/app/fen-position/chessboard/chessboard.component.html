@@ -5,8 +5,8 @@
       class="_square"
       [ngClass]="{ '-rankeven': isEven, '-rankodd': isOdd }"
     >
-    <svg viewBox="0 0 32 32" class="_piece">
-        <use  [appChessPieceIcon]="square.piece?.type" />
+    <svg viewBox="0 0 32 32" class="_piece" *ngIf="square.piece">
+        <use  [appChessPieceIcon]="square.piece.type" />
       </svg>
   </div>
   </div>
