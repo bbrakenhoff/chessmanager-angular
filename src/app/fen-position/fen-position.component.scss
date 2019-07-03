@@ -9,6 +9,8 @@
 
   & ._row {
     @include make-row();
+
+    justify-content: center;
   }
 
   & ._col {
@@ -17,10 +19,12 @@
 
     margin-bottom: 2rem;
 
-    &.-half {
-      @include media-breakpoint-up('md') {
-        @include make-col(6);
-      }
+    @include media-breakpoint-up('sm') {
+      @include make-col(6);
+    }
+
+    @include media-breakpoint-up('xl') {
+      @include make-col(3);
     }
   }
 

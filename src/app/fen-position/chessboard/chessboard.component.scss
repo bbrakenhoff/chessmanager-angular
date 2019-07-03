@@ -1,4 +1,4 @@
-@import "../../../assets/styles/_bootstrap.scss";
+@import '../../../assets/styles/_bootstrap.scss';
 
 .chessboard {
   display: flex;
@@ -15,31 +15,31 @@
     width: 12.5%;
     max-width: 12.5%;
 
+    &::after {
+      display: block;
+      padding-bottom: 100%;
+
+      content: '';
+    }
+
     &.-rankeven {
       &:nth-child(even) {
         background-color: white;
       }
 
       &:nth-child(odd) {
-        background-color: deeppink;
+        background-color: darken(#51cbce, 15);
       }
     }
 
     &.-rankodd {
       &:nth-child(even) {
-        background-color: deeppink;
+        background-color: darken(#51cbce, 15);
       }
 
       &:nth-child(odd) {
         background-color: white;
       }
-    }
-
-    &::after {
-      display: block;
-      padding-bottom: 100%;
-
-      content: "";
     }
   }
 
