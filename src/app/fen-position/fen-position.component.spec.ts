@@ -4,7 +4,6 @@ import { FenPositionComponent } from './fen-position.component';
 import { MockData } from 'src/models/mock-data';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FenPosition } from 'src/models/fen-position.model';
 import { spy, verify } from 'ts-mockito';
 
 describe('FenPositionComponent', () => {
@@ -32,7 +31,6 @@ describe('FenPositionComponent', () => {
   describe('constructor', () => {
 
     it('should build the form', () => {
-      component.fenPosition = new FenPosition();
       component.fenPosition.notation = MockData.fenNotations.eightQueensSolution;
       component.fenPosition.description = 'Test position description';
 
@@ -65,7 +63,6 @@ describe('FenPositionComponent', () => {
 
   describe('onFormSubmit()', () => {
     it('should write the form values to the fen position', () => {
-      component.fenPosition = new FenPosition();
       component.fenPosition.notation = MockData.fenNotations.eightQueensSolution;
       component.fenPosition.description = 'Eight queens solution';
 
@@ -75,6 +72,44 @@ describe('FenPositionComponent', () => {
       component.onFormSubmit();
       expect(component.fenPosition.notation).toEqual(MockData.fenNotations.startingPosition);
       expect(component.fenPosition.description).toEqual('Starting position');
+    });
+  });
+
+  describe('get validationMessage()', () => {
+
+    it('should return "FEN notation is correct" when fen position is valid', () => {
+      component.fenPosition.notation = MockData.fenNotations.startingPosition;
+      expect(component.validationMessage).toEqual('FEN notation is correct');
+    });
+
+    it('should return "Too many pieces on rank 3" when too many pieces on a rank', () => {
+      component.fenPosition.notation = MockData.fenNotations.tooManyPiecesOnRank;
+      expect(component.validationMessage).toEqual('Too many pieces on rank 3');
+    });
+
+    it('should return "Too many empty squares added to rank 2" when too many pieces added to a rank', () => {
+      component.fenPosition.notation = MockData.fenNotations.tooManyEmptySquaresToRank;
+      expect(component.validationMessage).toEqual('Too many empty squares added to rank 2');
+    });
+
+    it('should return "Not enough squares defined on rank 2" when not enough squares added to a rank', () => {
+      component.fenPosition.notation = MockData.fenNotations.notEnoughSquaresOnRank;
+      expect(component.validationMessage).toEqual('Not enough squares defined on rank 2');
+    });
+
+    it('should return "Too many ranks defined" when too many ranks defined', () => {
+      component.fenPosition.notation = MockData.fenNotations.tooManyRanksDefined;
+      expect(component.validationMessage).toEqual('Too many ranks defined');
+    });
+
+    it('should return "Illegal character found" when illegal character found', () => {
+      component.fenPosition.notation = MockData.fenNotations.illegalCharacterFound;
+      expect(component.validationMessage).toEqual('Illegal character found');
+    });
+
+    it('should return "Not enough squares defined" when not enough squares defined', () => {
+      component.fenPosition.notation = MockData.fenNotations.notEnoughSquaresDefined;
+      expect(component.validationMessage).toEqual('Not enough squares defined');
     });
   });
 });

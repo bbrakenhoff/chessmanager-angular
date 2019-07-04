@@ -22,6 +22,10 @@ export class FenPositionComponent implements OnInit {
     this.applyStartingPosition();
   }
 
+  get validationMessage() {
+    return '';
+  }
+
   ngOnInit() {
   }
 
