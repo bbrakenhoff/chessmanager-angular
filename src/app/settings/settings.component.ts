@@ -29,7 +29,7 @@ export class SettingsComponent {
   }
 
   onFormSubmit() {
-    this._storageService.setIconSet(this.form.controls.iconSet.value);
+    this._storageService.setIconSet(this.form.value.iconSet);
     this.currenticonSet = this._storageService.iconSet;
     this.iconSetCardIsOpen = false;
   }

@@ -4,15 +4,18 @@
       <app-chessboard [fenPosition]="fenPosition"></app-chessboard>
     </div>
     <div class="_col">
-      <form class="_form">
+      <form class="_form"   [formGroup]="form"
+      id="form"
+      novalidate="novalidate"  (ngSubmit)="onFormSubmit()">
         <fieldset class="_formfieldset">
           <label class="_formlabel">Notation</label>
           <input
             class="_forminput"
             type="text"
             placeholder="Notation"
-            [value]="fenPosition.notation"
-          />
+            formControlName="notation"
+            />
+            <!-- [value]="notation.value" -->
         </fieldset>
         <fieldset class="_formfieldset">
           <label class="_formlabel">Description</label>
@@ -20,8 +23,9 @@
             class="_forminput"
             type="text"
             placeholder="Description"
-            [value]="fenPosition.description"
-          />
+            formControlName="description"
+            />
+            <!-- [value]="description.value" -->
         </fieldset>
         <button type="submit" class="_formsubmit">Save</button>
       </form>

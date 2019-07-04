@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FenPosition } from 'src/models/fen-position.model';
 import { MockData } from 'src/models/mock-data';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-fen-position',
@@ -10,23 +11,36 @@ import { MockData } from 'src/models/mock-data';
 export class FenPositionComponent implements OnInit {
 
   fenPosition = new FenPosition();
+  form: FormGroup;
 
+  constructor(private _formBuilder: FormBuilder) {
+    this.form = this._formBuilder.group({
+      notation: [this.fenPosition.notation, Validators.required],
+      description: [this.fenPosition.description, Validators.required]
+    });
 
-  constructor() {
-    this.fenPosition.description = 'Starting position';
-    this.fenPosition.notation = MockData.fenNotations.startingPosition;
+    this.applyStartingPosition();
   }
 
   ngOnInit() {
   }
 
   applyStartingPosition() {
-    this.fenPosition.notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
-    this.fenPosition.description = 'Starting position';
+    this.form.controls.notation.setValue('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+    this.form.controls.description.setValue('Starting position');
+
+    this.onFormSubmit();
   }
 
   applyEmptyBoard() {
-    this.fenPosition.notation = '8/8/8/8/8/8/8/8';
-    this.fenPosition.description = 'Empty board';
+    this.form.controls.notation.setValue('8/8/8/8/8/8/8/8');
+    this.form.controls.description.setValue('Empty board');
+
+    this.onFormSubmit();
+  }
+
+  onFormSubmit() {
+    this.fenPosition.notation = this.form.value.notation;
+    this.fenPosition.description = this.form.value.description;
   }
 }
