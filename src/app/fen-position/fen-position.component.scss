@@ -28,6 +28,28 @@
     }
   }
 
+  & ._validation {
+    padding: 1.2rem;
+    border: 1px solid #66615b;
+
+    &.-invalid {
+      border-color: #ef8157;
+
+      color: #ef8157;
+    }
+  }
+
+  & ._validationnotation,
+  & ._validationerrorindicator {
+    margin-bottom: 0.4rem;
+
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  & ._validationmessage {
+    margin-top: 2.6rem;
+  }
+
   & ._form {
     @include app-card();
 

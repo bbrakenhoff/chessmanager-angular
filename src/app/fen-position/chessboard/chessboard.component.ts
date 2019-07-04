@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, DoCheck, KeyValueDiffers, KeyValueDiffer, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  DoCheck,
+  KeyValueDiffers,
+  KeyValueDiffer,
+  ChangeDetectorRef
+} from '@angular/core';
 import { FenPosition } from 'src/models/fen-position.model';
 import { Chessboard } from 'src/models/chessboard.model';
 
@@ -8,7 +16,6 @@ import { Chessboard } from 'src/models/chessboard.model';
   styleUrls: ['./chessboard.component.scss']
 })
 export class ChessboardComponent implements OnInit, DoCheck {
-
   @Input()
   fenPosition: FenPosition;
 
@@ -16,11 +23,15 @@ export class ChessboardComponent implements OnInit, DoCheck {
 
   readonly chessboard: Chessboard = new Chessboard();
 
-  constructor(private _keyValueDiffers: KeyValueDiffers, private _changeDector: ChangeDetectorRef) {
-  }
+  constructor(
+    private _keyValueDiffers: KeyValueDiffers,
+    private _changeDector: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this._fenPositionDiffer = this._keyValueDiffers.find(this.fenPosition).create();
+    this._fenPositionDiffer = this._keyValueDiffers
+      .find(this.fenPosition)
+      .create();
     this.chessboard.reflectFenPosition(this.fenPosition);
   }
 
@@ -28,7 +39,6 @@ export class ChessboardComponent implements OnInit, DoCheck {
     const changes = this._fenPositionDiffer.diff(this.fenPosition);
     if (changes) {
       this.chessboard.reflectFenPosition(this.fenPosition);
-      console.log(`%cBijoya: chessboard.component -> fenPositionDiffer`, 'color: deeppink;', this.chessboard);
       this._changeDector.detectChanges();
     }
   }

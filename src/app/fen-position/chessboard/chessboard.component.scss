@@ -1,9 +1,10 @@
-@import '../../../assets/styles/_bootstrap.scss';
+@import "../../../assets/styles/_bootstrap.scss";
 
 .chessboard {
   display: flex;
   flex-direction: column;
   border: 1px solid #dddddd;
+  margin-bottom: 1rem;
 
   & ._rank {
     display: flex;
@@ -19,7 +20,7 @@
       display: block;
       padding-bottom: 100%;
 
-      content: '';
+      content: "";
     }
 
     &.-rankeven {

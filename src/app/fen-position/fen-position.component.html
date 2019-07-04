@@ -2,6 +2,13 @@
   <div class="_row">
     <div class="_col">
       <app-chessboard [fenPosition]="fenPosition"></app-chessboard>
+      <div class="_validation -invalid">
+        <div class="_validationnotation">{{ fenPosition.notation }}</div>
+        <div class="_validationerrorindicator" *ngIf="!fenPosition.isValid"></div>
+        <div class="_validationmessage">
+          {{ fenPosition.isValid ? 'FEN position is valid' : 'Error error'}}
+        </div>
+      </div>
     </div>
     <div class="_col">
       <form class="_form"   [formGroup]="form"
