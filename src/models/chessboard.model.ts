@@ -65,14 +65,22 @@ export class Chessboard {
 
 
   private _clearRemainingSquares(rank: number, file: number): void {
+    console.log(`%cBijoya: chessboard.model -> rank: ${rank}, file: ${file}`, 'color: deeppink;');
+    if (file >= 7) {
+      file = 0;
+      rank++;
+    }
+
     while (rank < 8) {
       this.squares[rank][file].piece = null;
 
       if (file === 7) {
         file = 0;
         rank++;
+        console.log(`%cBijoya: chessboard.model -> rank: ${rank}, file: ${file}`, 'color: deeppink;');
       } else {
         file++;
+        console.log(`%cBijoya: chessboard.model -> rank: ${rank}, file: ${file}`, 'color: deeppink;');
       }
     }
   }

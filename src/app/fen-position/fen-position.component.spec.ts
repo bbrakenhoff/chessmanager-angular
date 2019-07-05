@@ -112,4 +112,17 @@ describe('FenPositionComponent', () => {
       expect(component.validationMessage).toEqual('Not enough squares defined');
     });
   });
+
+  describe('get errorIndicator()', () => {
+
+    it('should return empty string when fen position is valid', () => {
+      component.fenPosition.notation = MockData.fenNotations.startingPosition;
+      expect(component.errorIndicator).toEqual('');
+    });
+
+    it('should return a text containing spaces until the error position ending with a ^ when fen positio is invalid', () => {
+      component.fenPosition.notation = MockData.fenNotations.tooManyPiecesOnRank;
+      expect(component.errorIndicator).toEqual('                   ^');
+    });
+  });
 });
