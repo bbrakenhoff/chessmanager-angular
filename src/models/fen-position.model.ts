@@ -2,7 +2,6 @@ import { FenError } from './fen-error.model';
 import { FenCharUtil } from './fen-char-util.model';
 
 export class FenPosition {
-
   public description = '';
 
   // tslint:disable-next-line: variable-name
@@ -36,8 +35,10 @@ export class FenPosition {
       totalSquares: 0
     };
 
-
-    while (!this._error && validationCounters.charIndex < this.notation.length) {
+    while (
+      this.isValid &&
+      validationCounters.charIndex < this.notation.length
+    ) {
       const char = this.notation.charAt(validationCounters.charIndex);
       if (FenCharUtil.charRepresentsNewRank(char)) {
         this._validateNewRank(validationCounters);
@@ -46,25 +47,44 @@ export class FenPosition {
       } else if (FenCharUtil.charRepresentsEmptySquare(char)) {
         this._validateEmptySquare(char, validationCounters);
       } else {
-        this._error = FenError.createIllegalCharacterFound(validationCounters.charIndex);
+        this._error = FenError.createIllegalCharacterFound(
+          validationCounters.charIndex
+        );
       }
 
       validationCounters.charIndex++;
     }
 
-    if (!this.error && validationCounters.totalSquares < 64) {
-      this._error = FenError.createNotEnoughSquaresDefined(this.notation.length - 1);
+    if (this.isValid && validationCounters.totalSquares < 64) {
+      this._error = FenError.createNotEnoughSquaresDefined(
+        this.notation.length - 1
+      );
+    }
+
+    if (!this.isValid) {
+      console.log(
+        `%cBijoya: fen-position.model -> _validate`,
+        'color: limegreen;',
+        this.error
+      );
     }
   }
 
-  private _validateNewRank(validationCounters: FenPosition.ValidationCounters): void {
+  private _validateNewRank(
+    validationCounters: FenPosition.ValidationCounters
+  ): void {
     if (validationCounters.totalFiles < 8) {
-      this._error = FenError.createNotEnoughSquaresOnRank(validationCounters.charIndex, validationCounters.totalRanks);
+      this._error = FenError.createNotEnoughSquaresOnRank(
+        validationCounters.charIndex,
+        validationCounters.totalRanks
+      );
       return;
     }
 
     if (validationCounters.totalRanks + 1 > 7) {
-      this._error = FenError.createTooManyRanksDefined(validationCounters.charIndex);
+      this._error = FenError.createTooManyRanksDefined(
+        validationCounters.charIndex
+      );
       return;
     }
 
@@ -72,9 +92,14 @@ export class FenPosition {
     validationCounters.totalFiles = 0;
   }
 
-  private _validateChessPiece(validationCounters: FenPosition.ValidationCounters): void {
-    if ((validationCounters.totalFiles + 1) > 8) {
-      this._error = FenError.createTooManyPiecesOnRank(validationCounters.charIndex, validationCounters.totalRanks);
+  private _validateChessPiece(
+    validationCounters: FenPosition.ValidationCounters
+  ): void {
+    if (validationCounters.totalFiles + 1 > 8) {
+      this._error = FenError.createTooManyPiecesOnRank(
+        validationCounters.charIndex,
+        validationCounters.totalRanks
+      );
       return;
     }
 
@@ -82,11 +107,17 @@ export class FenPosition {
     validationCounters.totalSquares++;
   }
 
-  private _validateEmptySquare(char: string, validationCounters: FenPosition.ValidationCounters): void {
+  private _validateEmptySquare(
+    char: string,
+    validationCounters: FenPosition.ValidationCounters
+  ): void {
     const emptySquares = +char;
 
     if (validationCounters.totalFiles + emptySquares > 8) {
-      this._error = FenError.createTooManyEmptySquaresAddedToRank(validationCounters.charIndex, validationCounters.totalRanks);
+      this._error = FenError.createTooManyEmptySquaresAddedToRank(
+        validationCounters.charIndex,
+        validationCounters.totalRanks
+      );
       return;
     }
 

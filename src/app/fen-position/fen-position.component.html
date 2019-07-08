@@ -2,20 +2,26 @@
   <div class="_row">
     <div class="_col">
       <app-chessboard [fenPosition]="fenPosition"></app-chessboard>
-      <div class="_validation -invalid">
-        <div class="_validationnotation">{{ fenPosition.notation }}</div>
-        <div class="_validationerrorindicator" *ngIf="!fenPosition.isValid">
-          {{ errorIndicator }}
+      <div class="_validation" [ngClass]="{ '-invalid': !fenPosition.isValid }">
+        <div class="_validationnotation">
+          <div>{{ fenPosition.notation }}</div>
+          <div class="_errorindicator" *ngIf="!fenPosition.isValid" [innerHtml]="errorIndicator">
+          </div>
         </div>
+
         <div class="_validationmessage">
           {{ validationMessage }}
         </div>
       </div>
     </div>
     <div class="_col">
-      <form class="_form"   [formGroup]="form"
-      id="form"
-      novalidate="novalidate"  (ngSubmit)="onFormSubmit()">
+      <form
+        class="_form"
+        [formGroup]="form"
+        id="form"
+        novalidate="novalidate"
+        (ngSubmit)="onFormSubmit()"
+      >
         <fieldset class="_formfieldset">
           <label class="_formlabel">Notation</label>
           <input
@@ -23,8 +29,8 @@
             type="text"
             placeholder="Notation"
             formControlName="notation"
-            />
-            <!-- [value]="notation.value" -->
+          />
+          <!-- [value]="notation.value" -->
         </fieldset>
         <fieldset class="_formfieldset">
           <label class="_formlabel">Description</label>
@@ -33,8 +39,8 @@
             type="text"
             placeholder="Description"
             formControlName="description"
-            />
-            <!-- [value]="description.value" -->
+          />
+          <!-- [value]="description.value" -->
         </fieldset>
         <button type="submit" class="_formsubmit">Save</button>
       </form>

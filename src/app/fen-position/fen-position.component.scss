@@ -1,6 +1,7 @@
 @import '../../assets/styles/_bootstrap.scss';
-@import '../../assets/styles//_card.scss';
-@import '../../assets/styles//_button.scss';
+@import '../../assets/styles/_card.scss';
+@import '../../assets/styles/_button.scss';
+@import '../../assets/styles/_variables.scss';
 
 .fen-position {
   @include make-container();
@@ -39,15 +40,21 @@
     }
   }
 
-  & ._validationnotation,
-  & ._validationerrorindicator {
-    margin-bottom: 0.4rem;
+  & ._validationnotation {
+    padding-bottom: 1rem;
 
-    font-family: 'Courier New', Courier, monospace;
+    font-family: $font-roboto-mono;
+    font-weight: 300;
+    overflow-x: auto;
+  }
+
+  & ._errorindicator {
+    font-family: $font-roboto-mono;
+    font-weight: 400;
   }
 
   & ._validationmessage {
-    margin-top: 2.6rem;
+    margin-top: 0.6rem;
   }
 
   & ._form {

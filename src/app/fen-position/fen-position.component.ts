@@ -1,6 +1,5 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FenPosition } from 'src/models/fen-position.model';
-import { MockData } from 'src/models/mock-data';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FenErrorCode } from 'src/models/fen-error-code.model';
 
@@ -55,11 +54,12 @@ export class FenPositionComponent implements OnInit {
     let i = 0;
 
     while (i < this.fenPosition.error.position) {
+      console.log(`%cBijoya: fen-position.component -> errorIndicator`, 'color: deeppink;', i);
       whiteSpace += '&nbsp;';
       i++;
     }
 
-    return whiteSpace + '^';
+    return whiteSpace + '&#94;';
   }
 
   ngOnInit() {
