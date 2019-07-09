@@ -1,16 +1,20 @@
 import { FenError } from './fen-error.model';
 import { FenCharUtil } from './fen-char-util.model';
+import * as uuid from 'uuid/v4';
+
 
 export class FenPosition {
-  public description = '';
+  readonly id = uuid();
+  description = '';
+  collectionId: string = null;
 
   // tslint:disable-next-line: variable-name
   private _notation = '';
-  public get notation(): string {
+  get notation(): string {
     return this._notation;
   }
 
-  public set notation(value: string) {
+  set notation(value: string) {
     this._notation = value;
 
     this._validate();
@@ -18,11 +22,11 @@ export class FenPosition {
 
   // tslint:disable-next-line: variable-name
   private _error: FenError;
-  public get error(): FenError {
+  get error(): FenError {
     return this._error;
   }
 
-  public get isValid(): boolean {
+  get isValid(): boolean {
     return !this.error;
   }
 
