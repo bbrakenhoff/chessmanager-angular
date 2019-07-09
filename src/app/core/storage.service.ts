@@ -40,7 +40,7 @@ export class StorageService {
   }
 
   private _set(key: StorageKey, value: any) {
-    localStorage.setItem(key, value);
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   public createTestData() {

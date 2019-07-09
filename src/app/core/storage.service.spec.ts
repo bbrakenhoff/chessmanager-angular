@@ -21,7 +21,7 @@ describe('StorageService', () => {
     resetCalls(localStorageSpy);
   });
 
-  describe('get iconSet', () => {
+  describe('get iconSet()', () => {
     it('should return the stored icon set when in storage', () => {
       when((storageServiceSpy as any)._get(anyString())).thenReturn(
         IconSet.Maya
@@ -62,7 +62,12 @@ describe('StorageService', () => {
   describe('_set(key: StorageKey, value: any)', () => {
     it('should save the new value under the given key', () => {
       (storageService as any)._set(StorageKey.PrefIconSet, valueMock);
-      verify(localStorageSpy.setItem(StorageKey.PrefIconSet, valueMock)).once();
+      verify(
+        localStorageSpy.setItem(
+          StorageKey.PrefIconSet,
+          JSON.stringify(valueMock)
+        )
+      ).once();
     });
   });
 });
