@@ -60,14 +60,6 @@ export class FenPosition {
         this.notation.length - 1
       );
     }
-
-    if (!this.isValid) {
-      console.log(
-        `%cBijoya: fen-position.model -> _validate`,
-        'color: limegreen;',
-        this.error
-      );
-    }
   }
 
   private _validateNewRank(

@@ -54,7 +54,6 @@ export class FenPositionComponent implements OnInit {
     let i = 0;
 
     while (i < this.fenPosition.error.position) {
-      console.log(`%cBijoya: fen-position.component -> errorIndicator`, 'color: deeppink;', i);
       whiteSpace += '&nbsp;';
       i++;
     }
