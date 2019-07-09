@@ -49,6 +49,15 @@ describe('StorageService', () => {
     });
   });
 
+  describe('get collections()', () => {
+
+    it('should return the stored collections when in storage', () => {
+
+    });
+
+    it('should return an empty array when nothing in storage', () => {});
+  });
+
   describe('_get(key: StorageKey): any', () => {
     it('should retrieve the value matching with the given key', () => {
       when(localStorageSpy.getItem(anyString())).thenReturn(valueMock);
