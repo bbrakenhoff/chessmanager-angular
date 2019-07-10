@@ -27,7 +27,7 @@ export class Chessboard {
     }
   }
 
-  public reflectFenPosition(fenPosition: FenPosition) {
+  reflectFenPosition(fenPosition: FenPosition) {
     const charIndex = this._reflectionCharIndex(fenPosition);
 
     let r = 0;

@@ -2,7 +2,7 @@ import { PieceType } from './piece-type.model';
 
 export class FenCharUtil {
 
-  public static charRepresentsEmptySquare(char: string): boolean {
+  static charRepresentsEmptySquare(char: string): boolean {
     switch (char) {
       case '1':
       case '2':
@@ -16,12 +16,12 @@ export class FenCharUtil {
     }
   }
 
-  public static charRepresentsChessPiece(char: string): boolean {
+  static charRepresentsChessPiece(char: string): boolean {
     const pieceTypes: string[] = [PieceType.Bishop, PieceType.King, PieceType.Knight, PieceType.Pawn, PieceType.Queen, PieceType.Rook];
     return pieceTypes.includes(char.toUpperCase());
   }
 
-  public static charRepresentsNewRank(char: string): boolean {
+  static charRepresentsNewRank(char: string): boolean {
     return char === '/';
   }
 }

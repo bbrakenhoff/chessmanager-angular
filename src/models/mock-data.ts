@@ -1,5 +1,5 @@
 export class MockData {
-  public static fenNotations = {
+  static fenNotations = {
     emptyBoard: '8/8/8/8/8/8/8/8',
     startingPosition: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
     tooManyPiecesOnRank: 'rnbqkbnr/pppppppp/8K/8/8/8/PPPPPPPP/RNBQKBNR',

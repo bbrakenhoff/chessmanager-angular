@@ -3,8 +3,8 @@ import { PieceType } from './piece-type.model';
 import { FenCharUtil } from './fen-char-util.model';
 
 export class ChessPiece {
-  public readonly color: ChessColor;
-  public readonly type: PieceType;
+  readonly color: ChessColor;
+  readonly type: PieceType;
 
   constructor(color: ChessColor, type: PieceType) {
     this.color = color;

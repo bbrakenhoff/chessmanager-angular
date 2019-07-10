@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
-import { defaultCollections, TestData } from '../util/default-collections-generator';
+import {
+  defaultCollections,
+  TestData
+} from '../util/default-collections-generator';
 
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
@@ -12,13 +15,13 @@ export enum StorageKey {
   providedIn: 'root'
 })
 export class StorageService {
-  constructor() { }
+  constructor() {}
 
   /**
    * Return the stored icon set.
    * Return IconSet.Alpha when storage is empty.
    */
-  public get iconSet(): IconSet {
+  get iconSet(): IconSet {
     const value = this._get(StorageKey.PrefIconSet);
 
     switch (value) {
@@ -31,7 +34,7 @@ export class StorageService {
     }
   }
 
-  public setIconSet(value: IconSet) {
+  setIconSet(value: IconSet) {
     this._set(StorageKey.PrefIconSet, value);
   }
 
@@ -43,10 +46,11 @@ export class StorageService {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  public createTestData() {
-    this._set(StorageKey.Collections, defaultCollections.map((testData: TestData) =>
-      testData.collection
-    ));
+  createTestData() {
+    this._set(
+      StorageKey.Collections,
+      defaultCollections.map((testData: TestData) => testData.collection)
+    );
 
     const fenPositions = [];
     for (const testData of defaultCollections) {

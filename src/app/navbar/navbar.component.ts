@@ -30,17 +30,17 @@ enum TogglerState {
   ]
 })
 export class NavbarComponent implements OnInit {
-  public togglerIsOpen = false;
+  togglerIsOpen = false;
 
   constructor() {}
 
   ngOnInit() {}
 
-  public onTogglerClicked() {
+  onTogglerClicked() {
     this.togglerIsOpen = !this.togglerIsOpen;
   }
 
-  public onNavItemClicked() {
+  onNavItemClicked() {
     this.togglerIsOpen = false;
   }
 }
