@@ -9,7 +9,7 @@ export interface TestData {
 export const defaultCollections: TestData[] = [
   createTestCollection(),
   createProblemsCollection(),
-  createErrorsCollection(),
+  createErrorsCollection()
 ];
 
 function createTestCollection(): TestData {
@@ -25,6 +25,11 @@ function createTestCollection(): TestData {
   emptyBoard.description = 'Empty board';
   emptyBoard.collectionId = collection.id;
 
+  const eightQueensSolution = new FenPosition();
+  eightQueensSolution.notation = 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5';
+  eightQueensSolution.description = 'Eight queens solution';
+  eightQueensSolution.collectionId = collection.id;
+
   const foolsMate = new FenPosition();
   foolsMate.notation = 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR';
   foolsMate.description = 'Fool\'s Mate';
@@ -32,11 +37,7 @@ function createTestCollection(): TestData {
 
   return {
     collection,
-    fenPositions: [
-      startingPosition,
-      emptyBoard,
-      foolsMate
-    ]
+    fenPositions: [startingPosition, emptyBoard, eightQueensSolution, foolsMate]
   };
 }
 
@@ -76,14 +77,7 @@ function createProblemsCollection(): TestData {
 
   return {
     collection,
-    fenPositions: [
-      problem1,
-      problem2,
-      problem3,
-      problem4,
-      problem5,
-      problem6
-    ]
+    fenPositions: [problem1, problem2, problem3, problem4, problem5, problem6]
   };
 }
 
@@ -97,8 +91,10 @@ function createErrorsCollection(): TestData {
   tooManyPiecesOnRank.collectionId = collection.id;
 
   const tooManyEmptySquaresToRank = new FenPosition();
-  tooManyEmptySquaresToRank.notation = 'rnbqkbnr/pppppp3/8/8/8/8/PPPPPPPP/RNBQKBNR';
-  tooManyEmptySquaresToRank.description = 'Too many empty squares added to rank 2';
+  tooManyEmptySquaresToRank.notation =
+    'rnbqkbnr/pppppp3/8/8/8/8/PPPPPPPP/RNBQKBNR';
+  tooManyEmptySquaresToRank.description =
+    'Too many empty squares added to rank 2';
   tooManyEmptySquaresToRank.collectionId = collection.id;
 
   const notEnoughSquaresOnRank = new FenPosition();
@@ -107,12 +103,14 @@ function createErrorsCollection(): TestData {
   notEnoughSquaresOnRank.collectionId = collection.id;
 
   const tooManyRanksDefined = new FenPosition();
-  tooManyRanksDefined.notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/KQBNRP';
+  tooManyRanksDefined.notation =
+    'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/KQBNRP';
   tooManyRanksDefined.description = 'Too many ranks defined';
   tooManyRanksDefined.collectionId = collection.id;
 
   const illegalCharacterFound = new FenPosition();
-  illegalCharacterFound.notation = 'rnbXkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+  illegalCharacterFound.notation =
+    'rnbXkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
   illegalCharacterFound.description = 'Illegal character found';
   illegalCharacterFound.collectionId = collection.id;
 
@@ -121,15 +119,15 @@ function createErrorsCollection(): TestData {
   notEnoughSquaresDefined.description = 'Not enough squares defined';
   notEnoughSquaresDefined.collectionId = collection.id;
 
-  return{
-     collection,
-     fenPositions: [
+  return {
+    collection,
+    fenPositions: [
       tooManyPiecesOnRank,
       tooManyEmptySquaresToRank,
       notEnoughSquaresOnRank,
       tooManyRanksDefined,
       illegalCharacterFound,
       notEnoughSquaresDefined
-     ]
-    };
+    ]
+  };
 }

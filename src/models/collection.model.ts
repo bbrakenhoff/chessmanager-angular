@@ -15,7 +15,7 @@ export class Collection {
 
   static createFromJson(json: any) {
     const collection = Collection.create();
-    collection._id = json.id;
+    collection._id = json._id;
     collection.name = json.name;
 
     return collection;

@@ -2,11 +2,14 @@ import { FenError } from './fen-error.model';
 import { FenCharUtil } from './fen-char-util.model';
 import * as uuid from 'uuid/v4';
 
-
 export class FenPosition {
-  readonly id = uuid();
+  private _id = uuid();
+  public get id() {
+    return this._id;
+  }
+
+  collectionId = '';
   description = '';
-  collectionId: string = null;
 
   // tslint:disable-next-line: variable-name
   private _notation = '';
@@ -21,13 +24,26 @@ export class FenPosition {
   }
 
   // tslint:disable-next-line: variable-name
-  private _error: FenError;
+  private _error: FenError = null;
   get error(): FenError {
     return this._error;
   }
 
   get isValid(): boolean {
     return !this.error;
+  }
+
+  static create() {
+    return new FenPosition();
+  }
+
+  static createFromJson(json: any) {
+    const fenPosition = FenPosition.create();
+    fenPosition._id = json._id;
+    fenPosition.collectionId = json.collectionId;
+    fenPosition.description = json.description;
+    fenPosition._notation = json._notation;
+    return fenPosition;
   }
 
   private _validate() {
