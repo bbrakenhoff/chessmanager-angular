@@ -13,7 +13,7 @@ export const defaultCollections: TestData[] = [
 ];
 
 function createTestCollection(): TestData {
-  const collection = new Collection();
+  const collection = Collection.create();
 
   const startingPosition = new FenPosition();
   startingPosition.notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
@@ -41,7 +41,7 @@ function createTestCollection(): TestData {
 }
 
 function createProblemsCollection(): TestData {
-  const collection = new Collection();
+  const collection = Collection.create();
   collection.name = 'Problems';
 
   const problem1 = new FenPosition();
@@ -88,7 +88,7 @@ function createProblemsCollection(): TestData {
 }
 
 function createErrorsCollection(): TestData {
-  const collection = new Collection();
+  const collection = Collection.create();
   collection.name = 'Errors';
 
   const tooManyPiecesOnRank = new FenPosition();
