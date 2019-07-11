@@ -5,6 +5,7 @@ import {
   TestData
 } from '../util/default-collections-generator';
 import { Collection } from 'src/models/collection.model';
+import { FenPosition } from 'src/models/fen-position.model';
 
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
@@ -30,8 +31,24 @@ export class StorageService {
     return [];
   }
 
-  public setCollections(values: Collection[]) {
-    this._set(StorageKey.Collections, values);
+  public setCollections(value: Collection[]) {
+    this._set(StorageKey.Collections, value);
+  }
+
+  public get fenPositions() {
+    const json: any[] = this._get(StorageKey.FenPositions);
+
+    if (json) {
+      return json.map((fenPosition: any) =>
+        FenPosition.createFromJson(fenPosition)
+      );
+    }
+
+    return [];
+  }
+
+  public setFenPositions(value: FenPosition[]) {
+    this._set(StorageKey.FenPositions, value);
   }
 
   /**
@@ -70,8 +87,7 @@ export class StorageService {
   }
 
   createTestData() {
-    this._set(
-      StorageKey.Collections,
+    this.setCollections(
       defaultCollections.map((testData: TestData) => testData.collection)
     );
 
@@ -80,6 +96,6 @@ export class StorageService {
       fenPositions.push(...testData.fenPositions);
     }
 
-    this._set(StorageKey.FenPositions, fenPositions);
+    this.setFenPositions(fenPositions);
   }
 }

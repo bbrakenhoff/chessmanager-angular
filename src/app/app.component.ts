@@ -11,6 +11,11 @@ export class AppComponent {
 
   constructor(private _storageService: StorageService) {
     this._storageService.createTestData();
-    console.log(`%cBijoya: app.component -> AppComponent`, 'color: deeppink;', this._storageService.collections);
+    console.log(
+      `%cBijoya: app.component -> AppComponent`,
+      'color: deeppink;',
+      this._storageService.collections,
+      this._storageService.fenPositions
+    );
   }
 }
