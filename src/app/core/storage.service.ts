@@ -22,13 +22,16 @@ export class StorageService {
     const json: any[] = this._get(StorageKey.Collections);
 
     if (json) {
-      console.log(`Bijoya: storage.service -> json`, json);
       return json.map((collection: any) =>
         Collection.createFromJson(collection)
       );
     }
 
     return [];
+  }
+
+  public setCollections(values: Collection[]) {
+    this._set(StorageKey.Collections, values);
   }
 
   /**
@@ -56,11 +59,8 @@ export class StorageService {
     const value = localStorage.getItem(key);
 
     try {
-      const parsed = JSON.parse(value);
-      console.log(`Bijoya: storage.service -> _get parsed`, parsed);
-      return parsed;
+      return JSON.parse(value);
     } catch (error) {
-      console.log(`Bijoya: storage.service -> _get not parsed`, value);
       return value;
     }
   }

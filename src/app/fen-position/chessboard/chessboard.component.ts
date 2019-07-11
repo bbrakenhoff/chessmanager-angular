@@ -21,7 +21,7 @@ export class ChessboardComponent implements OnInit, DoCheck {
 
   private _fenPositionDiffer: KeyValueDiffer<string, any>;
 
-  readonly chessboard: Chessboard = new Chessboard();
+  readonly chessboard: Chessboard =  Chessboard.create();
 
   constructor(
     private _keyValueDiffers: KeyValueDiffers,

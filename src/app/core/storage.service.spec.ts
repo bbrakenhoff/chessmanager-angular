@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { StorageService, StorageKey } from './storage.service';
 import { spy, anyString, when, verify, resetCalls, reset } from 'ts-mockito';
 import { IconSet } from 'src/models/icon-set.model';
+import { Collection } from 'src/models/collection.model';
 
 describe('StorageService', () => {
   const storageStringValue = 'Storage key value';
@@ -22,13 +23,25 @@ describe('StorageService', () => {
     resetCalls(localStorageSpy);
   });
 
-  fdescribe('get collections()', () => {
+  describe('get collections()', () => {
     it('should return the collections from storage when in storage', () => {
-      when((storageServiceSpy as any)._get(anyString())).thenReturn(
-        '[{"_id":"733386ca-21ee-46f2-a3cd-8e8cb323570f","name":"Test collection"},{"_id":"b880b03b-fd9a-44dd-b03f-c66eb53bfb06","name":"Problems"},{"_id":"4ff1dd7b-127a-4544-82de-a36f1fd0e7cd","name":"Errors"}]'
-      );
-      expect(storageService.collections).toBeDefined();
-      expect(storageService.collections.length).toEqual(3);
+      when((storageServiceSpy as any)._get(anyString())).thenReturn([
+        {
+          _id: '733386ca-21ee-46f2-a3cd-8e8cb323570f',
+          name: 'Test collection'
+        },
+        {
+          _id: 'b880b03b-fd9a-44dd-b03f-c66eb53bfb06',
+          name: 'Problems'
+        },
+        {
+          _id: '4ff1dd7b-127a-4544-82de-a36f1fd0e7cd',
+          name: 'Errors'
+        }
+      ]);
+      const collections = storageService.collections;
+      expect(collections).toBeDefined();
+      expect(collections.length).toEqual(3);
       verify((storageServiceSpy as any)._get(StorageKey.Collections)).once();
     });
 
@@ -36,6 +49,21 @@ describe('StorageService', () => {
       when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
       expect(storageService.collections).toEqual([]);
       verify((storageServiceSpy as any)._get(StorageKey.Collections)).once();
+    });
+  });
+
+  describe('setCollections(values: Collection[])', () => {
+    it('should store the given values', () => {
+      const collections = [
+        Collection.create('Test collection'),
+        Collection.create('Problems'),
+        Collection.create('Errors')
+      ];
+      storageService.setCollections(collections);
+
+      verify(
+        (storageServiceSpy as any)._set(StorageKey.Collections, collections)
+      );
     });
   });
 
