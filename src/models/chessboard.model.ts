@@ -5,11 +5,14 @@ import { FenCharUtil } from './fen-char-util.model';
 import { ChessPiece } from './piece.model';
 
 export class Chessboard {
-
   squares: ChessSquare[][];
 
-  constructor() {
+  private constructor() {
     this._initSquares();
+  }
+
+  static create() {
+    return new Chessboard();
   }
 
   private _initSquares() {
@@ -20,7 +23,7 @@ export class Chessboard {
 
       for (let f = 0; f < 8; f++) {
         const color = (r + f) % 2 === 0 ? ChessColor.White : ChessColor.Black;
-        rank.push(new ChessSquare(color));
+        rank.push(ChessSquare.create(color));
       }
 
       this.squares.push(rank);
@@ -40,7 +43,7 @@ export class Chessboard {
         r++;
         f = 0;
       } else if (FenCharUtil.charRepresentsChessPiece(char)) {
-        this.squares[r][f].piece = ChessPiece.fromFenChar(char);
+        this.squares[r][f].piece = ChessPiece.createFromFenChar(char);
         f++;
       } else if (FenCharUtil.charRepresentsEmptySquare(char)) {
         const emptySquares = +char;
@@ -60,9 +63,10 @@ export class Chessboard {
   }
 
   private _reflectionCharIndex(fenPosition: FenPosition): number {
-    return fenPosition.isValid ? fenPosition.notation.length : fenPosition.error.position;
+    return fenPosition.isValid
+      ? fenPosition.notation.length
+      : fenPosition.error.position;
   }
-
 
   private _clearRemainingSquares(rank: number, file: number): void {
     if (file >= 7) {

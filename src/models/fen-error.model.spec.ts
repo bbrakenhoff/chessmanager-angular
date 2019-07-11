@@ -3,7 +3,7 @@ import { FenErrorCode } from './fen-error-code.model';
 
 describe('FenError', () => {
 
-  describe('createTooManyPiecesOnRank(position: number, rank: number)', () => {
+  describe('static createTooManyPiecesOnRank(position: number, rank: number)', () => {
 
     it('should create FenError with FenErrorCode.TooManyPiecesOnRank', () => {
       const result = FenError.createTooManyPiecesOnRank(3, 2);
@@ -13,7 +13,7 @@ describe('FenError', () => {
     });
   });
 
-  describe('createTooManyEmptySquaresAddedToRank(position: number, rank: number)', () => {
+  describe('static createTooManyEmptySquaresAddedToRank(position: number, rank: number)', () => {
 
     it('should create FenError with FenErrorCode.TooManyEmptySquaresAddedToRank', () => {
       const result = FenError.createTooManyEmptySquaresAddedToRank(3, 2);
@@ -23,7 +23,7 @@ describe('FenError', () => {
     });
   });
 
-  describe('createNotEnoughSquaresOnRank(position: number, rank: number)', () => {
+  describe('static createNotEnoughSquaresOnRank(position: number, rank: number)', () => {
 
     it('should create FenError with FenErrorCode.NotEnoughSquaresDefinedOnRank', () => {
       const result = FenError.createNotEnoughSquaresOnRank(3, 2);
@@ -33,7 +33,7 @@ describe('FenError', () => {
     });
   });
 
-  describe('createTooManyRanksDefined(position: number)', () => {
+  describe('static createTooManyRanksDefined(position: number)', () => {
 
     it('should create FenError with FenErrorCode.TooManyRanksDefined', () => {
       const result = FenError.createTooManyRanksDefined(3);
@@ -43,7 +43,7 @@ describe('FenError', () => {
     });
   });
 
-  describe('createIllegalCharacterFound(position: number)', () => {
+  describe('static createIllegalCharacterFound(position: number)', () => {
 
     it('should create FenError with FenErrorCode.IllegalCharacterFound', () => {
       const result = FenError.createIllegalCharacterFound(3);
@@ -53,7 +53,7 @@ describe('FenError', () => {
     });
   });
 
-  describe('createNotEnoughSquaresDefined(position: number)', () => {
+  describe('static createNotEnoughSquaresDefined(position: number)', () => {
 
     it('should create FenError with FenErrorCode.NotEnoughSquaresDefined', () => {
       const result = FenError.createNotEnoughSquaresDefined(3);

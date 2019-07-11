@@ -30,7 +30,7 @@ describe('FenPositionComponent', () => {
   describe('constructor', () => {
     it('should build the form', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.eightQueensSolution;
+        MockData.FenNotations.EightQueensSolution;
       component.fenPosition.description = 'Test position description';
 
       expect(component.form).toBeDefined();
@@ -49,7 +49,7 @@ describe('FenPositionComponent', () => {
     it('should apply the starting position to the form and submit', () => {
       component.applyStartingPosition();
       expect(component.form.controls.notation.value).toEqual(
-        MockData.fenNotations.startingPosition
+        MockData.FenNotations.StartingPosition
       );
       expect(component.form.controls.description.value).toEqual(
         'Starting position'
@@ -62,7 +62,7 @@ describe('FenPositionComponent', () => {
     it('should apply the starting position to the form and submit', () => {
       component.applyEmptyBoard();
       expect(component.form.controls.notation.value).toEqual(
-        MockData.fenNotations.emptyBoard
+        MockData.FenNotations.EmptyBoard
       );
       expect(component.form.controls.description.value).toEqual('Empty board');
       verify(componentSpy.onFormSubmit()).once();
@@ -72,17 +72,17 @@ describe('FenPositionComponent', () => {
   describe('onFormSubmit()', () => {
     it('should write the form values to the fen position', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.eightQueensSolution;
+        MockData.FenNotations.EightQueensSolution;
       component.fenPosition.description = 'Eight queens solution';
 
       component.form.controls.notation.setValue(
-        MockData.fenNotations.startingPosition
+        MockData.FenNotations.StartingPosition
       );
       component.form.controls.description.setValue('Starting position');
 
       component.onFormSubmit();
       expect(component.fenPosition.notation).toEqual(
-        MockData.fenNotations.startingPosition
+        MockData.FenNotations.StartingPosition
       );
       expect(component.fenPosition.description).toEqual('Starting position');
     });
@@ -90,19 +90,19 @@ describe('FenPositionComponent', () => {
 
   describe('get validationMessage()', () => {
     it('should return "FEN notation is correct" when fen position is valid', () => {
-      component.fenPosition.notation = MockData.fenNotations.startingPosition;
+      component.fenPosition.notation = MockData.FenNotations.StartingPosition;
       expect(component.validationMessage).toEqual('FEN notation is correct');
     });
 
     it('should return "Too many pieces on rank 3" when too many pieces on a rank', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.tooManyPiecesOnRank;
+        MockData.FenNotations.TooManyPiecesOnRank;
       expect(component.validationMessage).toEqual('Too many pieces on rank 3');
     });
 
     it('should return "Too many empty squares added to rank 2" when too many pieces added to a rank', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.tooManyEmptySquaresToRank;
+        MockData.FenNotations.TooManyEmptySquaresToRank;
       expect(component.validationMessage).toEqual(
         'Too many empty squares added to rank 2'
       );
@@ -110,7 +110,7 @@ describe('FenPositionComponent', () => {
 
     it('should return "Not enough squares defined on rank 2" when not enough squares added to a rank', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.notEnoughSquaresOnRank;
+        MockData.FenNotations.NotEnoughSquaresOnRank;
       expect(component.validationMessage).toEqual(
         'Not enough squares defined on rank 2'
       );
@@ -118,32 +118,32 @@ describe('FenPositionComponent', () => {
 
     it('should return "Too many ranks defined" when too many ranks defined', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.tooManyRanksDefined;
+        MockData.FenNotations.TooManyRanksDefined;
       expect(component.validationMessage).toEqual('Too many ranks defined');
     });
 
     it('should return "Illegal character found" when illegal character found', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.illegalCharacterFound;
+        MockData.FenNotations.IllegalCharacterFound;
       expect(component.validationMessage).toEqual('Illegal character found');
     });
 
     it('should return "Not enough squares defined" when not enough squares defined', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.notEnoughSquaresDefined;
+        MockData.FenNotations.NotEnoughSquaresDefined;
       expect(component.validationMessage).toEqual('Not enough squares defined');
     });
   });
 
   describe('get errorIndicator()', () => {
     it('should return empty string when fen position is valid', () => {
-      component.fenPosition.notation = MockData.fenNotations.startingPosition;
+      component.fenPosition.notation = MockData.FenNotations.StartingPosition;
       expect(component.errorIndicator).toEqual('');
     });
 
     it('should return a text containing spaces until the error position ending with a ^ when fen positio is invalid', () => {
       component.fenPosition.notation =
-        MockData.fenNotations.tooManyPiecesOnRank;
+        MockData.FenNotations.TooManyPiecesOnRank;
       expect(component.errorIndicator).toEqual(
         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#94;'
       );

@@ -5,7 +5,11 @@ export class ChessSquare {
   readonly color: ChessColor;
   piece: ChessPiece = null;
 
-  constructor(color: ChessColor) {
+  private constructor(color: ChessColor) {
     this.color = color;
   }
+
+   static create(color: ChessColor) {
+     return new ChessSquare(color);
+   }
 }

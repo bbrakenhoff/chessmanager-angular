@@ -10,11 +10,11 @@ describe('Chessboard', () => {
   let fenPosition: FenPosition;
 
   beforeEach(() => {
-    chessboard = new Chessboard();
+    chessboard = Chessboard.create();
     fenPosition = new FenPosition();
   });
 
-  describe('constructor()', () => {
+  describe('static create()', () => {
 
     it('should create an empty chessboard', () => {
       expect(chessboard).toBeDefined();
@@ -54,21 +54,21 @@ describe('Chessboard', () => {
   describe('reflectFenPosition(fenPosition: FenPosition)', () => {
 
     it('should reflect notation when fen position is valid', () => {
-      fenPosition.notation = MockData.fenNotations.startingPosition;
+      fenPosition.notation = MockData.FenNotations.StartingPosition;
 
       chessboard.reflectFenPosition(fenPosition);
 
-      expect(chessboard.squares[0][0].piece).toEqual(ChessPiece.fromFenChar('r'));
-      expect(chessboard.squares[0][1].piece).toEqual(ChessPiece.fromFenChar('n'));
-      expect(chessboard.squares[0][2].piece).toEqual(ChessPiece.fromFenChar('b'));
-      expect(chessboard.squares[0][3].piece).toEqual(ChessPiece.fromFenChar('q'));
-      expect(chessboard.squares[0][4].piece).toEqual(ChessPiece.fromFenChar('k'));
-      expect(chessboard.squares[0][5].piece).toEqual(ChessPiece.fromFenChar('b'));
-      expect(chessboard.squares[0][6].piece).toEqual(ChessPiece.fromFenChar('n'));
-      expect(chessboard.squares[0][7].piece).toEqual(ChessPiece.fromFenChar('r'));
+      expect(chessboard.squares[0][0].piece).toEqual(ChessPiece.createFromFenChar('r'));
+      expect(chessboard.squares[0][1].piece).toEqual(ChessPiece.createFromFenChar('n'));
+      expect(chessboard.squares[0][2].piece).toEqual(ChessPiece.createFromFenChar('b'));
+      expect(chessboard.squares[0][3].piece).toEqual(ChessPiece.createFromFenChar('q'));
+      expect(chessboard.squares[0][4].piece).toEqual(ChessPiece.createFromFenChar('k'));
+      expect(chessboard.squares[0][5].piece).toEqual(ChessPiece.createFromFenChar('b'));
+      expect(chessboard.squares[0][6].piece).toEqual(ChessPiece.createFromFenChar('n'));
+      expect(chessboard.squares[0][7].piece).toEqual(ChessPiece.createFromFenChar('r'));
 
       for (const square of chessboard.squares[1]) {
-        expect(square.piece).toEqual(ChessPiece.fromFenChar('p'));
+        expect(square.piece).toEqual(ChessPiece.createFromFenChar('p'));
       }
 
       let r = 2;
@@ -82,27 +82,27 @@ describe('Chessboard', () => {
       }
 
       for (const square of chessboard.squares[6]) {
-        expect(square.piece).toEqual(ChessPiece.fromFenChar('P'));
+        expect(square.piece).toEqual(ChessPiece.createFromFenChar('P'));
       }
 
-      expect(chessboard.squares[7][0].piece).toEqual(ChessPiece.fromFenChar('R'));
-      expect(chessboard.squares[7][1].piece).toEqual(ChessPiece.fromFenChar('N'));
-      expect(chessboard.squares[7][2].piece).toEqual(ChessPiece.fromFenChar('B'));
-      expect(chessboard.squares[7][3].piece).toEqual(ChessPiece.fromFenChar('Q'));
-      expect(chessboard.squares[7][4].piece).toEqual(ChessPiece.fromFenChar('K'));
-      expect(chessboard.squares[7][5].piece).toEqual(ChessPiece.fromFenChar('B'));
-      expect(chessboard.squares[7][6].piece).toEqual(ChessPiece.fromFenChar('N'));
-      expect(chessboard.squares[7][7].piece).toEqual(ChessPiece.fromFenChar('R'));
+      expect(chessboard.squares[7][0].piece).toEqual(ChessPiece.createFromFenChar('R'));
+      expect(chessboard.squares[7][1].piece).toEqual(ChessPiece.createFromFenChar('N'));
+      expect(chessboard.squares[7][2].piece).toEqual(ChessPiece.createFromFenChar('B'));
+      expect(chessboard.squares[7][3].piece).toEqual(ChessPiece.createFromFenChar('Q'));
+      expect(chessboard.squares[7][4].piece).toEqual(ChessPiece.createFromFenChar('K'));
+      expect(chessboard.squares[7][5].piece).toEqual(ChessPiece.createFromFenChar('B'));
+      expect(chessboard.squares[7][6].piece).toEqual(ChessPiece.createFromFenChar('N'));
+      expect(chessboard.squares[7][7].piece).toEqual(ChessPiece.createFromFenChar('R'));
     });
 
     it('should reflect notation until char index of fen error when fen position is invalid', () => {
-      fenPosition.notation = MockData.fenNotations.illegalCharacterFound;
+      fenPosition.notation = MockData.FenNotations.IllegalCharacterFound;
 
       chessboard.reflectFenPosition(fenPosition);
 
-      expect(chessboard.squares[0][0].piece).toEqual(ChessPiece.fromFenChar('r'));
-      expect(chessboard.squares[0][1].piece).toEqual(ChessPiece.fromFenChar('n'));
-      expect(chessboard.squares[0][2].piece).toEqual(ChessPiece.fromFenChar('b'));
+      expect(chessboard.squares[0][0].piece).toEqual(ChessPiece.createFromFenChar('r'));
+      expect(chessboard.squares[0][1].piece).toEqual(ChessPiece.createFromFenChar('n'));
+      expect(chessboard.squares[0][2].piece).toEqual(ChessPiece.createFromFenChar('b'));
       expect(chessboard.squares[0][3].piece).toBeNull();
       expect(chessboard.squares[0][4].piece).toBeNull();
       expect(chessboard.squares[0][5].piece).toBeNull();
@@ -117,10 +117,10 @@ describe('Chessboard', () => {
     });
 
     it('should reflect notation when there is a previous notation applied', () => {
-      fenPosition.notation = MockData.fenNotations.startingPosition;
+      fenPosition.notation = MockData.FenNotations.StartingPosition;
       chessboard.reflectFenPosition(fenPosition);
 
-      fenPosition.notation = MockData.fenNotations.eightQueensSolution;
+      fenPosition.notation = MockData.FenNotations.EightQueensSolution;
       chessboard.reflectFenPosition(fenPosition);
 
       const whiteQueenPositions = [
@@ -133,7 +133,7 @@ describe('Chessboard', () => {
         { rank: 6, file: 5 },
         { rank: 7, file: 2 }
       ];
-      const whiteQueen = ChessPiece.fromFenChar('Q');
+      const whiteQueen = ChessPiece.createFromFenChar('Q');
 
       for (let rank = 0; rank < 8; rank++) {
         for (let file = 0; file < 8; file++) {
@@ -148,15 +148,15 @@ describe('Chessboard', () => {
     });
 
     it('should clear remaining squares when fen position is invalid', () => {
-      fenPosition.notation = MockData.fenNotations.eightQueensSolution;
+      fenPosition.notation = MockData.FenNotations.EightQueensSolution;
       chessboard.reflectFenPosition(fenPosition);
 
-      fenPosition.notation = MockData.fenNotations.illegalCharacterFound;
+      fenPosition.notation = MockData.FenNotations.IllegalCharacterFound;
       chessboard.reflectFenPosition(fenPosition);
 
-      expect(chessboard.squares[0][0].piece).toEqual(ChessPiece.fromFenChar('r'));
-      expect(chessboard.squares[0][1].piece).toEqual(ChessPiece.fromFenChar('n'));
-      expect(chessboard.squares[0][2].piece).toEqual(ChessPiece.fromFenChar('b'));
+      expect(chessboard.squares[0][0].piece).toEqual(ChessPiece.createFromFenChar('r'));
+      expect(chessboard.squares[0][1].piece).toEqual(ChessPiece.createFromFenChar('n'));
+      expect(chessboard.squares[0][2].piece).toEqual(ChessPiece.createFromFenChar('b'));
       expect(chessboard.squares[0][3].piece).toBeNull();
       expect(chessboard.squares[0][4].piece).toBeNull();
       expect(chessboard.squares[0][5].piece).toBeNull();
@@ -174,13 +174,13 @@ describe('Chessboard', () => {
   describe('_reflectionCharIndex(fenPosition: FenPosition)', () => {
 
     it('should return the lenght of the notation when fen position is valid', () => {
-      fenPosition.notation = MockData.fenNotations.startingPosition;
+      fenPosition.notation = MockData.FenNotations.StartingPosition;
       const result = (chessboard as any)._reflectionCharIndex(fenPosition);
       expect(result).toEqual(fenPosition.notation.length);
     });
 
     it('should return the position of the error when the fen position is invalid', () => {
-      fenPosition.notation = MockData.fenNotations.tooManyEmptySquaresToRank;
+      fenPosition.notation = MockData.FenNotations.TooManyEmptySquaresToRank;
       const result = (chessboard as any)._reflectionCharIndex(fenPosition);
       expect(result).toEqual(fenPosition.error.position);
     });
@@ -190,7 +190,7 @@ describe('Chessboard', () => {
 
     it('should clear the remaining squares starting from current file', () => {
       const fenPosition = new FenPosition();
-      fenPosition.notation = MockData.fenNotations.eightQueensSolution;
+      fenPosition.notation = MockData.FenNotations.EightQueensSolution;
 
       const whiteQueenPositions = [
         { rank: 0, file: 0 },
@@ -203,7 +203,7 @@ describe('Chessboard', () => {
         { rank: 7, file: 2 }
       ];
 
-      const whiteQueen = ChessPiece.fromFenChar('Q');
+      const whiteQueen = ChessPiece.createFromFenChar('Q');
 
       for (const position of whiteQueenPositions) {
         chessboard.squares[position.rank][position.file].piece = whiteQueen;

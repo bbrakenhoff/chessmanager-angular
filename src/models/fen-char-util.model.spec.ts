@@ -2,7 +2,7 @@ import { FenCharUtil } from './fen-char-util.model';
 
 describe('FenCharUtil', () => {
 
-  describe('charRepresentsEmptySquare(char: string)', () => {
+  describe('static charRepresentsEmptySquare(char: string)', () => {
 
     it('should return true when char equals a digit between 1 and 8', () => {
       const result = FenCharUtil.charRepresentsEmptySquare('3');
@@ -25,7 +25,7 @@ describe('FenCharUtil', () => {
     });
   });
 
-  describe('charRepresentsChessPiece(char: string)', () => {
+  describe('static charRepresentsChessPiece(char: string)', () => {
 
     it('should return true when char equals one of the piece types as a uppercase letter', () => {
       const result = FenCharUtil.charRepresentsChessPiece('r');
@@ -43,7 +43,7 @@ describe('FenCharUtil', () => {
     });
   });
 
-  describe('charRepresentsNewRank(char: string)', () => {
+  describe('static charRepresentsNewRank(char: string)', () => {
 
     it('should return true when the char equals "/"', () => {
       const result = FenCharUtil.charRepresentsNewRank('/');
