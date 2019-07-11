@@ -4,6 +4,7 @@ import {
   defaultCollections,
   TestData
 } from '../util/default-collections-generator';
+import { Collection } from 'src/models/collection.model';
 
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
@@ -16,6 +17,19 @@ export enum StorageKey {
 })
 export class StorageService {
   constructor() {}
+
+  public get collections() {
+    const json: any[] = this._get(StorageKey.Collections);
+
+    if (json) {
+      console.log(`Bijoya: storage.service -> json`, json);
+      return json.map((collection: any) =>
+        Collection.createFromJson(collection)
+      );
+    }
+
+    return [];
+  }
 
   /**
    * Return the stored icon set.
@@ -38,8 +52,17 @@ export class StorageService {
     this._set(StorageKey.PrefIconSet, value);
   }
 
-  private _get(key: StorageKey): string {
-    return localStorage.getItem(key);
+  private _get(key: StorageKey): any {
+    const value = localStorage.getItem(key);
+
+    try {
+      const parsed = JSON.parse(value);
+      console.log(`Bijoya: storage.service -> _get parsed`, parsed);
+      return parsed;
+    } catch (error) {
+      console.log(`Bijoya: storage.service -> _get not parsed`, value);
+      return value;
+    }
   }
 
   private _set(key: StorageKey, value: any) {

@@ -5,7 +5,8 @@ import { spy, anyString, when, verify, resetCalls, reset } from 'ts-mockito';
 import { IconSet } from 'src/models/icon-set.model';
 
 describe('StorageService', () => {
-  const valueMock = 'Storage key value';
+  const storageStringValue = 'Storage key value';
+  const storageJSONValue = '[{"pizza": "calzone"}]';
 
   const localStorageSpy: Storage = spy(localStorage);
   let storageService: StorageService;
@@ -19,6 +20,23 @@ describe('StorageService', () => {
 
   afterEach(() => {
     resetCalls(localStorageSpy);
+  });
+
+  fdescribe('get collections()', () => {
+    it('should return the collections from storage when in storage', () => {
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(
+        '[{"_id":"733386ca-21ee-46f2-a3cd-8e8cb323570f","name":"Test collection"},{"_id":"b880b03b-fd9a-44dd-b03f-c66eb53bfb06","name":"Problems"},{"_id":"4ff1dd7b-127a-4544-82de-a36f1fd0e7cd","name":"Errors"}]'
+      );
+      expect(storageService.collections).toBeDefined();
+      expect(storageService.collections.length).toEqual(3);
+      verify((storageServiceSpy as any)._get(StorageKey.Collections)).once();
+    });
+
+    it('should return an empty array when nothing in storage', () => {
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
+      expect(storageService.collections).toEqual([]);
+      verify((storageServiceSpy as any)._get(StorageKey.Collections)).once();
+    });
   });
 
   describe('get iconSet()', () => {
@@ -49,32 +67,31 @@ describe('StorageService', () => {
     });
   });
 
-  describe('get collections()', () => {
-
-    it('should return the stored collections when in storage', () => {
-
-    });
-
-    it('should return an empty array when nothing in storage', () => {});
-  });
-
   describe('_get(key: StorageKey): any', () => {
     it('should retrieve the value matching with the given key', () => {
-      when(localStorageSpy.getItem(anyString())).thenReturn(valueMock);
+      when(localStorageSpy.getItem(anyString())).thenReturn(storageJSONValue);
 
       const value = (storageService as any)._get(StorageKey.PrefIconSet);
       verify(localStorageSpy.getItem(StorageKey.PrefIconSet)).once();
-      expect(value).toEqual(valueMock);
+      expect(value).toEqual(JSON.parse(storageJSONValue));
+    });
+
+    it('should return a string when the value being returned cannot be parsed to JSON', () => {
+      when(localStorageSpy.getItem(anyString())).thenReturn(storageStringValue);
+
+      const value = (storageService as any)._get(StorageKey.PrefIconSet);
+      verify(localStorageSpy.getItem(StorageKey.PrefIconSet)).once();
+      expect(value).toEqual(storageStringValue);
     });
   });
 
   describe('_set(key: StorageKey, value: any)', () => {
     it('should save the new value under the given key', () => {
-      (storageService as any)._set(StorageKey.PrefIconSet, valueMock);
+      (storageService as any)._set(StorageKey.PrefIconSet, storageStringValue);
       verify(
         localStorageSpy.setItem(
           StorageKey.PrefIconSet,
-          JSON.stringify(valueMock)
+          JSON.stringify(storageStringValue)
         )
       ).once();
     });

@@ -9,14 +9,15 @@ export class Collection {
 
   private constructor() {}
 
-  static create() {
-    return new Collection();
+  static create(name: string) {
+    const collection = new Collection();
+    collection.name = name;
+    return collection;
   }
 
   static createFromJson(json: any) {
-    const collection = Collection.create();
+    const collection = Collection.create(json.name);
     collection._id = json._id;
-    collection.name = json.name;
 
     return collection;
   }
