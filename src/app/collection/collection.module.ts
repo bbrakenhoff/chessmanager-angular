@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CollectionsComponent } from './collections.component';
+import { CollectionComponent } from './collection.component';
 
 @NgModule({
-  declarations: [CollectionsComponent],
+  declarations: [CollectionComponent],
   imports: [
     CommonModule
   ]
 })
-export class CollectionsModule { }
+export class CollectionModule { }

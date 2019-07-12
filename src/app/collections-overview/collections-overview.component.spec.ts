@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollectionsComponent } from './collections.component';
+import { CollectionsOverviewComponent } from './collections-overview.component';
 import { StorageService } from '../core/storage.service';
 import { mock, instance, when } from 'ts-mockito';
 
 describe('CollectionsComponent', () => {
-  let component: CollectionsComponent;
-  let fixture: ComponentFixture<CollectionsComponent>;
+  let component: CollectionsOverviewComponent;
+  let fixture: ComponentFixture<CollectionsOverviewComponent>;
 
   const storageServiceMock = mock(StorageService);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CollectionsComponent],
+      declarations: [CollectionsOverviewComponent],
       providers: [
         {
           provide: StorageService,
@@ -26,7 +26,7 @@ describe('CollectionsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CollectionsComponent);
+    fixture = TestBed.createComponent(CollectionsOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

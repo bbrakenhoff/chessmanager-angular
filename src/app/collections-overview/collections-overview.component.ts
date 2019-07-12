@@ -4,10 +4,10 @@ import { Collection } from 'src/models/collection.model';
 
 @Component({
   selector: 'app-collections',
-  templateUrl: './collections.component.html',
-  styleUrls: ['./collections.component.scss']
+  templateUrl: './collections-overview.component.html',
+  styleUrls: ['./collections-overview.component.scss']
 })
-export class CollectionsComponent implements OnInit {
+export class CollectionsOverviewComponent implements OnInit {
   collections: Collection[];
 
   constructor(private _storageService: StorageService) {

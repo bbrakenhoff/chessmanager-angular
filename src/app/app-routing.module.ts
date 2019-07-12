@@ -4,17 +4,33 @@ import { SettingsComponent } from './settings/settings.component';
 import { SettingsModule } from './settings/settings.module';
 import { FenPositionComponent } from './fen-position/fen-position.component';
 import { FenPositionModule } from './fen-position/fen-position.module';
-import { CollectionsComponent } from './collections/collections.component';
-import { CollectionsModule } from './collections/collections.module';
+import { CollectionsOverviewComponent } from './collections-overview/collections-overview.component';
+import { CollectionsOverviewModule } from './collections-overview/collections-overview.module';
+import { CollectionModule } from './collection/collection.module';
+import { CollectionComponent } from './collection/collection.component';
 
 const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'fenposition', component: FenPositionComponent },
-  { path: '', component: CollectionsComponent }
+  {
+    path: 'collections',
+    component: CollectionsOverviewComponent,
+  },
+  {
+    path: 'collections/:id',
+    component: CollectionComponent
+  },
+  { path: '', redirectTo: '/collections', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [SettingsModule, CollectionsModule, FenPositionModule, RouterModule.forRoot(routes)],
+  imports: [
+    SettingsModule,
+    CollectionsOverviewModule,
+    CollectionModule,
+    FenPositionModule,
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
