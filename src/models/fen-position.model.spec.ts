@@ -1,9 +1,9 @@
 import { FenPosition } from './fen-position.model';
 import { FenError } from './fen-error.model';
-import { MockData } from './mock-data';
+import { TestDataFactory } from 'src/app/util/test-data-factory';
 
 describe('FenPosition', () => {
-  const testFenNotations = MockData.FenNotations;
+  const testFenNotations = TestDataFactory.createFenNotations();
 
   describe('static create()', () => {
     it('should create a new fen position', () => {
@@ -63,12 +63,12 @@ describe('FenPosition', () => {
 
     describe('valid', () => {
       it('should not result in an error when empty board represented', () => {
-        result.notation = testFenNotations.EmptyBoard;
+        result.notation = testFenNotations.emptyBoard;
         expect(result.error).toBeNull();
       });
 
       it('should not result in an error when starting position represented', () => {
-        result.notation = testFenNotations.StartingPosition;
+        result.notation = testFenNotations.startingPosition;
         expect(result.error).toBeNull();
       });
     });
@@ -81,36 +81,36 @@ describe('FenPosition', () => {
       });
 
       it('should result in an error when too many pieces on a rank', () => {
-        result.notation = testFenNotations.TooManyPiecesOnRank;
+        result.notation = testFenNotations.tooManyPiecesOnRank;
         expect(result.error).toEqual(FenError.createTooManyPiecesOnRank(19, 2));
       });
 
       it('should result in an error when too many empty squares added to a rank', () => {
-        result.notation = testFenNotations.TooManyEmptySquaresToRank;
+        result.notation = testFenNotations.tooManyEmptySquaresToRank;
         expect(result.error).toEqual(
           FenError.createTooManyEmptySquaresAddedToRank(15, 1)
         );
       });
 
       it('should result in an error when not enough squares defined on a rank', () => {
-        result.notation = testFenNotations.NotEnoughSquaresOnRank;
+        result.notation = testFenNotations.notEnoughSquaresOnRank;
         expect(result.error).toEqual(
           FenError.createNotEnoughSquaresOnRank(15, 1)
         );
       });
 
       it('should result in an error when when too many ranks defined', () => {
-        result.notation = testFenNotations.TooManyRanksDefined;
+        result.notation = testFenNotations.tooManyRanksDefined;
         expect(result.error).toEqual(FenError.createTooManyRanksDefined(43));
       });
 
       it('should result in an error when illegal character found', () => {
-        result.notation = testFenNotations.IllegalCharacterFound;
+        result.notation = testFenNotations.illegalCharacterFound;
         expect(result.error).toEqual(FenError.createIllegalCharacterFound(3));
       });
 
       it('should result in an error when not enough squares defined', () => {
-        result.notation = testFenNotations.NotEnoughSquaresDefined;
+        result.notation = testFenNotations.notEnoughSquaresDefined;
         expect(result.error).toEqual(
           FenError.createNotEnoughSquaresDefined(39)
         );

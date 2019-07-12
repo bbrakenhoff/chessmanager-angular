@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
-import {
-  defaultCollections,
-  TestData
-} from '../util/default-collections-generator';
 import { Collection } from 'src/models/collection.model';
 import { FenPosition } from 'src/models/fen-position.model';
+import { TestDataFactory, TestCollection } from '../util/test-data-factory';
 
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
@@ -87,12 +84,13 @@ export class StorageService {
   }
 
   createTestData() {
+    const testCollections = TestDataFactory.createAllTestCollections();
     this.setCollections(
-      defaultCollections.map((testData: TestData) => testData.collection)
+      testCollections.map((testData: TestCollection) => testData.collection)
     );
 
     const fenPositions = [];
-    for (const testData of defaultCollections) {
+    for (const testData of testCollections) {
       fenPositions.push(...testData.fenPositions);
     }
 

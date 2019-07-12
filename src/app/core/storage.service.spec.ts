@@ -13,58 +13,16 @@ import {
 import { IconSet } from 'src/models/icon-set.model';
 import { Collection } from 'src/models/collection.model';
 import { FenPosition } from 'src/models/fen-position.model';
+import { TestDataFactory } from '../util/test-data-factory';
 
 describe('StorageService', () => {
   const testData = {
-    storageStringValue: 'Storage key value',
-    storageJsonValue: '[{"pizza": "calzone"}]',
-    collectionsJsonArray: [
-      {
-        _id: '733386ca-21ee-46f2-a3cd-8e8cb323570f',
-        name: 'Test collection'
-      },
-      {
-        _id: 'b880b03b-fd9a-44dd-b03f-c66eb53bfb06',
-        name: 'Problems'
-      },
-      {
-        _id: '4ff1dd7b-127a-4544-82de-a36f1fd0e7cd',
-        name: 'Errors'
-      }
-    ],
-    get collections() {
-      return this.collectionsJsonArray.map((json: any) =>
-        Collection.createFromJson(json)
-      );
-    },
-    fenPositionsJsonArray: [
-      {
-        collectionId: '10c98c7a-647f-4780-80f6-cc06d2fe3816',
-        description: 'Starting position',
-        _error: null,
-        _id: '00b9ef28-8879-4869-bb20-333e48fdd236',
-        _notation: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
-      },
-      {
-        collectionId: '10c98c7a-647f-4780-80f6-cc06d2fe3816',
-        description: 'Empty board',
-        _error: null,
-        _id: '3e20c455-c740-4abf-b2d3-0836da6c2c53',
-        _notation: '8/8/8/8/8/8/8/8'
-      },
-      {
-        collectionId: '10c98c7a-647f-4780-80f6-cc06d2fe3816',
-        description: 'Eight queens solution',
-        _error: null,
-        _id: '669123fc-15b8-4706-9791-84205e2f5d46',
-        _notation: 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5'
-      }
-    ],
-    get fenPositions() {
-      return this.fenPositionsJsonArray.map((json: any) =>
-        FenPosition.createFromJson(json)
-      );
-    }
+    storageStringValue: TestDataFactory.createString(),
+    storageJsonValue: TestDataFactory.createJson(),
+    collectionsJsonArray: TestDataFactory.createCollectionsJson(),
+    collections: TestDataFactory.createCollections(),
+    fenPositionsJsonArray: TestDataFactory.createFenPositionsJson(),
+    fenPositions: TestDataFactory.createFenPositions()
   };
 
   const localStorageSpy: Storage = spy(localStorage);
