@@ -2,15 +2,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CollectionComponent } from './collection.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { when, instance, mock } from 'ts-mockito';
+import { when, instance, mock, anyString, verify } from 'ts-mockito';
 import { of } from 'rxjs';
 import * as uuid from 'uuid/v4';
+import { StorageService } from '../core/storage.service';
 
 describe('CollectionComponent', () => {
+  const testData = {
+    collectionId: uuid()
+  };
+
   let component: CollectionComponent;
   let fixture: ComponentFixture<CollectionComponent>;
 
   const activatedRouteMock = mock(ActivatedRoute);
+  const storageServiceMock = mock(StorageService);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,8 +26,19 @@ describe('CollectionComponent', () => {
         {
           provide: ActivatedRoute,
           useFactory: () => {
-            when(activatedRouteMock.params).thenReturn(of({ id: uuid() }));
+            when(activatedRouteMock.params).thenReturn(
+              of({ id: testData.collectionId })
+            );
             return instance(activatedRouteMock);
+          }
+        },
+        {
+          provide: StorageService,
+          useFactory: () => {
+            when(
+              storageServiceMock.getFenPositionsByCollection(anyString())
+            ).thenReturn([]);
+            return instance(storageServiceMock);
           }
         }
       ]
@@ -36,5 +53,8 @@ describe('CollectionComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    verify(
+      storageServiceMock.getFenPositionsByCollection(testData.collectionId)
+    ).once();
   });
 });

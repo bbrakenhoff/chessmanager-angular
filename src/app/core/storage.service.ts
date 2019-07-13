@@ -32,7 +32,13 @@ export class StorageService {
     this._set(StorageKey.Collections, value);
   }
 
-  public get fenPositions() {
+  public getFenPositionsByCollection(collectionId: string) {
+    return this._fenPositions.filter(
+      fenPosition => fenPosition.collectionId === collectionId
+    );
+  }
+
+  private get _fenPositions() {
     const json: any[] = this._get(StorageKey.FenPositions);
 
     if (json) {
@@ -85,15 +91,14 @@ export class StorageService {
 
   createTestData() {
     const testCollections = TestDataFactory.createAllTestCollections();
-    this.setCollections(
-      testCollections.map((testData: TestCollection) => testData.collection)
-    );
-
+    const collections = [];
     const fenPositions = [];
-    for (const testData of testCollections) {
-      fenPositions.push(...testData.fenPositions);
-    }
 
+    for (const testCollectionName of Object.keys(testCollections)) {
+      collections.push(testCollections[testCollectionName].collection);
+      fenPositions.push(...testCollections[testCollectionName].fenPositions);
+    }
+    this.setCollections(collections);
     this.setFenPositions(fenPositions);
   }
 }

@@ -70,12 +70,12 @@ export class TestDataFactory {
     );
   }
 
-  static createAllTestCollections(): TestCollection[] {
-    return [
-      TestDataFactory.createTestCollection(),
-      TestDataFactory.createProblemsCollection(),
-      TestDataFactory.createErrorsCollection()
-    ];
+  static createAllTestCollections() {
+    return {
+    testCollection:  TestDataFactory.createTestCollection(),
+      problemsCollection: TestDataFactory.createProblemsCollection(),
+      errorsCollection: TestDataFactory.createErrorsCollection()
+    };
   }
 
   static createTestCollection(): TestCollection {

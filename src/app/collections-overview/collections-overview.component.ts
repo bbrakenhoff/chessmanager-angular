@@ -8,7 +8,7 @@ import { Collection } from 'src/models/collection.model';
   styleUrls: ['./collections-overview.component.scss']
 })
 export class CollectionsOverviewComponent implements OnInit {
-  collections: Collection[];
+  collections: Collection[] = [];
 
   constructor(private _storageService: StorageService) {
     this.collections = this._storageService.collections;

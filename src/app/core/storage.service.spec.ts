@@ -21,6 +21,8 @@ describe('StorageService', () => {
     storageJsonValue: TestDataFactory.createJson(),
     collectionsJsonArray: TestDataFactory.createCollectionsJson(),
     collections: TestDataFactory.createCollections(),
+    collection: TestDataFactory.createTestCollection(),
+    collectionsWithFenPositions: TestDataFactory.createAllTestCollections(),
     fenPositionsJsonArray: TestDataFactory.createFenPositionsJson(),
     fenPositions: TestDataFactory.createFenPositions()
   };
@@ -72,14 +74,28 @@ describe('StorageService', () => {
     });
   });
 
-  describe('get fenPositions()', () => {
+  describe('getFenPositionsByCollection(collectionId: string)', () => {
+    it('should find the fen positions belonging to the given collection', () => {
+      const collectionId =
+        testData.collectionsWithFenPositions.testCollection.collection.id;
+      when((storageServiceSpy as any)._fenPositions).thenReturn([
+        ...testData.collectionsWithFenPositions.testCollection.fenPositions,
+        ...testData.collectionsWithFenPositions.errorsCollection.fenPositions
+      ]);
+
+      const fenPositions = storageService.getFenPositionsByCollection(collectionId);
+      expect(fenPositions).toEqual(testData.collectionsWithFenPositions.testCollection.fenPositions);
+    });
+  });
+
+  describe('get _fenPositions()', () => {
     it('should return the fen positions from storage when in storage', () => {
       const FenPositionSpy = spy(FenPosition);
 
       when((storageServiceSpy as any)._get(anyString())).thenReturn(
         testData.fenPositionsJsonArray
       );
-      const fenPositions = storageService.fenPositions;
+      const fenPositions = (storageService as any)._fenPositions;
       expect(fenPositions).toBeDefined();
       expect(fenPositions.length).toEqual(3);
       verify(FenPositionSpy.createFromJson(anything())).thrice();
@@ -88,8 +104,8 @@ describe('StorageService', () => {
 
     it('should return an empty array when nothing in storage', () => {
       when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
-      expect(storageService.collections).toEqual([]);
-      verify((storageServiceSpy as any)._get(StorageKey.Collections)).once();
+      expect((storageService as any)._fenPositions).toEqual([]);
+      verify((storageServiceSpy as any)._get(StorageKey.FenPositions)).once();
     });
   });
 

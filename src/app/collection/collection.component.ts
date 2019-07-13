@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { StorageService } from '../core/storage.service';
+import { FenPosition } from 'src/models/fen-position.model';
 
 @Component({
   selector: 'app-collection',
@@ -7,14 +9,17 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./collection.component.scss']
 })
 export class CollectionComponent implements OnInit {
-  constructor(private _activatedRoute: ActivatedRoute) {
+  fenPositions: FenPosition[] = [];
 
-    this._activatedRoute.params.subscribe(result =>
-      console.log(
-        `%cBijoya: collections-overview.component -> CollectionsOverviewComponent`,
-        'color: orange;',
-        result
-      )
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _storageService: StorageService
+  ) {
+    this._activatedRoute.params.subscribe(
+      params =>
+        (this.fenPositions = this._storageService.getFenPositionsByCollection(
+          params.id
+        ))
     );
   }
 
