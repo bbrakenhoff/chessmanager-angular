@@ -18,13 +18,11 @@ const routes: Routes = [
   },
   {
     path: 'collections/:collectionId',
-    component: CollectionComponent,
-    children: [
-      {
-        path: 'fen-position/:fenPositionId',
-        component: FenPositionComponent
-      }
-    ]
+    component: CollectionComponent
+  },
+  {
+    path: 'collections/:collectionId/fen-position/:fenPositionId',
+    component: FenPositionComponent
   },
   { path: '', redirectTo: '/collections', pathMatch: 'full' }
 ];
