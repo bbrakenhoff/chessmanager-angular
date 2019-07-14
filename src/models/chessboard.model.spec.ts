@@ -12,7 +12,7 @@ describe('Chessboard', () => {
 
   beforeEach(() => {
     chessboard = Chessboard.create();
-    fenPosition = new FenPosition();
+    fenPosition = FenPosition.create();
   });
 
   describe('static create()', () => {

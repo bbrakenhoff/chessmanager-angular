@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FenPosition } from 'src/models/fen-position.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FenErrorCode } from 'src/models/fen-error-code.model';
+import { ActivatedRoute } from '@angular/router';
+import { StorageService } from '../core/storage.service';
 
 @Component({
   selector: 'app-fen-position',
@@ -9,17 +11,30 @@ import { FenErrorCode } from 'src/models/fen-error-code.model';
   styleUrls: ['./fen-position.component.scss']
 })
 export class FenPositionComponent implements OnInit {
-
-  fenPosition = new FenPosition();
+  fenPosition = FenPosition.create();
   form: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _activatedRoute: ActivatedRoute,
+    private _storageService: StorageService
+  ) {
     this.form = this._formBuilder.group({
       notation: [this.fenPosition.notation, Validators.required],
       description: [this.fenPosition.description, Validators.required]
     });
 
-    this.applyStartingPosition();
+    this._activatedRoute.params.subscribe(params => {
+      const fenPositionFromStorage = this._storageService.getFenPositionById(
+        params.fenPositionId
+      );
+      if (fenPositionFromStorage) {
+        this.fenPosition = fenPositionFromStorage;
+      } else {
+        this.applyStartingPosition();
+        console.log(`Bijoya: fen-position.component -> fenPositionFromStorage wel aangeroepen`);
+      }
+    });
   }
 
   get validationMessage(): string {
@@ -31,9 +46,11 @@ export class FenPositionComponent implements OnInit {
       case FenErrorCode.TooManyPiecesOnRank:
         return `Too many pieces on rank ${this.fenPosition.error.rank + 1}`;
       case FenErrorCode.TooManyEmptySquaresAddedToRank:
-        return `Too many empty squares added to rank ${this.fenPosition.error.rank + 1}`;
+        return `Too many empty squares added to rank ${this.fenPosition.error
+          .rank + 1}`;
       case FenErrorCode.NotEnoughSquaresOnRank:
-        return `Not enough squares defined on rank ${this.fenPosition.error.rank + 1}`;
+        return `Not enough squares defined on rank ${this.fenPosition.error
+          .rank + 1}`;
       case FenErrorCode.TooManyRanksDefined:
         return 'Too many ranks defined';
       case FenErrorCode.IllegalCharacterFound:
@@ -61,11 +78,12 @@ export class FenPositionComponent implements OnInit {
     return whiteSpace + '&#94;';
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   applyStartingPosition() {
-    this.form.controls.notation.setValue('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+    this.form.controls.notation.setValue(
+      'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
+    );
     this.form.controls.description.setValue('Starting position');
 
     this.onFormSubmit();

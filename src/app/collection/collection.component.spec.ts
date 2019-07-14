@@ -27,7 +27,7 @@ describe('CollectionComponent', () => {
           provide: ActivatedRoute,
           useFactory: () => {
             when(activatedRouteMock.params).thenReturn(
-              of({ id: testData.collectionId })
+              of({ collectionId: testData.collectionId })
             );
             return instance(activatedRouteMock);
           }

@@ -7,7 +7,6 @@ import {
   when,
   verify,
   resetCalls,
-  reset,
   anything
 } from 'ts-mockito';
 import { IconSet } from 'src/models/icon-set.model';
@@ -83,8 +82,32 @@ describe('StorageService', () => {
         ...testData.collectionsWithFenPositions.errorsCollection.fenPositions
       ]);
 
-      const fenPositions = storageService.getFenPositionsByCollection(collectionId);
-      expect(fenPositions).toEqual(testData.collectionsWithFenPositions.testCollection.fenPositions);
+      const fenPositions = storageService.getFenPositionsByCollection(
+        collectionId
+      );
+      expect(fenPositions).toEqual(
+        testData.collectionsWithFenPositions.testCollection.fenPositions
+      );
+    });
+  });
+
+  describe('getFenPositionById(fenPositionId: string)', () => {
+    it('should return the fen position with the given id when found', () => {
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(
+        testData.fenPositions
+      );
+      const fenPosition = storageService.getFenPositionById(
+        testData.fenPositions[0].id
+      );
+      expect(fenPosition).toEqual(testData.fenPositions[0]);
+    });
+
+    it('should return null when fen position cannot be found', () => {
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
+      const fenPosition = storageService.getFenPositionById(
+        testData.fenPositions[0].id
+      );
+      expect(fenPosition).toBeNull();
     });
   });
 

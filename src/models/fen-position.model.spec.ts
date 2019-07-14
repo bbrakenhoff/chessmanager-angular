@@ -41,7 +41,7 @@ describe('FenPosition', () => {
     let result: FenPosition;
 
     beforeEach(() => {
-      result = new FenPosition();
+      result = FenPosition.create();
     });
 
     it('should return false when error is empty', () => {
@@ -58,7 +58,7 @@ describe('FenPosition', () => {
     let result: FenPosition;
 
     beforeEach(() => {
-      result = new FenPosition();
+      result = FenPosition.create();
     });
 
     describe('valid', () => {
@@ -77,7 +77,7 @@ describe('FenPosition', () => {
       let result: FenPosition;
 
       beforeEach(() => {
-        result = new FenPosition();
+        result = FenPosition.create();
       });
 
       it('should result in an error when too many pieces on a rank', () => {
@@ -122,7 +122,7 @@ describe('FenPosition', () => {
     let result: FenPosition;
 
     beforeEach(() => {
-      result = new FenPosition();
+      result = FenPosition.create();
     });
 
     it('should set error to not enough squares on rank when total files is less than 8', () => {
@@ -160,7 +160,7 @@ describe('FenPosition', () => {
       let validationCounters: FenPosition.ValidationCounters;
 
       beforeEach(() => {
-        result = new FenPosition();
+        result = FenPosition.create();
         validationCounters = {
           charIndex: 19,
           totalRanks: 3,
@@ -208,7 +208,7 @@ describe('FenPosition', () => {
       };
 
       beforeEach(() => {
-        result = new FenPosition();
+        result = FenPosition.create();
         validationCounters.totalFiles = 0;
         validationCounters.totalSquares = 0;
       });

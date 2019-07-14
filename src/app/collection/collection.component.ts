@@ -18,7 +18,7 @@ export class CollectionComponent implements OnInit {
     this._activatedRoute.params.subscribe(
       params =>
         (this.fenPositions = this._storageService.getFenPositionsByCollection(
-          params.id
+          params.collectionId
         ))
     );
   }

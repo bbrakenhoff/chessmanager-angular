@@ -33,6 +33,8 @@ export class FenPosition {
     return !this.error;
   }
 
+  private constructor() {}
+
   static create() {
     return new FenPosition();
   }

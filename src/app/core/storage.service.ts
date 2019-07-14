@@ -38,6 +38,14 @@ export class StorageService {
     );
   }
 
+  public getFenPositionById(fenPositionId: string) {
+    const fenPositionWithId = this._fenPositions.find(
+      fenPosition => fenPosition.id === fenPositionId
+    );
+
+    return fenPositionWithId ? fenPositionWithId : null;
+  }
+
   private get _fenPositions() {
     const json: any[] = this._get(StorageKey.FenPositions);
 
