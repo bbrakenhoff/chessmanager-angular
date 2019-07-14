@@ -10,7 +10,7 @@ import { StorageService } from '../core/storage.service';
   templateUrl: './fen-diagram.component.html',
   styleUrls: ['./fen-diagram.component.scss']
 })
-export class FenPositionComponent implements OnInit {
+export class FenDiagramComponent implements OnInit {
   fenDiagram = FenDiagram.create();
   form: FormGroup;
 

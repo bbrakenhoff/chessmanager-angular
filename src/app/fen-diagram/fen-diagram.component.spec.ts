@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FenPositionComponent } from './fen-diagram.component';
+import { FenDiagramComponent } from './fen-diagram.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import {
@@ -19,26 +19,26 @@ import * as uuid from 'uuid/v4';
 import { of } from 'rxjs';
 import { FenDiagram } from 'src/models/fen-diagram.model';
 
-describe('FenPositionComponent', () => {
+describe('FenDiagramComponent', () => {
   const testData = {
     testFenNotations: TestDataFactory.createFenNotations(),
-    fenDiagrams: TestDataFactory.createFenPositions(),
+    fenDiagrams: TestDataFactory.createFenDiagrams(),
     collectionId: uuid(),
     get fenDiagramId() {
       return this.fenDiagrams[0].id;
     }
   };
 
-  let component: FenPositionComponent;
-  let fixture: ComponentFixture<FenPositionComponent>;
-  let componentSpy: FenPositionComponent;
+  let component: FenDiagramComponent;
+  let fixture: ComponentFixture<FenDiagramComponent>;
+  let componentSpy: FenDiagramComponent;
 
   const activatedRouteMock = mock(ActivatedRoute);
   const storageServiceMock = mock(StorageService);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FenPositionComponent],
+      declarations: [FenDiagramComponent],
       providers: [
         FormBuilder,
         {
@@ -68,7 +68,7 @@ describe('FenPositionComponent', () => {
       testData.fenDiagrams[0]
     );
 
-    fixture = TestBed.createComponent(FenPositionComponent);
+    fixture = TestBed.createComponent(FenDiagramComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 
@@ -100,7 +100,7 @@ describe('FenPositionComponent', () => {
       when(storageServiceMock.getFenDiagramById(anyString())).thenReturn(null);
 
       // Recreate component, otherwise the alterations to mock do not work
-      fixture = TestBed.createComponent(FenPositionComponent);
+      fixture = TestBed.createComponent(FenDiagramComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
 

@@ -21,9 +21,9 @@ describe('StorageService', () => {
     collectionsJsonArray: TestDataFactory.createCollectionsJson(),
     collections: TestDataFactory.createCollections(),
     collection: TestDataFactory.createTestCollection(),
-    collectionsWithFenPositions: TestDataFactory.createAllTestCollections(),
-    fenDiagramsJsonArray: TestDataFactory.createFenPositionsJson(),
-    fenDiagrams: TestDataFactory.createFenPositions()
+    collectionsWithFenDiagrams: TestDataFactory.createAllTestCollections(),
+    fenDiagramsJsonArray: TestDataFactory.createFenDiagramsJson(),
+    fenDiagrams: TestDataFactory.createFenDiagrams()
   };
 
   const localStorageSpy: Storage = spy(localStorage);
@@ -76,17 +76,17 @@ describe('StorageService', () => {
   describe('getFenDiagramsByCollection(collectionId: string)', () => {
     it('should find the fen diagrams belonging to the given collection', () => {
       const collectionId =
-        testData.collectionsWithFenPositions.testCollection.collection.id;
+        testData.collectionsWithFenDiagrams.testCollection.collection.id;
       when((storageServiceSpy as any)._fenDiagrams).thenReturn([
-        ...testData.collectionsWithFenPositions.testCollection.fenDiagrams,
-        ...testData.collectionsWithFenPositions.errorsCollection.fenDiagrams
+        ...testData.collectionsWithFenDiagrams.testCollection.fenDiagrams,
+        ...testData.collectionsWithFenDiagrams.errorsCollection.fenDiagrams
       ]);
 
       const fenDiagrams = storageService.getFenDiagramsByCollection(
         collectionId
       );
       expect(fenDiagrams).toEqual(
-        testData.collectionsWithFenPositions.testCollection.fenDiagrams
+        testData.collectionsWithFenDiagrams.testCollection.fenDiagrams
       );
     });
   });
@@ -113,7 +113,7 @@ describe('StorageService', () => {
 
   describe('get _fenDiagrams()', () => {
     it('should return the fen diagrams from storage when in storage', () => {
-      const FenPositionSpy = spy(FenDiagram);
+      const FenDiagramSpy = spy(FenDiagram);
 
       when((storageServiceSpy as any)._get(anyString())).thenReturn(
         testData.fenDiagramsJsonArray
@@ -121,24 +121,24 @@ describe('StorageService', () => {
       const fenDiagrams = (storageService as any)._fenDiagrams;
       expect(fenDiagrams).toBeDefined();
       expect(fenDiagrams.length).toEqual(3);
-      verify(FenPositionSpy.createFromJson(anything())).thrice();
-      verify((storageServiceSpy as any)._get(StorageKey.FenPositions)).once();
+      verify(FenDiagramSpy.createFromJson(anything())).thrice();
+      verify((storageServiceSpy as any)._get(StorageKey.FenDiagrams)).once();
     });
 
     it('should return an empty array when nothing in storage', () => {
       when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
       expect((storageService as any)._fenDiagrams).toEqual([]);
-      verify((storageServiceSpy as any)._get(StorageKey.FenPositions)).once();
+      verify((storageServiceSpy as any)._get(StorageKey.FenDiagrams)).once();
     });
   });
 
-  describe('setFenPositions(value: FenPosition[])', () => {
+  describe('setFenDiagrams(value: FenDiagram[])', () => {
     it('should store the given values', () => {
       const fenDiagrams = testData.fenDiagrams;
-      storageService.setFenPositions(fenDiagrams);
+      storageService.setFenDiagrams(fenDiagrams);
 
       verify(
-        (storageServiceSpy as any)._set(StorageKey.FenPositions, fenDiagrams)
+        (storageServiceSpy as any)._set(StorageKey.FenDiagrams, fenDiagrams)
       );
     });
   });

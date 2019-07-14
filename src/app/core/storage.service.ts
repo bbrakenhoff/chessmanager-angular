@@ -7,7 +7,7 @@ import { TestDataFactory, TestCollection } from '../util/test-data-factory';
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
   Collections = 'collections',
-  FenPositions = 'fen_positions'
+  FenDiagrams = 'fen_diagrams'
 }
 
 @Injectable({
@@ -47,7 +47,7 @@ export class StorageService {
   }
 
   private get _fenDiagrams() {
-    const json: any[] = this._get(StorageKey.FenPositions);
+    const json: any[] = this._get(StorageKey.FenDiagrams);
 
     if (json) {
       return json.map((fenDiagram: any) =>
@@ -58,8 +58,8 @@ export class StorageService {
     return [];
   }
 
-  public setFenPositions(value: FenDiagram[]) {
-    this._set(StorageKey.FenPositions, value);
+  public setFenDiagrams(value: FenDiagram[]) {
+    this._set(StorageKey.FenDiagrams, value);
   }
 
   /**
@@ -107,6 +107,6 @@ export class StorageService {
       fenDiagrams.push(...testCollections[testCollectionName].fenDiagrams);
     }
     this.setCollections(collections);
-    this.setFenPositions(fenDiagrams);
+    this.setFenDiagrams(fenDiagrams);
   }
 }

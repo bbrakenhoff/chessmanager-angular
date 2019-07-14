@@ -38,7 +38,7 @@ export class TestDataFactory {
     );
   }
 
-  public static createFenPositionsJson() {
+  public static createFenDiagramsJson() {
     return [
       {
         collectionId: '10c98c7a-647f-4780-80f6-cc06d2fe3816',
@@ -64,8 +64,8 @@ export class TestDataFactory {
     ];
   }
 
-  public static createFenPositions() {
-    return TestDataFactory.createFenPositionsJson().map(json =>
+  public static createFenDiagrams() {
+    return TestDataFactory.createFenDiagramsJson().map(json =>
       FenDiagram.createFromJson(json)
     );
   }

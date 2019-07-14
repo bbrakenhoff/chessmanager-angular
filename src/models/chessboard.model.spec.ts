@@ -53,11 +53,11 @@ describe('Chessboard', () => {
     });
   });
 
-  describe('reflectFenPosition(fenDiagram: FenPosition)', () => {
+  describe('reflectFenNotation(fenDiagram: FenDiagram)', () => {
     it('should reflect notation when fen diagram is valid', () => {
       fenDiagram.notation = testFenNotations.startingPosition;
 
-      chessboard.reflectFenPosition(fenDiagram);
+      chessboard.reflectFenNotation(fenDiagram);
 
       expect(chessboard.squares[0][0].piece).toEqual(
         ChessPiece.createFromFenChar('r')
@@ -131,7 +131,7 @@ describe('Chessboard', () => {
     it('should reflect notation until char index of fen error when fen diagram is invalid', () => {
       fenDiagram.notation = testFenNotations.illegalCharacterFound;
 
-      chessboard.reflectFenPosition(fenDiagram);
+      chessboard.reflectFenNotation(fenDiagram);
 
       expect(chessboard.squares[0][0].piece).toEqual(
         ChessPiece.createFromFenChar('r')
@@ -157,10 +157,10 @@ describe('Chessboard', () => {
 
     it('should reflect notation when there is a previous notation applied', () => {
       fenDiagram.notation = testFenNotations.startingPosition;
-      chessboard.reflectFenPosition(fenDiagram);
+      chessboard.reflectFenNotation(fenDiagram);
 
       fenDiagram.notation = testFenNotations.eightQueensSolution;
-      chessboard.reflectFenPosition(fenDiagram);
+      chessboard.reflectFenNotation(fenDiagram);
 
       const whiteQueenPositions = [
         { rank: 0, file: 0 },
@@ -190,10 +190,10 @@ describe('Chessboard', () => {
 
     it('should clear remaining squares when fen diagram is invalid', () => {
       fenDiagram.notation = testFenNotations.eightQueensSolution;
-      chessboard.reflectFenPosition(fenDiagram);
+      chessboard.reflectFenNotation(fenDiagram);
 
       fenDiagram.notation = testFenNotations.illegalCharacterFound;
-      chessboard.reflectFenPosition(fenDiagram);
+      chessboard.reflectFenNotation(fenDiagram);
 
       expect(chessboard.squares[0][0].piece).toEqual(
         ChessPiece.createFromFenChar('r')
@@ -218,7 +218,7 @@ describe('Chessboard', () => {
     });
   });
 
-  describe('_reflectionCharIndex(fenDiagram: FenPosition)', () => {
+  describe('_reflectionCharIndex(fenDiagram: FenDiagram)', () => {
     it('should return the lenght of the notation when fen diagram is valid', () => {
       fenDiagram.notation = testFenNotations.startingPosition;
       const result = (chessboard as any)._reflectionCharIndex(fenDiagram);

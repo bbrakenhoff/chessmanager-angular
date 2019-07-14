@@ -32,13 +32,13 @@ export class ChessboardComponent implements OnInit, DoCheck {
     this._fenDiagramDiffer = this._keyValueDiffers
       .find(this.fenDiagram)
       .create();
-    this.chessboard.reflectFenPosition(this.fenDiagram);
+    this.chessboard.reflectFenNotation(this.fenDiagram);
   }
 
   ngDoCheck() {
     const changes = this._fenDiagramDiffer.diff(this.fenDiagram);
     if (changes) {
-      this.chessboard.reflectFenPosition(this.fenDiagram);
+      this.chessboard.reflectFenNotation(this.fenDiagram);
       this._changeDector.detectChanges();
     }
   }

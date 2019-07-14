@@ -30,7 +30,7 @@ export class Chessboard {
     }
   }
 
-  reflectFenPosition(fenDiagram: FenDiagram) {
+  reflectFenNotation(fenDiagram: FenDiagram) {
     const charIndex = this._reflectionCharIndex(fenDiagram);
 
     let r = 0;
