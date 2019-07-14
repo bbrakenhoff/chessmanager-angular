@@ -55,63 +55,58 @@ describe('FenDiagram', () => {
   });
 
   describe('_validate()', () => {
-    let result: FenDiagram;
+    let fenDiagram: FenDiagram;
 
     beforeEach(() => {
-      result = FenDiagram.create();
+      fenDiagram = FenDiagram.create();
     });
 
     describe('valid', () => {
       it('should not result in an error when empty board represented', () => {
-        result.notation = testFenNotations.emptyBoard;
-        expect(result.error).toBeNull();
+        fenDiagram.notation = testFenNotations.emptyBoard;
+        expect(fenDiagram.error).toBeNull();
       });
 
       it('should not result in an error when starting position represented', () => {
-        result.notation = testFenNotations.startingPosition;
-        expect(result.error).toBeNull();
+        fenDiagram.notation = testFenNotations.startingPosition;
+        expect(fenDiagram.error).toBeNull();
       });
     });
 
     describe('invalid', () => {
-      let result: FenDiagram;
-
-      beforeEach(() => {
-        result = FenDiagram.create();
-      });
 
       it('should result in an error when too many pieces on a rank', () => {
-        result.notation = testFenNotations.tooManyPiecesOnRank;
-        expect(result.error).toEqual(FenError.createTooManyPiecesOnRank(19, 2));
+        fenDiagram.notation = testFenNotations.tooManyPiecesOnRank;
+        expect(fenDiagram.error).toEqual(FenError.createTooManyPiecesOnRank(19, 2));
       });
 
       it('should result in an error when too many empty squares added to a rank', () => {
-        result.notation = testFenNotations.tooManyEmptySquaresToRank;
-        expect(result.error).toEqual(
+        fenDiagram.notation = testFenNotations.tooManyEmptySquaresToRank;
+        expect(fenDiagram.error).toEqual(
           FenError.createTooManyEmptySquaresAddedToRank(15, 1)
         );
       });
 
       it('should result in an error when not enough squares defined on a rank', () => {
-        result.notation = testFenNotations.notEnoughSquaresOnRank;
-        expect(result.error).toEqual(
+        fenDiagram.notation = testFenNotations.notEnoughSquaresOnRank;
+        expect(fenDiagram.error).toEqual(
           FenError.createNotEnoughSquaresOnRank(15, 1)
         );
       });
 
       it('should result in an error when when too many ranks defined', () => {
-        result.notation = testFenNotations.tooManyRanksDefined;
-        expect(result.error).toEqual(FenError.createTooManyRanksDefined(43));
+        fenDiagram.notation = testFenNotations.tooManyRanksDefined;
+        expect(fenDiagram.error).toEqual(FenError.createTooManyRanksDefined(43));
       });
 
       it('should result in an error when illegal character found', () => {
-        result.notation = testFenNotations.illegalCharacterFound;
-        expect(result.error).toEqual(FenError.createIllegalCharacterFound(3));
+        fenDiagram.notation = testFenNotations.illegalCharacterFound;
+        expect(fenDiagram.error).toEqual(FenError.createIllegalCharacterFound(3));
       });
 
       it('should result in an error when not enough squares defined', () => {
-        result.notation = testFenNotations.notEnoughSquaresDefined;
-        expect(result.error).toEqual(
+        fenDiagram.notation = testFenNotations.notEnoughSquaresDefined;
+        expect(fenDiagram.error).toEqual(
           FenError.createNotEnoughSquaresDefined(39)
         );
       });
@@ -119,10 +114,10 @@ describe('FenDiagram', () => {
   });
 
   describe('_validateNewRank(validationCounters: { charIndex: number, totalRanks: number, totalFiles: number })', () => {
-    let result: FenDiagram;
+    let fenDiagram: FenDiagram;
 
     beforeEach(() => {
-      result = FenDiagram.create();
+      fenDiagram = FenDiagram.create();
     });
 
     it('should set error to not enough squares on rank when total files is less than 8', () => {
@@ -133,8 +128,8 @@ describe('FenDiagram', () => {
         totalSquares: 0
       };
 
-      (result as any)._validateNewRank(validationCounters);
-      expect(result.error).toEqual(
+      (fenDiagram as any)._validateNewRank(validationCounters);
+      expect(fenDiagram.error).toEqual(
         FenError.createNotEnoughSquaresOnRank(15, 1)
       );
     });
@@ -147,8 +142,8 @@ describe('FenDiagram', () => {
         totalSquares: 0
       };
 
-      (result as any)._validateNewRank(validationCounters);
-      expect(result.error).toEqual(FenError.createTooManyRanksDefined(43));
+      (fenDiagram as any)._validateNewRank(validationCounters);
+      expect(fenDiagram.error).toEqual(FenError.createTooManyRanksDefined(43));
     });
   });
 
@@ -156,11 +151,11 @@ describe('FenDiagram', () => {
     '_validateChessPiece(validationCounters: { charIndex: number, totalRanks: number,' +
       'totalFiles: number, totalSquares: number})',
     () => {
-      let result: FenDiagram;
+      let fenDiagram: FenDiagram;
       let validationCounters: FenDiagram.ValidationCounters;
 
       beforeEach(() => {
-        result = FenDiagram.create();
+        fenDiagram = FenDiagram.create();
         validationCounters = {
           charIndex: 19,
           totalRanks: 3,
@@ -173,21 +168,21 @@ describe('FenDiagram', () => {
         validationCounters.totalFiles = 8;
         validationCounters.totalSquares = 24;
 
-        (result as any)._validateChessPiece(validationCounters);
-        expect(result.error).toEqual(FenError.createTooManyPiecesOnRank(19, 3));
+        (fenDiagram as any)._validateChessPiece(validationCounters);
+        expect(fenDiagram.error).toEqual(FenError.createTooManyPiecesOnRank(19, 3));
       });
 
       it('should raise the total files with one when the piece is valid', () => {
         validationCounters.totalFiles = 4;
 
-        (result as any)._validateChessPiece(validationCounters);
+        (fenDiagram as any)._validateChessPiece(validationCounters);
         expect(validationCounters.totalFiles).toEqual(5);
       });
 
       it('should raise the total squares with one when the piece is valid', () => {
         validationCounters.totalSquares = 20;
 
-        (result as any)._validateChessPiece(validationCounters);
+        (fenDiagram as any)._validateChessPiece(validationCounters);
         expect(validationCounters.totalSquares).toEqual(21);
       });
     }
@@ -198,7 +193,7 @@ describe('FenDiagram', () => {
       'charIndex: number, totalRanks: number,' +
       'totalFiles: number, totalSquares: number })',
     () => {
-      let result: FenDiagram;
+      let fenDiagram: FenDiagram;
 
       const validationCounters: FenDiagram.ValidationCounters = {
         charIndex: 0,
@@ -208,25 +203,25 @@ describe('FenDiagram', () => {
       };
 
       beforeEach(() => {
-        result = FenDiagram.create();
+        fenDiagram = FenDiagram.create();
         validationCounters.totalFiles = 0;
         validationCounters.totalSquares = 0;
       });
 
       it('should set error when number of empty squares added to total files is more than 8', () => {
-        (result as any)._validateEmptySquare('9', validationCounters);
-        expect(result.error).toEqual(
+        (fenDiagram as any)._validateEmptySquare('9', validationCounters);
+        expect(fenDiagram.error).toEqual(
           FenError.createTooManyEmptySquaresAddedToRank(0, 0)
         );
       });
 
       it('should raise the total files with number of empty squares when valid', () => {
-        (result as any)._validateEmptySquare('4', validationCounters);
+        (fenDiagram as any)._validateEmptySquare('4', validationCounters);
         expect(validationCounters.totalFiles).toEqual(4);
       });
 
       it('should raise the total squares with number of empty squares when valid', () => {
-        (result as any)._validateEmptySquare('4', validationCounters);
+        (fenDiagram as any)._validateEmptySquare('4', validationCounters);
         expect(validationCounters.totalSquares).toEqual(4);
       });
     }

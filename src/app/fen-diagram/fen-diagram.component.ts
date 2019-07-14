@@ -20,8 +20,8 @@ export class FenDiagramComponent implements OnInit {
     private _storageService: StorageService
   ) {
     this.form = this._formBuilder.group({
-      notation: [this.fenDiagram.notation, Validators.required],
-      description: [this.fenDiagram.description, Validators.required]
+      notation: ['', Validators.required],
+      description: ['', Validators.required]
     });
 
     this._activatedRoute.params.subscribe(params => {
@@ -33,6 +33,11 @@ export class FenDiagramComponent implements OnInit {
       } else {
         this.applyStartingPosition();
       }
+
+      this.form.setValue({
+        notation: this.fenDiagram.notation,
+        description: this.fenDiagram.description
+      });
     });
   }
 

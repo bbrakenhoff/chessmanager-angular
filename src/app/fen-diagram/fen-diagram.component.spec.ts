@@ -90,6 +90,10 @@ describe('FenDiagramComponent', () => {
       verify(
         storageServiceMock.getFenDiagramById(testData.fenDiagramId)
       ).once();
+      expect(component.form.value).toEqual({
+        notation: testData.fenDiagrams[0].notation,
+        description: testData.fenDiagrams[0].description
+      });
       expect(component.fenDiagram).toEqual(testData.fenDiagrams[0]);
     });
 
@@ -108,7 +112,7 @@ describe('FenDiagramComponent', () => {
         storageServiceMock.getFenDiagramById(testData.fenDiagramId)
       ).once();
       expect(testData.fenDiagrams).not.toContain(component.fenDiagram);
-      expect(component.form.value).toEqual({notation, description});
+      expect(component.form.value).toEqual({ notation, description });
       expect(component.fenDiagram.notation).toEqual(notation);
       expect(component.fenDiagram.description).toEqual(description);
     });
