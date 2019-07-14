@@ -1,11 +1,11 @@
-<div class="fen-position">
+<div class="fen-diagram">
   <div class="_row">
     <div class="_col">
-      <app-chessboard [fenPosition]="fenPosition"></app-chessboard>
-      <div class="_validation" [ngClass]="{ '-invalid': !fenPosition.isValid }">
+      <app-chessboard [fenDiagram]="fenDiagram"></app-chessboard>
+      <div class="_validation" [ngClass]="{ '-invalid': !fenDiagram.isValid }">
         <div class="_validationnotation">
-          <div>{{ fenPosition.notation }}</div>
-          <div class="_errorindicator" *ngIf="!fenPosition.isValid" [innerHtml]="errorIndicator">
+          <div>{{ fenDiagram.notation }}</div>
+          <div class="_errorindicator" *ngIf="!fenDiagram.isValid" [innerHtml]="errorIndicator">
           </div>
         </div>
 

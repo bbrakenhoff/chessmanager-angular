@@ -11,7 +11,7 @@ import {
 } from 'ts-mockito';
 import { IconSet } from 'src/models/icon-set.model';
 import { Collection } from 'src/models/collection.model';
-import { FenPosition } from 'src/models/fen-position.model';
+import { FenDiagram } from 'src/models/fen-diagram.model';
 import { TestDataFactory } from '../util/test-data-factory';
 
 describe('StorageService', () => {
@@ -22,8 +22,8 @@ describe('StorageService', () => {
     collections: TestDataFactory.createCollections(),
     collection: TestDataFactory.createTestCollection(),
     collectionsWithFenPositions: TestDataFactory.createAllTestCollections(),
-    fenPositionsJsonArray: TestDataFactory.createFenPositionsJson(),
-    fenPositions: TestDataFactory.createFenPositions()
+    fenDiagramsJsonArray: TestDataFactory.createFenPositionsJson(),
+    fenDiagrams: TestDataFactory.createFenPositions()
   };
 
   const localStorageSpy: Storage = spy(localStorage);
@@ -73,72 +73,72 @@ describe('StorageService', () => {
     });
   });
 
-  describe('getFenPositionsByCollection(collectionId: string)', () => {
-    it('should find the fen positions belonging to the given collection', () => {
+  describe('getFenDiagramsByCollection(collectionId: string)', () => {
+    it('should find the fen diagrams belonging to the given collection', () => {
       const collectionId =
         testData.collectionsWithFenPositions.testCollection.collection.id;
-      when((storageServiceSpy as any)._fenPositions).thenReturn([
-        ...testData.collectionsWithFenPositions.testCollection.fenPositions,
-        ...testData.collectionsWithFenPositions.errorsCollection.fenPositions
+      when((storageServiceSpy as any)._fenDiagrams).thenReturn([
+        ...testData.collectionsWithFenPositions.testCollection.fenDiagrams,
+        ...testData.collectionsWithFenPositions.errorsCollection.fenDiagrams
       ]);
 
-      const fenPositions = storageService.getFenPositionsByCollection(
+      const fenDiagrams = storageService.getFenDiagramsByCollection(
         collectionId
       );
-      expect(fenPositions).toEqual(
-        testData.collectionsWithFenPositions.testCollection.fenPositions
+      expect(fenDiagrams).toEqual(
+        testData.collectionsWithFenPositions.testCollection.fenDiagrams
       );
     });
   });
 
-  describe('getFenPositionById(fenPositionId: string)', () => {
-    it('should return the fen position with the given id when found', () => {
+  describe('getFenDiagramById(fenDiagramId: string)', () => {
+    it('should return the fen diagram with the given id when found', () => {
       when((storageServiceSpy as any)._get(anyString())).thenReturn(
-        testData.fenPositions
+        testData.fenDiagrams
       );
-      const fenPosition = storageService.getFenPositionById(
-        testData.fenPositions[0].id
+      const fenDiagram = storageService.getFenDiagramById(
+        testData.fenDiagrams[0].id
       );
-      expect(fenPosition).toEqual(testData.fenPositions[0]);
+      expect(fenDiagram).toEqual(testData.fenDiagrams[0]);
     });
 
-    it('should return null when fen position cannot be found', () => {
+    it('should return null when fen diagram cannot be found', () => {
       when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
-      const fenPosition = storageService.getFenPositionById(
-        testData.fenPositions[0].id
+      const fenDiagram = storageService.getFenDiagramById(
+        testData.fenDiagrams[0].id
       );
-      expect(fenPosition).toBeNull();
+      expect(fenDiagram).toBeNull();
     });
   });
 
-  describe('get _fenPositions()', () => {
-    it('should return the fen positions from storage when in storage', () => {
-      const FenPositionSpy = spy(FenPosition);
+  describe('get _fenDiagrams()', () => {
+    it('should return the fen diagrams from storage when in storage', () => {
+      const FenPositionSpy = spy(FenDiagram);
 
       when((storageServiceSpy as any)._get(anyString())).thenReturn(
-        testData.fenPositionsJsonArray
+        testData.fenDiagramsJsonArray
       );
-      const fenPositions = (storageService as any)._fenPositions;
-      expect(fenPositions).toBeDefined();
-      expect(fenPositions.length).toEqual(3);
+      const fenDiagrams = (storageService as any)._fenDiagrams;
+      expect(fenDiagrams).toBeDefined();
+      expect(fenDiagrams.length).toEqual(3);
       verify(FenPositionSpy.createFromJson(anything())).thrice();
       verify((storageServiceSpy as any)._get(StorageKey.FenPositions)).once();
     });
 
     it('should return an empty array when nothing in storage', () => {
       when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
-      expect((storageService as any)._fenPositions).toEqual([]);
+      expect((storageService as any)._fenDiagrams).toEqual([]);
       verify((storageServiceSpy as any)._get(StorageKey.FenPositions)).once();
     });
   });
 
   describe('setFenPositions(value: FenPosition[])', () => {
     it('should store the given values', () => {
-      const fenPositions = testData.fenPositions;
-      storageService.setFenPositions(fenPositions);
+      const fenDiagrams = testData.fenDiagrams;
+      storageService.setFenPositions(fenDiagrams);
 
       verify(
-        (storageServiceSpy as any)._set(StorageKey.FenPositions, fenPositions)
+        (storageServiceSpy as any)._set(StorageKey.FenPositions, fenDiagrams)
       );
     });
   });

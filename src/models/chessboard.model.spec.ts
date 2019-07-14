@@ -1,6 +1,6 @@
 import { Chessboard } from './chessboard.model';
 import { ChessColor } from './color.model';
-import { FenPosition } from './fen-position.model';
+import { FenDiagram } from './fen-diagram.model';
 import { ChessPiece } from './piece.model';
 import { TestDataFactory } from 'src/app/util/test-data-factory';
 
@@ -8,11 +8,11 @@ describe('Chessboard', () => {
   const testFenNotations = TestDataFactory.createFenNotations();
 
   let chessboard: Chessboard;
-  let fenPosition: FenPosition;
+  let fenDiagram: FenDiagram;
 
   beforeEach(() => {
     chessboard = Chessboard.create();
-    fenPosition = FenPosition.create();
+    fenDiagram = FenDiagram.create();
   });
 
   describe('static create()', () => {
@@ -53,11 +53,11 @@ describe('Chessboard', () => {
     });
   });
 
-  describe('reflectFenPosition(fenPosition: FenPosition)', () => {
-    it('should reflect notation when fen position is valid', () => {
-      fenPosition.notation = testFenNotations.startingPosition;
+  describe('reflectFenPosition(fenDiagram: FenPosition)', () => {
+    it('should reflect notation when fen diagram is valid', () => {
+      fenDiagram.notation = testFenNotations.startingPosition;
 
-      chessboard.reflectFenPosition(fenPosition);
+      chessboard.reflectFenPosition(fenDiagram);
 
       expect(chessboard.squares[0][0].piece).toEqual(
         ChessPiece.createFromFenChar('r')
@@ -128,10 +128,10 @@ describe('Chessboard', () => {
       );
     });
 
-    it('should reflect notation until char index of fen error when fen position is invalid', () => {
-      fenPosition.notation = testFenNotations.illegalCharacterFound;
+    it('should reflect notation until char index of fen error when fen diagram is invalid', () => {
+      fenDiagram.notation = testFenNotations.illegalCharacterFound;
 
-      chessboard.reflectFenPosition(fenPosition);
+      chessboard.reflectFenPosition(fenDiagram);
 
       expect(chessboard.squares[0][0].piece).toEqual(
         ChessPiece.createFromFenChar('r')
@@ -156,11 +156,11 @@ describe('Chessboard', () => {
     });
 
     it('should reflect notation when there is a previous notation applied', () => {
-      fenPosition.notation = testFenNotations.startingPosition;
-      chessboard.reflectFenPosition(fenPosition);
+      fenDiagram.notation = testFenNotations.startingPosition;
+      chessboard.reflectFenPosition(fenDiagram);
 
-      fenPosition.notation = testFenNotations.eightQueensSolution;
-      chessboard.reflectFenPosition(fenPosition);
+      fenDiagram.notation = testFenNotations.eightQueensSolution;
+      chessboard.reflectFenPosition(fenDiagram);
 
       const whiteQueenPositions = [
         { rank: 0, file: 0 },
@@ -188,12 +188,12 @@ describe('Chessboard', () => {
       }
     });
 
-    it('should clear remaining squares when fen position is invalid', () => {
-      fenPosition.notation = testFenNotations.eightQueensSolution;
-      chessboard.reflectFenPosition(fenPosition);
+    it('should clear remaining squares when fen diagram is invalid', () => {
+      fenDiagram.notation = testFenNotations.eightQueensSolution;
+      chessboard.reflectFenPosition(fenDiagram);
 
-      fenPosition.notation = testFenNotations.illegalCharacterFound;
-      chessboard.reflectFenPosition(fenPosition);
+      fenDiagram.notation = testFenNotations.illegalCharacterFound;
+      chessboard.reflectFenPosition(fenDiagram);
 
       expect(chessboard.squares[0][0].piece).toEqual(
         ChessPiece.createFromFenChar('r')
@@ -218,23 +218,23 @@ describe('Chessboard', () => {
     });
   });
 
-  describe('_reflectionCharIndex(fenPosition: FenPosition)', () => {
-    it('should return the lenght of the notation when fen position is valid', () => {
-      fenPosition.notation = testFenNotations.startingPosition;
-      const result = (chessboard as any)._reflectionCharIndex(fenPosition);
-      expect(result).toEqual(fenPosition.notation.length);
+  describe('_reflectionCharIndex(fenDiagram: FenPosition)', () => {
+    it('should return the lenght of the notation when fen diagram is valid', () => {
+      fenDiagram.notation = testFenNotations.startingPosition;
+      const result = (chessboard as any)._reflectionCharIndex(fenDiagram);
+      expect(result).toEqual(fenDiagram.notation.length);
     });
 
-    it('should return the position of the error when the fen position is invalid', () => {
-      fenPosition.notation = testFenNotations.tooManyEmptySquaresToRank;
-      const result = (chessboard as any)._reflectionCharIndex(fenPosition);
-      expect(result).toEqual(fenPosition.error.position);
+    it('should return the position of the error when the fen diagram is invalid', () => {
+      fenDiagram.notation = testFenNotations.tooManyEmptySquaresToRank;
+      const result = (chessboard as any)._reflectionCharIndex(fenDiagram);
+      expect(result).toEqual(fenDiagram.error.position);
     });
   });
 
   describe('_clearRemainingSquares(rank: number, file: number)', () => {
     it('should clear the remaining squares starting from current file', () => {
-      fenPosition.notation = testFenNotations.eightQueensSolution;
+      fenDiagram.notation = testFenNotations.eightQueensSolution;
 
       const whiteQueenPositions = [
         { rank: 0, file: 0 },

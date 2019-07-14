@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
 import { Collection } from 'src/models/collection.model';
-import { FenPosition } from 'src/models/fen-position.model';
+import { FenDiagram } from '../../models/fen-diagram.model';
 import { TestDataFactory, TestCollection } from '../util/test-data-factory';
 
 export enum StorageKey {
@@ -32,33 +32,33 @@ export class StorageService {
     this._set(StorageKey.Collections, value);
   }
 
-  public getFenPositionsByCollection(collectionId: string) {
-    return this._fenPositions.filter(
-      fenPosition => fenPosition.collectionId === collectionId
+  public getFenDiagramsByCollection(collectionId: string) {
+    return this._fenDiagrams.filter(
+      fenDiagram => fenDiagram.collectionId === collectionId
     );
   }
 
-  public getFenPositionById(fenPositionId: string) {
-    const fenPositionWithId = this._fenPositions.find(
-      fenPosition => fenPosition.id === fenPositionId
+  public getFenDiagramById(fenDiagramId: string) {
+    const fenDiagramWithId = this._fenDiagrams.find(
+      fenDiagram => fenDiagram.id === fenDiagramId
     );
 
-    return fenPositionWithId ? fenPositionWithId : null;
+    return fenDiagramWithId ? fenDiagramWithId : null;
   }
 
-  private get _fenPositions() {
+  private get _fenDiagrams() {
     const json: any[] = this._get(StorageKey.FenPositions);
 
     if (json) {
-      return json.map((fenPosition: any) =>
-        FenPosition.createFromJson(fenPosition)
+      return json.map((fenDiagram: any) =>
+        FenDiagram.createFromJson(fenDiagram)
       );
     }
 
     return [];
   }
 
-  public setFenPositions(value: FenPosition[]) {
+  public setFenPositions(value: FenDiagram[]) {
     this._set(StorageKey.FenPositions, value);
   }
 
@@ -100,13 +100,13 @@ export class StorageService {
   createTestData() {
     const testCollections = TestDataFactory.createAllTestCollections();
     const collections = [];
-    const fenPositions = [];
+    const fenDiagrams = [];
 
     for (const testCollectionName of Object.keys(testCollections)) {
       collections.push(testCollections[testCollectionName].collection);
-      fenPositions.push(...testCollections[testCollectionName].fenPositions);
+      fenDiagrams.push(...testCollections[testCollectionName].fenDiagrams);
     }
     this.setCollections(collections);
-    this.setFenPositions(fenPositions);
+    this.setFenPositions(fenDiagrams);
   }
 }

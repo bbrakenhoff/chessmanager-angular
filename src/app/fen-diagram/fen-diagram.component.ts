@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FenPosition } from 'src/models/fen-position.model';
+import { FenDiagram } from 'src/models/fen-diagram.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FenErrorCode } from 'src/models/fen-error-code.model';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../core/storage.service';
 
 @Component({
-  selector: 'app-fen-position',
-  templateUrl: './fen-position.component.html',
-  styleUrls: ['./fen-position.component.scss']
+  selector: 'app-fen-diagram',
+  templateUrl: './fen-diagram.component.html',
+  styleUrls: ['./fen-diagram.component.scss']
 })
 export class FenPositionComponent implements OnInit {
-  fenPosition = FenPosition.create();
+  fenDiagram = FenDiagram.create();
   form: FormGroup;
 
   constructor(
@@ -20,36 +20,35 @@ export class FenPositionComponent implements OnInit {
     private _storageService: StorageService
   ) {
     this.form = this._formBuilder.group({
-      notation: [this.fenPosition.notation, Validators.required],
-      description: [this.fenPosition.description, Validators.required]
+      notation: [this.fenDiagram.notation, Validators.required],
+      description: [this.fenDiagram.description, Validators.required]
     });
 
     this._activatedRoute.params.subscribe(params => {
-      const fenPositionFromStorage = this._storageService.getFenPositionById(
-        params.fenPositionId
+      const fenDiagramFromStorage = this._storageService.getFenDiagramById(
+        params.fenDiagramId
       );
-      if (fenPositionFromStorage) {
-        this.fenPosition = fenPositionFromStorage;
+      if (fenDiagramFromStorage) {
+        this.fenDiagram = fenDiagramFromStorage;
       } else {
         this.applyStartingPosition();
-        console.log(`Bijoya: fen-position.component -> fenPositionFromStorage wel aangeroepen`);
       }
     });
   }
 
   get validationMessage(): string {
-    if (this.fenPosition.isValid) {
+    if (this.fenDiagram.isValid) {
       return 'FEN notation is correct';
     }
 
-    switch (this.fenPosition.error.code) {
+    switch (this.fenDiagram.error.code) {
       case FenErrorCode.TooManyPiecesOnRank:
-        return `Too many pieces on rank ${this.fenPosition.error.rank + 1}`;
+        return `Too many pieces on rank ${this.fenDiagram.error.rank + 1}`;
       case FenErrorCode.TooManyEmptySquaresAddedToRank:
-        return `Too many empty squares added to rank ${this.fenPosition.error
+        return `Too many empty squares added to rank ${this.fenDiagram.error
           .rank + 1}`;
       case FenErrorCode.NotEnoughSquaresOnRank:
-        return `Not enough squares defined on rank ${this.fenPosition.error
+        return `Not enough squares defined on rank ${this.fenDiagram.error
           .rank + 1}`;
       case FenErrorCode.TooManyRanksDefined:
         return 'Too many ranks defined';
@@ -63,14 +62,14 @@ export class FenPositionComponent implements OnInit {
   }
 
   get errorIndicator(): string {
-    if (this.fenPosition.isValid) {
+    if (this.fenDiagram.isValid) {
       return '';
     }
 
     let whiteSpace = '';
     let i = 0;
 
-    while (i < this.fenPosition.error.position) {
+    while (i < this.fenDiagram.error.position) {
       whiteSpace += '&nbsp;';
       i++;
     }
@@ -97,7 +96,7 @@ export class FenPositionComponent implements OnInit {
   }
 
   onFormSubmit() {
-    this.fenPosition.notation = this.form.value.notation;
-    this.fenPosition.description = this.form.value.description;
+    this.fenDiagram.notation = this.form.value.notation;
+    this.fenDiagram.description = this.form.value.description;
   }
 }

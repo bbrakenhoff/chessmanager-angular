@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FenPositionComponent } from './fen-position.component';
+import { FenPositionComponent as FenDiagramComponent } from './fen-diagram.component';
 import { ChessboardComponent } from './chessboard/chessboard.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [FenPositionComponent, ChessboardComponent],
+  declarations: [FenDiagramComponent, ChessboardComponent],
   imports: [CommonModule, ReactiveFormsModule, SharedComponentsModule],
-  exports: [FenPositionComponent]
+  exports: [FenDiagramComponent]
 })
-export class FenPositionModule { }
+export class FenDiagramModule { }

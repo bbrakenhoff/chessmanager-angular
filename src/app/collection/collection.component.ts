@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../core/storage.service';
-import { FenPosition } from 'src/models/fen-position.model';
+import { FenDiagram } from '../../models/fen-diagram.model';
 
 @Component({
   selector: 'app-collection',
@@ -9,7 +9,7 @@ import { FenPosition } from 'src/models/fen-position.model';
   styleUrls: ['./collection.component.scss']
 })
 export class CollectionComponent implements OnInit {
-  fenPositions: FenPosition[] = [];
+  fenDiagrams: FenDiagram[] = [];
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -17,7 +17,7 @@ export class CollectionComponent implements OnInit {
   ) {
     this._activatedRoute.params.subscribe(
       params =>
-        (this.fenPositions = this._storageService.getFenPositionsByCollection(
+        (this.fenDiagrams = this._storageService.getFenDiagramsByCollection(
           params.collectionId
         ))
     );

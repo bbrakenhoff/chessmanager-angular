@@ -2,7 +2,7 @@ import { FenError } from './fen-error.model';
 import { FenCharUtil } from './fen-char-util.model';
 import * as uuid from 'uuid/v4';
 
-export class FenPosition {
+export class FenDiagram {
   private _id = uuid();
   public get id() {
     return this._id;
@@ -36,21 +36,21 @@ export class FenPosition {
   private constructor() {}
 
   static create() {
-    return new FenPosition();
+    return new FenDiagram();
   }
 
   static createFromJson(json: any) {
-    const fenPosition = FenPosition.create();
-    fenPosition._id = json._id;
-    fenPosition.collectionId = json.collectionId;
-    fenPosition.description = json.description;
-    fenPosition._notation = json._notation;
-    return fenPosition;
+    const fenDiagram = FenDiagram.create();
+    fenDiagram._id = json._id;
+    fenDiagram.collectionId = json.collectionId;
+    fenDiagram.description = json.description;
+    fenDiagram._notation = json._notation;
+    return fenDiagram;
   }
 
   private _validate() {
     // Wrap in vairable, so they can be updated by reference outside this method
-    const validationCounters: FenPosition.ValidationCounters = {
+    const validationCounters: FenDiagram.ValidationCounters = {
       charIndex: 0,
       totalRanks: 0,
       totalFiles: 0,
@@ -85,7 +85,7 @@ export class FenPosition {
   }
 
   private _validateNewRank(
-    validationCounters: FenPosition.ValidationCounters
+    validationCounters: FenDiagram.ValidationCounters
   ): void {
     if (validationCounters.totalFiles < 8) {
       this._error = FenError.createNotEnoughSquaresOnRank(
@@ -107,7 +107,7 @@ export class FenPosition {
   }
 
   private _validateChessPiece(
-    validationCounters: FenPosition.ValidationCounters
+    validationCounters: FenDiagram.ValidationCounters
   ): void {
     if (validationCounters.totalFiles + 1 > 8) {
       this._error = FenError.createTooManyPiecesOnRank(
@@ -123,7 +123,7 @@ export class FenPosition {
 
   private _validateEmptySquare(
     char: string,
-    validationCounters: FenPosition.ValidationCounters
+    validationCounters: FenDiagram.ValidationCounters
   ): void {
     const emptySquares = +char;
 
@@ -141,7 +141,7 @@ export class FenPosition {
 }
 
 // tslint:disable-next-line: no-namespace
-export namespace FenPosition {
+export namespace FenDiagram {
   export interface ValidationCounters {
     charIndex: number;
     totalRanks: number;

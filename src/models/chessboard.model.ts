@@ -1,6 +1,6 @@
 import { ChessSquare } from './square.model';
 import { ChessColor } from './color.model';
-import { FenPosition } from './fen-position.model';
+import { FenDiagram } from './fen-diagram.model';
 import { FenCharUtil } from './fen-char-util.model';
 import { ChessPiece } from './piece.model';
 
@@ -30,15 +30,15 @@ export class Chessboard {
     }
   }
 
-  reflectFenPosition(fenPosition: FenPosition) {
-    const charIndex = this._reflectionCharIndex(fenPosition);
+  reflectFenPosition(fenDiagram: FenDiagram) {
+    const charIndex = this._reflectionCharIndex(fenDiagram);
 
     let r = 0;
     let f = 0;
     let i = 0;
 
     while (i < charIndex) {
-      const char = fenPosition.notation.charAt(i);
+      const char = fenDiagram.notation.charAt(i);
       if (FenCharUtil.charRepresentsNewRank(char)) {
         r++;
         f = 0;
@@ -57,15 +57,15 @@ export class Chessboard {
       i++;
     }
 
-    if (!fenPosition.isValid) {
+    if (!fenDiagram.isValid) {
       this._clearRemainingSquares(r, f);
     }
   }
 
-  private _reflectionCharIndex(fenPosition: FenPosition): number {
-    return fenPosition.isValid
-      ? fenPosition.notation.length
-      : fenPosition.error.position;
+  private _reflectionCharIndex(fenDiagram: FenDiagram): number {
+    return fenDiagram.isValid
+      ? fenDiagram.notation.length
+      : fenDiagram.error.position;
   }
 
   private _clearRemainingSquares(rank: number, file: number): void {

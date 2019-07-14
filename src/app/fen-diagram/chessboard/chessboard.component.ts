@@ -7,8 +7,8 @@ import {
   KeyValueDiffer,
   ChangeDetectorRef
 } from '@angular/core';
-import { FenPosition } from 'src/models/fen-position.model';
-import { Chessboard } from 'src/models/chessboard.model';
+import { FenDiagram } from '../../../models/fen-diagram.model';
+import { Chessboard } from '../../../models/chessboard.model';
 
 @Component({
   selector: 'app-chessboard',
@@ -17,9 +17,9 @@ import { Chessboard } from 'src/models/chessboard.model';
 })
 export class ChessboardComponent implements OnInit, DoCheck {
   @Input()
-  fenPosition: FenPosition;
+  fenDiagram: FenDiagram;
 
-  private _fenPositionDiffer: KeyValueDiffer<string, any>;
+  private _fenDiagramDiffer: KeyValueDiffer<string, any>;
 
   readonly chessboard: Chessboard =  Chessboard.create();
 
@@ -29,16 +29,16 @@ export class ChessboardComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit() {
-    this._fenPositionDiffer = this._keyValueDiffers
-      .find(this.fenPosition)
+    this._fenDiagramDiffer = this._keyValueDiffers
+      .find(this.fenDiagram)
       .create();
-    this.chessboard.reflectFenPosition(this.fenPosition);
+    this.chessboard.reflectFenPosition(this.fenDiagram);
   }
 
   ngDoCheck() {
-    const changes = this._fenPositionDiffer.diff(this.fenPosition);
+    const changes = this._fenDiagramDiffer.diff(this.fenDiagram);
     if (changes) {
-      this.chessboard.reflectFenPosition(this.fenPosition);
+      this.chessboard.reflectFenPosition(this.fenDiagram);
       this._changeDector.detectChanges();
     }
   }

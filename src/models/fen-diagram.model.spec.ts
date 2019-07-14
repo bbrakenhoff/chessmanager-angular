@@ -1,25 +1,25 @@
-import { FenPosition } from './fen-position.model';
+import { FenDiagram } from './fen-diagram.model';
 import { FenError } from './fen-error.model';
 import { TestDataFactory } from 'src/app/util/test-data-factory';
 
-describe('FenPosition', () => {
+describe('FenDiagram', () => {
   const testFenNotations = TestDataFactory.createFenNotations();
 
   describe('static create()', () => {
-    it('should create a new fen position', () => {
-      const fenPosition: FenPosition = FenPosition.create();
-      expect(fenPosition).toBeDefined();
-      expect(fenPosition.id).toBeDefined();
-      expect(fenPosition.id).not.toEqual('');
-      expect(fenPosition.description).toEqual('');
-      expect(fenPosition.collectionId).toEqual('');
-      expect(fenPosition.notation).toEqual('');
-      expect(fenPosition.error).toBeNull();
+    it('should create a new fen diagram', () => {
+      const fenDiagram: FenDiagram = FenDiagram.create();
+      expect(fenDiagram).toBeDefined();
+      expect(fenDiagram.id).toBeDefined();
+      expect(fenDiagram.id).not.toEqual('');
+      expect(fenDiagram.description).toEqual('');
+      expect(fenDiagram.collectionId).toEqual('');
+      expect(fenDiagram.notation).toEqual('');
+      expect(fenDiagram.error).toBeNull();
     });
   });
 
   describe('static createFromJson(json: any)', () => {
-    it('should create a fen position from JSON', () => {
+    it('should create a fen diagram from JSON', () => {
       const json = {
         collectionId: 'fb1b177a-8088-4ce6-8666-d36284a195e1',
         description: 'Eight queens solution',
@@ -28,20 +28,20 @@ describe('FenPosition', () => {
         _notation: 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5'
       };
 
-      const fenPosition = FenPosition.createFromJson(json);
-      expect(fenPosition).toBeDefined();
-      expect(fenPosition.id).toEqual(json._id);
-      expect(fenPosition.collectionId).toEqual(json.collectionId);
-      expect(fenPosition.description).toEqual(json.description);
-      expect(fenPosition.notation).toEqual(json._notation);
+      const fenDiagram = FenDiagram.createFromJson(json);
+      expect(fenDiagram).toBeDefined();
+      expect(fenDiagram.id).toEqual(json._id);
+      expect(fenDiagram.collectionId).toEqual(json.collectionId);
+      expect(fenDiagram.description).toEqual(json.description);
+      expect(fenDiagram.notation).toEqual(json._notation);
     });
   });
 
   describe('get isValid()', () => {
-    let result: FenPosition;
+    let result: FenDiagram;
 
     beforeEach(() => {
-      result = FenPosition.create();
+      result = FenDiagram.create();
     });
 
     it('should return false when error is empty', () => {
@@ -55,10 +55,10 @@ describe('FenPosition', () => {
   });
 
   describe('_validate()', () => {
-    let result: FenPosition;
+    let result: FenDiagram;
 
     beforeEach(() => {
-      result = FenPosition.create();
+      result = FenDiagram.create();
     });
 
     describe('valid', () => {
@@ -74,10 +74,10 @@ describe('FenPosition', () => {
     });
 
     describe('invalid', () => {
-      let result: FenPosition;
+      let result: FenDiagram;
 
       beforeEach(() => {
-        result = FenPosition.create();
+        result = FenDiagram.create();
       });
 
       it('should result in an error when too many pieces on a rank', () => {
@@ -119,14 +119,14 @@ describe('FenPosition', () => {
   });
 
   describe('_validateNewRank(validationCounters: { charIndex: number, totalRanks: number, totalFiles: number })', () => {
-    let result: FenPosition;
+    let result: FenDiagram;
 
     beforeEach(() => {
-      result = FenPosition.create();
+      result = FenDiagram.create();
     });
 
     it('should set error to not enough squares on rank when total files is less than 8', () => {
-      const validationCounters: FenPosition.ValidationCounters = {
+      const validationCounters: FenDiagram.ValidationCounters = {
         charIndex: 15,
         totalFiles: 6,
         totalRanks: 1,
@@ -140,7 +140,7 @@ describe('FenPosition', () => {
     });
 
     it('should set error to too many ranks defined when adding a rank results in more than 8 ranks', () => {
-      const validationCounters: FenPosition.ValidationCounters = {
+      const validationCounters: FenDiagram.ValidationCounters = {
         charIndex: 43,
         totalFiles: 8,
         totalRanks: 8,
@@ -156,11 +156,11 @@ describe('FenPosition', () => {
     '_validateChessPiece(validationCounters: { charIndex: number, totalRanks: number,' +
       'totalFiles: number, totalSquares: number})',
     () => {
-      let result: FenPosition;
-      let validationCounters: FenPosition.ValidationCounters;
+      let result: FenDiagram;
+      let validationCounters: FenDiagram.ValidationCounters;
 
       beforeEach(() => {
-        result = FenPosition.create();
+        result = FenDiagram.create();
         validationCounters = {
           charIndex: 19,
           totalRanks: 3,
@@ -198,9 +198,9 @@ describe('FenPosition', () => {
       'charIndex: number, totalRanks: number,' +
       'totalFiles: number, totalSquares: number })',
     () => {
-      let result: FenPosition;
+      let result: FenDiagram;
 
-      const validationCounters: FenPosition.ValidationCounters = {
+      const validationCounters: FenDiagram.ValidationCounters = {
         charIndex: 0,
         totalRanks: 0,
         totalFiles: 0,
@@ -208,7 +208,7 @@ describe('FenPosition', () => {
       };
 
       beforeEach(() => {
-        result = FenPosition.create();
+        result = FenDiagram.create();
         validationCounters.totalFiles = 0;
         validationCounters.totalSquares = 0;
       });

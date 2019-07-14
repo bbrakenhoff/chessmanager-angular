@@ -2,8 +2,8 @@
     <div class="_row">
       <div class="_col">
         <ul class="_list">
-          <li class="_listitem" *ngFor="let fenPosition of fenPositions">
-            <a [routerLink]="['./fen-position', fenPosition.id]">{{ fenPosition.description }}</a>
+          <li class="_listitem" *ngFor="let fenDiagram of fenDiagrams">
+            <a [routerLink]="['./fen-position', fenDiagram.id]">{{ fenDiagram.description }}</a>
           </li>
         </ul>
       </div>

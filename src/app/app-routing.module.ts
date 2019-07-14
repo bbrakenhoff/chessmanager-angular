@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsModule } from './settings/settings.module';
-import { FenPositionComponent } from './fen-position/fen-position.component';
-import { FenPositionModule } from './fen-position/fen-position.module';
+import { FenPositionComponent } from './fen-diagram/fen-diagram.component';
+import { FenDiagramModule } from './fen-diagram/fen-diagram.module';
 import { CollectionsOverviewComponent } from './collections-overview/collections-overview.component';
 import { CollectionsOverviewModule } from './collections-overview/collections-overview.module';
 import { CollectionModule } from './collection/collection.module';
@@ -21,7 +21,7 @@ const routes: Routes = [
     component: CollectionComponent
   },
   {
-    path: 'collections/:collectionId/fen-position/:fenPositionId',
+    path: 'collections/:collectionId/fen-position/:fenDiagramId',
     component: FenPositionComponent
   },
   { path: '', redirectTo: '/collections', pathMatch: 'full' }
@@ -32,7 +32,7 @@ const routes: Routes = [
     SettingsModule,
     CollectionsOverviewModule,
     CollectionModule,
-    FenPositionModule,
+    FenDiagramModule,
     RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
