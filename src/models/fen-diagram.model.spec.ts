@@ -22,10 +22,10 @@ describe('FenDiagram', () => {
     it('should create a fen diagram from JSON', () => {
       const json = {
         collectionId: 'fb1b177a-8088-4ce6-8666-d36284a195e1',
-        description: 'Eight queens solution',
+        description: 'Illegal character found',
         _id: 'ffe2e91f-277d-4ffe-baee-c1a84c36d0fb',
         _error: null,
-        _notation: 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5'
+        _notation: 'rnbXkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
       };
 
       const fenDiagram = FenDiagram.createFromJson(json);
@@ -34,6 +34,7 @@ describe('FenDiagram', () => {
       expect(fenDiagram.collectionId).toEqual(json.collectionId);
       expect(fenDiagram.description).toEqual(json.description);
       expect(fenDiagram.notation).toEqual(json._notation);
+      expect(fenDiagram.isValid).toEqual(false);
     });
   });
 

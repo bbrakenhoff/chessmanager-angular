@@ -44,7 +44,7 @@ export class FenDiagram {
     fenDiagram._id = json._id;
     fenDiagram.collectionId = json.collectionId;
     fenDiagram.description = json.description;
-    fenDiagram._notation = json._notation;
+    fenDiagram.notation = json._notation;
     return fenDiagram;
   }
 
