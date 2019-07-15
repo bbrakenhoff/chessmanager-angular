@@ -2,9 +2,9 @@
   <div class="_row">
     <div class="_col">
       <app-chessboard [fenDiagram]="fenDiagram"></app-chessboard>
-      <div class="_validation" [ngClass]="{ '-invalid': !fenDiagram.isValid }">
-        <div class="_validationnotation">
-          <div>{{ fenDiagram.notation }}</div>
+      <div class="_validationwrapper" [ngClass]="{ '-invalid': !fenDiagram.isValid }">
+        <div class="_validation">
+          <div class="_validationnotation">{{ fenDiagram.notation }}</div>
           <div class="_errorindicator" *ngIf="!fenDiagram.isValid" [innerHtml]="errorIndicator">
           </div>
         </div>

@@ -29,7 +29,7 @@
     }
   }
 
-  & ._validation {
+  & ._validationwrapper {
     padding: 1.2rem;
     border: 1px solid #66615b;
 
@@ -40,11 +40,14 @@
     }
   }
 
-  & ._validationnotation {
+  & ._validation {
     padding-bottom: 1rem;
 
-    font-family: $font-roboto-mono;
     overflow-x: auto;
+  }
+
+  & ._validationnotation {
+    font-family: $font-roboto-mono;
   }
 
   & ._errorindicator {
