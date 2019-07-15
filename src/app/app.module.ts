@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { SettingsModule } from './settings/settings.module';
+import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { SettingsModule } from './settings/settings.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     NavbarModule,
+    BreadcrumbsModule,
     SettingsModule
   ],
   providers: [],

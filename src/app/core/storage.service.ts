@@ -16,6 +16,14 @@ export enum StorageKey {
 export class StorageService {
   constructor() {}
 
+  public getCollectionById(collectionId: string) {
+    const collectionWithId = this.collections.find(
+      collection => collection.id === collectionId
+    );
+
+    return collectionWithId ? collectionWithId : null;
+  }
+
   public get collections() {
     const json: any[] = this._get(StorageKey.Collections);
 

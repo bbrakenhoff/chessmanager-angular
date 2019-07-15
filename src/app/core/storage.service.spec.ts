@@ -41,6 +41,26 @@ describe('StorageService', () => {
     resetCalls(localStorageSpy);
   });
 
+  describe('getCollectionById(fenDiagramId: string)', () => {
+    it('should return the collecction with the given id when found', () => {
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(
+        testData.collections
+      );
+      const collection = storageService.getCollectionById(
+        testData.collections[0].id
+      );
+      expect(collection).toEqual(testData.collections[0]);
+    });
+
+    it('should return null when fen diagram cannot be found', () => {
+      when((storageServiceSpy as any)._get(anyString())).thenReturn(undefined);
+      const collection = storageService.getCollectionById(
+        testData.collections[0].id
+      );
+      expect(collection).toBeNull();
+    });
+  });
+
   describe('get collections()', () => {
     it('should return the collections from storage when in storage', () => {
       const CollectionSpy = spy(Collection);
