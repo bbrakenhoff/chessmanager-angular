@@ -1,0 +1,32 @@
+@import './_card.scss';
+@import './_link.scss';
+
+@mixin app-list() {
+  @include app-card();
+
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.25rem;
+  margin: 0;
+
+  list-style-type: none;
+}
+
+@mixin app-listitem() {
+  display: flex;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #dddddd;
+
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+@mixin app-listlink(){
+  @include app-link();
+
+  display: block;
+  width: 100%;
+}

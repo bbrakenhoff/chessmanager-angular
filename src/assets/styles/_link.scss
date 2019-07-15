@@ -1,0 +1,15 @@
+@mixin app-link() {
+  color: #51cbce;
+  text-decoration: none;
+
+  &:hover,
+  &:active,
+  &:focus {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: darken(#51cbce, 15);
+  }
+}

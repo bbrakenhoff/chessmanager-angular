@@ -3,7 +3,7 @@
       <div class="_col">
         <ul class="_list">
           <li class="_listitem" *ngFor="let fenDiagram of fenDiagrams">
-            <a [routerLink]="['./fen-diagram', fenDiagram.id]">{{ fenDiagram.description }}</a>
+            <a class="_listlink" [routerLink]="['./fen-diagram', fenDiagram.id]">{{ fenDiagram.description }}</a>
           </li>
         </ul>
       </div>
