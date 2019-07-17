@@ -71,12 +71,6 @@ export class Chessboard {
   }
 
   private _clearRemainingSquares(rank: number, file: number): void {
-    console.log(
-      `%cBijoya: chessboard.model -> _clearRemainingSquares`,
-      'color: deeppink;',
-      rank,
-      file
-    );
     if (file >= 7) {
       file = 0;
       rank++;

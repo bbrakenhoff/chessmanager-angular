@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PRIMARY_OUTLET } from '@angular/router';
 import { SettingsComponent } from './settings/settings.component';
 import { SettingsModule } from './settings/settings.module';
 import { FenDiagramComponent } from './fen-diagram/fen-diagram.component';
@@ -8,16 +8,51 @@ import { CollectionsOverviewComponent } from './collections-overview/collections
 import { CollectionsOverviewModule } from './collections-overview/collections-overview.module';
 import { CollectionModule } from './collection/collection.module';
 import { CollectionComponent } from './collection/collection.component';
+import { Breadcrumb } from 'src/models/breadcrumb.model';
 
 const routes: Routes = [
-  { path: 'settings', component: SettingsComponent },
-  { path: 'collections', component: CollectionsOverviewComponent },
-  { path: 'collections/:collectionId', component: CollectionComponent },
   {
-    path: 'collections/:collectionId/fen-diagram/:fenDiagramId',
-    component: FenDiagramComponent
+    path: 'settings',
+    component: SettingsComponent,
+    data: {
+      breadcrumb: Breadcrumb.create('settings', () => '')
+    }
   },
-  { path: '', redirectTo: '/collections', pathMatch: 'full' }
+  {
+    path: 'collection-overview',
+    component: CollectionsOverviewComponent,
+    children: [
+      {
+        path: 'collection/:collectionId',
+        component: CollectionComponent,
+        children: [
+          {
+            path: 'fen-diagram/:fenDiagramId',
+            component: FenDiagramComponent,
+            outlet: PRIMARY_OUTLET,
+            data: {
+              breadcrumb: Breadcrumb.create(
+                'collections/collectionId/fen-diagram/fenDiagramId',
+                () => {
+                  return this.fenDiagramDescription;
+                }
+              )
+            }
+          }
+        ],
+        outlet: PRIMARY_OUTLET,
+        data: {
+          breadcrumb: Breadcrumb.create('collections/collectionId', () => {
+            return this.collectionName;
+          })
+        }
+      }
+    ],
+    data: {
+      breadcrumb: Breadcrumb.create('collection-overview', () => '')
+    }
+  },
+  { path: '', redirectTo: '/collection-overview', pathMatch: 'full' }
 ];
 
 @NgModule({
