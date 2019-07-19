@@ -1,41 +1,27 @@
 export class Breadcrumb {
-  readonly url: string;
-  readonly label: () => string;
-  readonly params: { collectionId: string; fenDiagramId: string } = {
-    collectionId: null,
-    fenDiagramId: null
-  };
-
-  private _collectionName = '';
-  public get collectionName() {
-    return this._collectionName;
+  private _label: string;
+  get label() {
+    return this._label;
   }
 
-  private _fenDiagramDescription = '';
-  public get fenDiagramDescription() {
-    return this._fenDiagramDescription;
+  private _url: string;
+  get url() {
+    return this.param ? `${this._url}/${this.param}` : this._url;
   }
 
-  private constructor(url: string, label: () => string) {
-    this.url = url;
-    this.label = label;
+  private _param: string;
+  get param(): string {
+    return this._param;
   }
 
-  static create(url: string, label: () => string) {
-    return new Breadcrumb(url, label);
-  }
+  private constructor() {}
 
-  public setParamCollectionId(collectionId: string) {
-    this.params.collectionId = collectionId;
-    return this;
-  }
+  static create(label: string, url: string, param?: string) {
+    const breadcrumb = new Breadcrumb();
+    breadcrumb._label = label;
+    breadcrumb._url = url;
+    breadcrumb._param = param;
 
-  public setParamFenDiagramId(fenDiagramId: string) {
-    this.params.fenDiagramId = fenDiagramId;
-    return this;
-  }
-
-  public resolveLabel() {
-    // resolve collection name and fen diagram description
+    return breadcrumb;
   }
 }

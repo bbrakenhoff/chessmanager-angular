@@ -8,8 +8,7 @@ import { BreadcrumbsModule } from '../breadcrumbs/breadcrumbs.module';
   declarations: [CollectionComponent],
   imports: [
     CommonModule,
-    RouterModule,
-    BreadcrumbsModule
+    RouterModule
   ]
 })
 export class CollectionModule { }

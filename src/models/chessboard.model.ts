@@ -60,8 +60,6 @@ export class Chessboard {
     if (!fenDiagram.isValid) {
       this._clearRemainingSquares(r, f);
     }
-
-    console.log(`%cBijoya: chessboard.model`, 'color: deeppink;', this.squares);
   }
 
   private _reflectionCharIndex(fenDiagram: FenDiagram): number {

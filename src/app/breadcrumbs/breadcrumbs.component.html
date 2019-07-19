@@ -1,5 +1,11 @@
 <nav class="breadcrumbs">
   <ol class="_breadcrumblist">
-    <li class="_breadcrumb-item" [ngClass]="{'-isactive': true}">broodkruimel</li>
+    <li
+      class="_breadcrumb-item"
+      [ngClass]="{ '-isactive': true }"
+      *ngFor="let breadcrumb of breadcrumbs$ | async"
+    >
+      <a [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}</a>
+    </li>
   </ol>
 </nav>
