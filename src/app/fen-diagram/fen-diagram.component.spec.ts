@@ -143,7 +143,7 @@ describe('FenDiagramComponent', () => {
       expect(component.form.controls.description.value).toEqual(
         'Starting position'
       );
-      verify(componentSpy.updateFenDiagram()).once();
+      verify(componentSpy.updateFenDiagram()).called();
     });
   });
 
@@ -154,7 +154,7 @@ describe('FenDiagramComponent', () => {
         testData.testFenNotations.emptyBoard
       );
       expect(component.form.controls.description.value).toEqual('Empty board');
-      verify(componentSpy.updateFenDiagram()).once();
+      verify(componentSpy.updateFenDiagram()).called();
     });
   });
 
