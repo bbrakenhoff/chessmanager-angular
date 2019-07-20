@@ -143,7 +143,7 @@ describe('FenDiagramComponent', () => {
       expect(component.form.controls.description.value).toEqual(
         'Starting position'
       );
-      verify(componentSpy.onFormSubmit()).once();
+      verify(componentSpy.updateFenDiagram()).once();
     });
   });
 
@@ -154,11 +154,11 @@ describe('FenDiagramComponent', () => {
         testData.testFenNotations.emptyBoard
       );
       expect(component.form.controls.description.value).toEqual('Empty board');
-      verify(componentSpy.onFormSubmit()).once();
+      verify(componentSpy.updateFenDiagram()).once();
     });
   });
 
-  describe('onFormSubmit()', () => {
+  describe('updateFenDiagram()', () => {
     it('should write the form values to the fen diagram', () => {
       component.fenDiagram.notation =
         testData.testFenNotations.eightQueensSolution;
@@ -169,11 +169,16 @@ describe('FenDiagramComponent', () => {
       );
       component.form.controls.description.setValue('Starting position');
 
-      component.onFormSubmit();
+      component.updateFenDiagram();
       expect(component.fenDiagram.notation).toEqual(
         testData.testFenNotations.startingPosition
       );
       expect(component.fenDiagram.description).toEqual('Starting position');
+    });
+  });
+
+  describe('onFormSubmit()', () => {
+    it('should write the updated fen diagram to the storage', () => {
     });
   });
 

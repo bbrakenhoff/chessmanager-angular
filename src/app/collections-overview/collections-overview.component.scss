@@ -2,7 +2,7 @@
 @import '../../assets/styles/_list.scss';
 
 .collections {
-  @include app-container();
+  @include make-container();
 
   & ._row {
     @include make-row();

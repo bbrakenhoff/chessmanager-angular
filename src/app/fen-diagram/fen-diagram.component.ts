@@ -38,6 +38,10 @@ export class FenDiagramComponent implements OnInit {
         notation: this.fenDiagram.notation,
         description: this.fenDiagram.description
       });
+
+      this.form.valueChanges.subscribe(() => {
+        this.updateFenDiagram();
+      });
     });
   }
 
@@ -90,17 +94,17 @@ export class FenDiagramComponent implements OnInit {
     );
     this.form.controls.description.setValue('Starting position');
 
-    this.onFormSubmit();
+    this.updateFenDiagram();
   }
 
   applyEmptyBoard() {
     this.form.controls.notation.setValue('8/8/8/8/8/8/8/8');
     this.form.controls.description.setValue('Empty board');
 
-    this.onFormSubmit();
+    this.updateFenDiagram();
   }
 
-  onFormSubmit() {
+  updateFenDiagram() {
     this.fenDiagram.notation = this.form.value.notation;
     this.fenDiagram.description = this.form.value.description;
   }

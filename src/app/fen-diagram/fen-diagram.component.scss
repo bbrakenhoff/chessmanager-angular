@@ -4,9 +4,7 @@
 @import '../../assets/styles/_variables.scss';
 
 .fen-diagram {
-  @include app-container();
-
-  padding-top: 2rem;
+  @include make-container();
 
   & ._row {
     @include make-row();

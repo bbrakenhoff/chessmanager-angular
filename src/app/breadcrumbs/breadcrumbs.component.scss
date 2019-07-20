@@ -3,7 +3,9 @@
 @import '../../assets/styles/_variables.scss';
 
 .breadcrumbs {
-  @include app-container();
+  @include make-container();
+
+  margin-bottom: 1rem;
 
   & ._breadcrumblist {
     display: flex;
