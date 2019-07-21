@@ -36,7 +36,7 @@ describe('CollectionComponent', () => {
           provide: StorageService,
           useFactory: () => {
             when(
-              storageServiceMock.getFenDiagramsByCollection(anyString())
+              storageServiceMock.getFenDiagramsByCollectionId(anyString())
             ).thenReturn([]);
             return instance(storageServiceMock);
           }
@@ -54,7 +54,7 @@ describe('CollectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
     verify(
-      storageServiceMock.getFenDiagramsByCollection(testData.collectionId)
+      storageServiceMock.getFenDiagramsByCollectionId(testData.collectionId)
     ).once();
   });
 });

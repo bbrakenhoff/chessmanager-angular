@@ -20,7 +20,7 @@ describe('SettingsComponent', () => {
         {
           provide: StorageService,
           useFactory: () => {
-            when(storageServiceMock.iconSet).thenReturn(IconSet.Maya);
+            when(storageServiceMock.getIconSet()).thenReturn(IconSet.Maya);
             return instance(storageServiceMock);
           }
         }
@@ -43,7 +43,7 @@ describe('SettingsComponent', () => {
       expect(component.form.controls.iconSet.validator).toEqual(
         Validators.required
       );
-      verify(storageServiceMock.iconSet).once();
+      verify(storageServiceMock.getIconSet()).once();
       expect(component.form.controls.iconSet.value).toEqual(IconSet.Maya);
     });
   });
@@ -64,7 +64,7 @@ describe('SettingsComponent', () => {
       component.iconSetCardIsOpen = true;
       expect(component.iconSetCardIsOpen).toEqual(true);
       component.onFormSubmit();
-      verify(storageServiceMock.setIconSet(anyString())).once();
+      verify(storageServiceMock.saveIconSet(anyString())).once();
       expect(component.currenticonSet).toEqual(newIconSet);
       expect(component.iconSetCardIsOpen).toEqual(false);
     });

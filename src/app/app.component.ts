@@ -10,6 +10,6 @@ export class AppComponent {
   title = 'chessmanager';
 
   constructor(private _storageService: StorageService) {
-    this._storageService.createTestData();
+    // this._storageService.createTestData();
   }
 }

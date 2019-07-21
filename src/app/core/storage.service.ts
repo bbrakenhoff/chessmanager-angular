@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { IconSet } from 'src/models/icon-set.model';
 import { Collection } from 'src/models/collection.model';
-import { FenDiagram } from '../../models/fen-diagram.model';
-import { TestDataFactory, TestCollection } from '../util/test-data-factory';
+import { IconSet } from 'src/models/icon-set.model';
+import { FenDiagram } from 'src/models/fen-diagram.model';
 
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
@@ -16,105 +15,113 @@ export enum StorageKey {
 export class StorageService {
   constructor() {}
 
-  public getCollectionById(collectionId: string) {
-    const collectionWithId = this.collections.find(
-      collection => collection.id === collectionId
-    );
-
-    return collectionWithId ? collectionWithId : null;
-  }
-
-  public get collections() {
-    const json: any[] = this._get(StorageKey.Collections);
+  getCollections(): Collection[] {
+    const json: any[] = this._getItem(StorageKey.Collections);
 
     if (json) {
-      return json.map((collection: any) =>
-        Collection.createFromJson(collection)
-      );
+      return json.map(item => Collection.createFromJson(item));
     }
 
     return [];
   }
 
-  public setCollections(value: Collection[]) {
-    this._set(StorageKey.Collections, value);
+  getCollectionById(collectionId: string): Collection {
+    return this.getCollections().find(
+      collection => collection.id === collectionId
+    );
   }
 
-  public getFenDiagramsByCollection(collectionId: string) {
-    return this._fenDiagrams.filter(
+  saveCollection(collection: Collection) {
+    if (collection) {
+      const collections = this.getCollections();
+      let index = collections
+        .map((item: Collection) => item.id)
+        .indexOf(collection.id);
+
+      const isNewCollection = index === -1;
+      if (isNewCollection) {
+        index = collections.length;
+      }
+
+      collections.splice(index, isNewCollection ? 0 : 1, collection);
+      localStorage.setItem(StorageKey.Collections, JSON.stringify(collections));
+    }
+  }
+
+  deleteCollection(collectionId: string) {
+    const collections = this.getCollections().filter(
+      (item: Collection) => item.id !== collectionId
+    );
+
+    this._setItem(StorageKey.Collections, collections);
+
+    // TODO: delete belonging fen diagrams
+  }
+
+  getFenDiagramsByCollectionId(collectionId: string): FenDiagram[] {
+    return this._getFenDiagrams().filter(
       fenDiagram => fenDiagram.collectionId === collectionId
     );
   }
 
-  public getFenDiagramById(fenDiagramId: string) {
-    const fenDiagramWithId = this._fenDiagrams.find(
-      fenDiagram => fenDiagram.id === fenDiagramId
+  getFenDiagramById(fenDiagramId: string): FenDiagram {
+    return this._getFenDiagrams().find(
+      fenDiagram => fenDiagram.id == fenDiagramId
     );
-
-    return fenDiagramWithId ? fenDiagramWithId : null;
   }
 
-  private get _fenDiagrams() {
-    const json: any[] = this._get(StorageKey.FenDiagrams);
+  saveFenDiagram(fenDiagram: FenDiagram) {
+    if (fenDiagram) {
+      const fenDiagrams = this._getFenDiagrams();
+      let index = fenDiagrams
+        .map((item: FenDiagram) => item.id)
+        .indexOf(fenDiagram.id);
+
+      const isNewFenDiagram = index === -1;
+      if (isNewFenDiagram) {
+        index = fenDiagrams.length;
+      }
+
+      fenDiagrams.splice(index, isNewFenDiagram ? 0 : 1, fenDiagram);
+      this._setItem(StorageKey.FenDiagrams, fenDiagrams);
+    }
+  }
+
+  getIconSet(): IconSet {
+    const iconSet = this._getItem(StorageKey.PrefIconSet);
+
+    return iconSet ? iconSet : IconSet.Alpha;
+  }
+
+  saveIconSet(iconSet: IconSet) {
+    this._setItem(StorageKey.PrefIconSet, iconSet);
+  }
+
+  private _getFenDiagrams(): FenDiagram[] {
+    const json: any[] = this._getItem(StorageKey.FenDiagrams);
 
     if (json) {
-      return json.map((fenDiagram: any) =>
-        FenDiagram.createFromJson(fenDiagram)
-      );
+      return json.map(item => FenDiagram.createFromJson(item));
     }
 
     return [];
   }
 
-  public setFenDiagrams(value: FenDiagram[]) {
-    this._set(StorageKey.FenDiagrams, value);
-  }
+  private _getItem(key: StorageKey) {
+    const item = localStorage.getItem(key);
 
-  /**
-   * Return the stored icon set.
-   * Return IconSet.Alpha when storage is empty.
-   */
-  get iconSet(): IconSet {
-    const value = this._get(StorageKey.PrefIconSet);
-
-    switch (value) {
-      case IconSet.Leipzig:
-        return IconSet.Leipzig;
-      case IconSet.Maya:
-        return IconSet.Maya;
-      default:
-        return IconSet.Alpha;
+    if (item) {
+      try {
+        return JSON.parse(item);
+      } catch (error) {
+        return item;
+      }
     }
+
+    return undefined;
   }
 
-  setIconSet(value: IconSet) {
-    this._set(StorageKey.PrefIconSet, value);
-  }
-
-  private _get(key: StorageKey): any {
-    const value = localStorage.getItem(key);
-
-    try {
-      return JSON.parse(value);
-    } catch (error) {
-      return value;
-    }
-  }
-
-  private _set(key: StorageKey, value: any) {
+  private _setItem(key: StorageKey, value: any) {
     localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  createTestData() {
-    const testCollections = TestDataFactory.createAllTestCollections();
-    const collections = [];
-    const fenDiagrams = [];
-
-    for (const testCollectionName of Object.keys(testCollections)) {
-      collections.push(testCollections[testCollectionName].collection);
-      fenDiagrams.push(...testCollections[testCollectionName].fenDiagrams);
-    }
-    this.setCollections(collections);
-    this.setFenDiagrams(fenDiagrams);
   }
 }

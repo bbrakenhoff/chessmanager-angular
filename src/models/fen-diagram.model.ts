@@ -3,8 +3,8 @@ import { FenCharUtil } from './fen-char-util.model';
 import * as uuid from 'uuid/v4';
 
 export class FenDiagram {
-  private _id = uuid();
-  public get id() {
+  private _id: string = uuid();
+  public get id(): string {
     return this._id;
   }
 

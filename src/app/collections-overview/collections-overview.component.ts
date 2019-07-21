@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from '../core/storage.service';
 import { Collection } from 'src/models/collection.model';
+import { StorageService } from '../core/storage.service';
 
 @Component({
   selector: 'app-collections',
@@ -11,7 +11,7 @@ export class CollectionsOverviewComponent implements OnInit {
   collections: Collection[] = [];
 
   constructor(private _storageService: StorageService) {
-    this.collections = this._storageService.collections;
+    this.collections = this._storageService.getCollections();
   }
 
   ngOnInit() {}

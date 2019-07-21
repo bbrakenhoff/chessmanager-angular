@@ -14,10 +14,10 @@ import {
 } from 'ts-mockito';
 import { TestDataFactory } from '../util/test-data-factory';
 import { ActivatedRoute } from '@angular/router';
-import { StorageService } from '../core/storage.service';
 import * as uuid from 'uuid/v4';
 import { of } from 'rxjs';
 import { FenDiagram } from 'src/models/fen-diagram.model';
+import { StorageService } from '../core/storage.service';
 
 describe('FenDiagramComponent', () => {
   const testData = {
@@ -63,7 +63,7 @@ describe('FenDiagramComponent', () => {
   }));
 
   beforeEach(() => {
-    when(storageServiceMock.collections).thenReturn([]);
+    when(storageServiceMock.getCollections()).thenReturn([]);
     when(storageServiceMock.getFenDiagramById(anyString())).thenReturn(
       testData.fenDiagrams[0]
     );

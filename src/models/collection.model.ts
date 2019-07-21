@@ -1,7 +1,7 @@
 import * as uuid from 'uuid/v4';
 export class Collection {
   private _id: string = uuid();
-  get id() {
+  get id(): string {
     return this._id;
   }
 

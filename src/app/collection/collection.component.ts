@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StorageService } from '../core/storage.service';
 import { FenDiagram } from '../../models/fen-diagram.model';
+import { StorageService } from '../core/storage.service';
 
 @Component({
   selector: 'app-collection',
@@ -17,7 +17,7 @@ export class CollectionComponent implements OnInit {
   ) {
     this._activatedRoute.params.subscribe(
       params =>
-        (this.fenDiagrams = this._storageService.getFenDiagramsByCollection(
+        (this.fenDiagrams = this._storageService.getFenDiagramsByCollectionId(
           params.collectionId
         ))
     );

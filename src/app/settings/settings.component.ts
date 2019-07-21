@@ -18,7 +18,7 @@ export class SettingsComponent {
     private _formBuilder: FormBuilder,
     private _storageService: StorageService
   ) {
-    this.currenticonSet = this._storageService.iconSet;
+    this.currenticonSet = this._storageService.getIconSet();
     this.form = this._formBuilder.group({
       iconSet: [this.currenticonSet, Validators.required]
     });
@@ -29,8 +29,8 @@ export class SettingsComponent {
   }
 
   onFormSubmit() {
-    this._storageService.setIconSet(this.form.value.iconSet);
-    this.currenticonSet = this._storageService.iconSet;
+    this._storageService.saveIconSet(this.form.value.iconSet);
+    this.currenticonSet = this._storageService.getIconSet();
     this.iconSetCardIsOpen = false;
   }
 
