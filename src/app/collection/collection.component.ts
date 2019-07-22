@@ -23,9 +23,7 @@ export class CollectionComponent implements OnInit {
   ) {
     this._activatedRoute.params.subscribe(params => {
       this._collectionId = params.collectionId;
-      this.fenDiagrams = this._storageService.getFenDiagramsByCollectionId(
-        this._collectionId
-      );
+      this._updateFenDiagrams();
     });
 
     this.form = this._formBuilder.group({
@@ -43,5 +41,16 @@ export class CollectionComponent implements OnInit {
       this._storageService.saveFenDiagram(newFenDiagram);
       this._router.navigate(['../../fen-diagram', newFenDiagram.id]);
     }
+  }
+
+  onDeleteButtonClicked(fenDiagramId: string) {
+    this._storageService.deleteFenDiagram(fenDiagramId);
+    this._updateFenDiagrams();
+  }
+
+  private _updateFenDiagrams() {
+    this.fenDiagrams = this._storageService.getFenDiagramsByCollectionId(
+      this._collectionId
+    );
   }
 }

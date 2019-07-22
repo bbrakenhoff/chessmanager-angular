@@ -34,6 +34,11 @@ export class CollectionsOverviewComponent implements OnInit {
     }
   }
 
+  onDeleteButtonClicked(collectionId: string) {
+    this._storageService.deleteCollection(collectionId);
+    this._updateCollections();
+  }
+
   private _updateCollections() {
     this.collections = this._storageService.getCollections();
   }

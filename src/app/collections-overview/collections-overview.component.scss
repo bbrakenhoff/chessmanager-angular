@@ -33,6 +33,21 @@
     @include app-listlink();
   }
 
+  & ._deletebutton {
+    color: #ef8157;
+
+    &::before {
+      font-size: 1.2rem;
+      font-weight: bold;
+      vertical-align: middle;
+    }
+
+    &:hover,
+    &:active {
+      color: darken(#ef8157, 20);
+    }
+  }
+
   & ._form {
     display: flex;
     width: 50%;
