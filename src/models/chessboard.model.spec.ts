@@ -2,10 +2,10 @@ import { Chessboard } from './chessboard.model';
 import { ChessColor } from './color.model';
 import { FenDiagram } from './fen-diagram.model';
 import { ChessPiece } from './piece.model';
-import { TestDataFactory } from 'src/app/util/test-data-factory';
+import { GlobalTestDataFactory } from 'src/app/util/test-data-factory';
 
 describe('Chessboard', () => {
-  const testFenNotations = TestDataFactory.createFenNotations();
+  const testFenNotations = GlobalTestDataFactory.createFenNotations();
 
   let chessboard: Chessboard;
   let fenDiagram: FenDiagram;

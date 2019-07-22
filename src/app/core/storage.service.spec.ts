@@ -5,6 +5,7 @@ import { spy, anything, verify, reset } from 'ts-mockito';
 import { Collection } from 'src/models/collection.model';
 import { IconSet } from 'src/models/icon-set.model';
 import { FenDiagram } from 'src/models/fen-diagram.model';
+import { GlobalTestDataFactory } from '../util/test-data-factory';
 
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
@@ -14,91 +15,15 @@ export enum StorageKey {
 
 class TestDataFactory {
   static createTestCollections(): Collection[] {
-    return [
-      Collection.create('Test collection'),
-      Collection.create('Problems'),
-      Collection.create('Errors')
-    ];
+    return GlobalTestDataFactory.createCollectionsWithoutFenDiagrams();
   }
 
   static createTestCollectionWithFenDiagrams() {
-    const collection = Collection.create('Test collection');
-
-    const startingPosition = FenDiagram.create();
-    startingPosition.notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
-    startingPosition.description = 'Starting position';
-    startingPosition.collectionId = collection.id;
-
-    const emptyBoard = FenDiagram.create();
-    emptyBoard.notation = '8/8/8/8/8/8/8/8';
-    emptyBoard.description = 'Empty board';
-    emptyBoard.collectionId = collection.id;
-
-    const eightQueensSolution = FenDiagram.create();
-    eightQueensSolution.notation = 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5';
-    eightQueensSolution.description = 'Eight queens solution';
-    eightQueensSolution.collectionId = collection.id;
-
-    const foolsMate = FenDiagram.create();
-    foolsMate.notation = 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR';
-    foolsMate.description = 'Fool\'s Mate';
-    foolsMate.collectionId = collection.id;
-
-    return {
-      collection,
-      fenDiagrams: {
-        startingPosition,
-        emptyBoard,
-        eightQueensSolution,
-        foolsMate
-      }
-    };
+    return GlobalTestDataFactory.createTestCollection();
   }
 
   static createEndPositionsCollectionWithFenDiagrams() {
-    const collection = Collection.create('Problems');
-
-    const problem1 = FenDiagram.create();
-    problem1.notation = '3r2k1/1p5p/6p1/p2q1p2/P1Q5/1P5P/1P6/5RK1';
-    problem1.description = 'White to move & win';
-    problem1.collectionId = collection.id;
-
-    const problem2 = FenDiagram.create();
-    problem2.notation = 'r1bq4/1p4kp/3p1n2/5pB1/p1pQ4/8/1P4PP/4RRK1';
-    problem2.description = 'White; to; move & win';
-    problem2.collectionId = collection.id;
-
-    const problem3 = FenDiagram.create();
-    problem3.notation = 'r2k4/1pp2rpp/pn1b1p2/3n4/8/P4NB1/1PP3PP/2KRR3';
-    problem3.description = 'White; to; move & win';
-    problem3.collectionId = collection.id;
-
-    const problem4 = FenDiagram.create();
-    problem4.notation = 'r1bqk2r/1pp2ppp/pb1p4/4n3/PPB1P3/2P5/R3QPPP/1NB1R1K1';
-    problem4.description = ' Black to move & win';
-    problem4.collectionId = collection.id;
-
-    const problem5 = FenDiagram.create();
-    problem5.notation = '2k1r3/2p4p/5b2/1NpK4/4p1bN/1P4P1/P4P2/7R';
-    problem5.description = 'Black to move & win';
-    problem5.collectionId = collection.id;
-
-    const problem6 = FenDiagram.create();
-    problem6.notation = '1r4k1/prp1ppbp/2b2np1/3P4/2p2B2/2N1PN1P/PP1R1PP1/2K4R';
-    problem6.description = 'Black to move & win';
-    problem6.collectionId = collection.id;
-
-    return {
-      collection,
-      fenDiagrams: {
-        problem1,
-        problem2,
-        problem3,
-        problem4,
-        problem5,
-        problem6
-      }
-    };
+    return GlobalTestDataFactory.createProblemsCollection();
   }
 }
 
@@ -434,13 +359,17 @@ describe('StorageService', () => {
         ])
       );
 
-      storageService.deleteFenDiagram(testCollection.fenDiagrams.eightQueensSolution.id);
+      storageService.deleteFenDiagram(
+        testCollection.fenDiagrams.eightQueensSolution.id
+      );
       const fenDiagrams = localStorage.getItem(StorageKey.FenDiagrams);
-      expect(fenDiagrams).toEqual( JSON.stringify([
-        testCollection.fenDiagrams.startingPosition,
-        testCollection.fenDiagrams.emptyBoard,
-        testCollection.fenDiagrams.foolsMate
-      ]));
+      expect(fenDiagrams).toEqual(
+        JSON.stringify([
+          testCollection.fenDiagrams.startingPosition,
+          testCollection.fenDiagrams.emptyBoard,
+          testCollection.fenDiagrams.foolsMate
+        ])
+      );
     });
   });
 

@@ -1,9 +1,9 @@
 import { FenDiagram } from './fen-diagram.model';
 import { FenError } from './fen-error.model';
-import { TestDataFactory } from 'src/app/util/test-data-factory';
+import { GlobalTestDataFactory } from 'src/app/util/test-data-factory';
 
 describe('FenDiagram', () => {
-  const testFenNotations = TestDataFactory.createFenNotations();
+  const testFenNotations = GlobalTestDataFactory.createFenNotations();
 
   describe('static create()', () => {
     it('should create a new fen diagram', () => {

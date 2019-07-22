@@ -17,54 +17,15 @@ import { of } from 'rxjs';
 import { FenDiagram } from 'src/models/fen-diagram.model';
 import { StorageService } from '../core/storage.service';
 import { Collection } from 'src/models/collection.model';
+import { GlobalTestDataFactory } from '../util/test-data-factory';
 
 class TestDataFactory {
   static createFenNotations() {
-    return {
-      emptyBoard: '8/8/8/8/8/8/8/8',
-      startingPosition: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-      tooManyPiecesOnRank: 'rnbqkbnr/pppppppp/8K/8/8/8/PPPPPPPP/RNBQKBNR',
-      tooManyEmptySquaresToRank: 'rnbqkbnr/pppppp3/8/8/8/8/PPPPPPPP/RNBQKBNR',
-      notEnoughSquaresOnRank: 'rnbqkbnr/pppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-      tooManyRanksDefined: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/KQBNRP',
-      illegalCharacterFound: 'rnbXkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-      notEnoughSquaresDefined: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQK',
-      eightQueensSolution: 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5'
-    };
+    return GlobalTestDataFactory.createFenNotations();
   }
 
   static createTestCollectionWithFenDiagrams() {
-    const collection = Collection.create('Test collection');
-
-    const startingPosition = FenDiagram.create();
-    startingPosition.notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
-    startingPosition.description = 'Starting position';
-    startingPosition.collectionId = collection.id;
-
-    const emptyBoard = FenDiagram.create();
-    emptyBoard.notation = '8/8/8/8/8/8/8/8';
-    emptyBoard.description = 'Empty board';
-    emptyBoard.collectionId = collection.id;
-
-    const eightQueensSolution = FenDiagram.create();
-    eightQueensSolution.notation = 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5';
-    eightQueensSolution.description = 'Eight queens solution';
-    eightQueensSolution.collectionId = collection.id;
-
-    const foolsMate = FenDiagram.create();
-    foolsMate.notation = 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR';
-    foolsMate.description = 'Fool\'s Mate';
-    foolsMate.collectionId = collection.id;
-
-    return {
-      collection,
-      fenDiagrams: {
-        startingPosition,
-        emptyBoard,
-        eightQueensSolution,
-        foolsMate
-      }
-    };
+    return GlobalTestDataFactory.createTestCollection();
   }
 }
 

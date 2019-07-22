@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Collection } from 'src/models/collection.model';
 import { IconSet } from 'src/models/icon-set.model';
 import { FenDiagram } from 'src/models/fen-diagram.model';
+import { GlobalTestDataFactory } from '../util/test-data-factory';
 
 export enum StorageKey {
   PrefIconSet = 'pref_icon_set',
@@ -108,6 +109,26 @@ export class StorageService {
 
   saveIconSet(iconSet: IconSet) {
     this._setItem(StorageKey.PrefIconSet, iconSet);
+  }
+
+  fillStorageWithTestData() {
+    const testCollections = [
+      GlobalTestDataFactory.createTestCollection(),
+      GlobalTestDataFactory.createErrorsCollection(),
+      GlobalTestDataFactory.createProblemsCollection()
+    ];
+
+    this._setItem(
+      StorageKey.Collections,
+      testCollections.map(testCollection => testCollection.collection)
+    );
+
+    const fenDiagrams = [].concat(
+      ...testCollections.map(testCollection =>
+        Object.values(testCollection.fenDiagrams)
+      )
+    );
+    this._setItem(StorageKey.FenDiagrams, fenDiagrams);
   }
 
   private _getFenDiagrams(): FenDiagram[] {
