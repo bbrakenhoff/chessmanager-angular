@@ -1,11 +1,18 @@
 <div class="fen-positions">
-    <div class="_row">
-      <div class="_col">
-        <ul class="_list">
-          <li class="_listitem" *ngFor="let fenDiagram of fenDiagrams">
-            <a class="_listlink" [routerLink]="['../../fen-diagram', fenDiagram.id]">{{ fenDiagram.description }}</a>
-          </li>
-        </ul>
-      </div>
+  <div class="_row">
+    <div class="_col">
+      <ul class="_list">
+        <li class="_listitem" *ngFor="let fenDiagram of fenDiagrams">
+          <a
+            class="_listlink"
+            [routerLink]="['../../fen-diagram', fenDiagram.id]"
+            >{{ fenDiagram.description }}</a
+          >
+        </li>
+        <li class="_listitem -nodiagrams" *ngIf="fenDiagrams.length === 0">
+          No diagrams yet
+        </li>
+      </ul>
     </div>
   </div>
+</div>
