@@ -12,22 +12,65 @@ import {
   anyString,
   reset
 } from 'ts-mockito';
-import { TestDataFactory } from '../util/test-data-factory';
 import { ActivatedRoute } from '@angular/router';
-import * as uuid from 'uuid/v4';
 import { of } from 'rxjs';
 import { FenDiagram } from 'src/models/fen-diagram.model';
 import { StorageService } from '../core/storage.service';
+import { Collection } from 'src/models/collection.model';
+
+class TestDataFactory {
+  static createFenNotations() {
+    return {
+      emptyBoard: '8/8/8/8/8/8/8/8',
+      startingPosition: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+      tooManyPiecesOnRank: 'rnbqkbnr/pppppppp/8K/8/8/8/PPPPPPPP/RNBQKBNR',
+      tooManyEmptySquaresToRank: 'rnbqkbnr/pppppp3/8/8/8/8/PPPPPPPP/RNBQKBNR',
+      notEnoughSquaresOnRank: 'rnbqkbnr/pppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+      tooManyRanksDefined: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/KQBNRP',
+      illegalCharacterFound: 'rnbXkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+      notEnoughSquaresDefined: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQK',
+      eightQueensSolution: 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5'
+    };
+  }
+
+  static createTestCollectionWithFenDiagrams() {
+    const collection = Collection.create('Test collection');
+
+    const startingPosition = FenDiagram.create();
+    startingPosition.notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
+    startingPosition.description = 'Starting position';
+    startingPosition.collectionId = collection.id;
+
+    const emptyBoard = FenDiagram.create();
+    emptyBoard.notation = '8/8/8/8/8/8/8/8';
+    emptyBoard.description = 'Empty board';
+    emptyBoard.collectionId = collection.id;
+
+    const eightQueensSolution = FenDiagram.create();
+    eightQueensSolution.notation = 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5';
+    eightQueensSolution.description = 'Eight queens solution';
+    eightQueensSolution.collectionId = collection.id;
+
+    const foolsMate = FenDiagram.create();
+    foolsMate.notation = 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR';
+    foolsMate.description = 'Fool\'s Mate';
+    foolsMate.collectionId = collection.id;
+
+    return {
+      collection,
+      fenDiagrams: {
+        startingPosition,
+        emptyBoard,
+        eightQueensSolution,
+        foolsMate
+      }
+    };
+  }
+}
 
 describe('FenDiagramComponent', () => {
-  const testData = {
-    testFenNotations: TestDataFactory.createFenNotations(),
-    fenDiagrams: TestDataFactory.createFenDiagrams(),
-    collectionId: uuid(),
-    get fenDiagramId() {
-      return this.fenDiagrams[0].id;
-    }
-  };
+  const testCollection = TestDataFactory.createTestCollectionWithFenDiagrams();
+  const testNotations = TestDataFactory.createFenNotations();
 
   let component: FenDiagramComponent;
   let fixture: ComponentFixture<FenDiagramComponent>;
@@ -46,8 +89,8 @@ describe('FenDiagramComponent', () => {
           useFactory: () => {
             when(activatedRouteMock.params).thenReturn(
               of({
-                collectionId: testData.collectionId,
-                fenDiagramId: testData.fenDiagramId
+                collectionId: testCollection.collection.id,
+                fenDiagramId: testCollection.fenDiagrams.startingPosition.id
               })
             );
             return instance(activatedRouteMock);
@@ -65,7 +108,7 @@ describe('FenDiagramComponent', () => {
   beforeEach(() => {
     when(storageServiceMock.getCollections()).thenReturn([]);
     when(storageServiceMock.getFenDiagramById(anyString())).thenReturn(
-      testData.fenDiagrams[0]
+      testCollection.fenDiagrams.startingPosition
     );
 
     fixture = TestBed.createComponent(FenDiagramComponent);
@@ -78,48 +121,44 @@ describe('FenDiagramComponent', () => {
   afterEach(() => {
     reset(activatedRouteMock);
     reset(storageServiceMock);
+    reset(componentSpy);
   });
 
   describe('constructor', () => {
-    afterEach(() => {
-      testData.fenDiagrams[0].collectionId = '';
-    });
-
     it('should get the fen diagram from storage', () => {
-      testData.fenDiagrams[0].collectionId = testData.collectionId;
       verify(
-        storageServiceMock.getFenDiagramById(testData.fenDiagramId)
+        storageServiceMock.getFenDiagramById(
+          testCollection.fenDiagrams.startingPosition.id
+        )
       ).once();
       expect(component.form.value).toEqual({
-        notation: testData.fenDiagrams[0].notation,
-        description: testData.fenDiagrams[0].description
+        notation: testCollection.fenDiagrams.startingPosition.notation,
+        description: testCollection.fenDiagrams.startingPosition.description
       });
-      expect(component.fenDiagram).toEqual(testData.fenDiagrams[0]);
+      expect(component.fenDiagram).toEqual(
+        testCollection.fenDiagrams.startingPosition
+      );
     });
 
     it('should apply starting position to a new fen diagram when nothing retrieved from storage', () => {
-      const notation = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR';
-      const description = 'Starting position';
       reset(storageServiceMock);
-      when(storageServiceMock.getFenDiagramById(anyString())).thenReturn(null);
+      when(storageServiceMock.getFenDiagramById(anyString())).thenReturn(undefined);
 
       // Recreate component, otherwise the alterations to mock do not work
       fixture = TestBed.createComponent(FenDiagramComponent);
       component = fixture.componentInstance;
       fixture.detectChanges();
 
-      verify(
-        storageServiceMock.getFenDiagramById(testData.fenDiagramId)
-      ).once();
-      expect(testData.fenDiagrams).not.toContain(component.fenDiagram);
-      expect(component.form.value).toEqual({ notation, description });
-      expect(component.fenDiagram.notation).toEqual(notation);
-      expect(component.fenDiagram.description).toEqual(description);
+      verify(storageServiceMock.getFenDiagramById(anyString())).once();
+      // Cannot check if method called in constructor, so check form values
+      expect(component.form.value).toEqual({
+        notation:  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+        description: 'Starting position'
+      });
     });
 
     it('should build the form', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.eightQueensSolution;
+      component.fenDiagram.notation = testNotations.eightQueensSolution;
       component.fenDiagram.description = 'Test position description';
 
       expect(component.form).toBeDefined();
@@ -137,12 +176,11 @@ describe('FenDiagramComponent', () => {
   describe('applyStartingPosition()', () => {
     it('should apply the starting position to the form and submit', () => {
       component.applyStartingPosition();
-      expect(component.form.controls.notation.value).toEqual(
-        testData.testFenNotations.startingPosition
-      );
-      expect(component.form.controls.description.value).toEqual(
-        'Starting position'
-      );
+
+      expect(component.form.value).toEqual({
+        notation: testCollection.fenDiagrams.startingPosition.notation,
+        description: testCollection.fenDiagrams.startingPosition.description
+      });
       verify(componentSpy.updateFenDiagram()).called();
     });
   });
@@ -150,36 +188,37 @@ describe('FenDiagramComponent', () => {
   describe('applyEmptyBoard()', () => {
     it('should apply the starting position to the form and submit', () => {
       component.applyEmptyBoard();
-      expect(component.form.controls.notation.value).toEqual(
-        testData.testFenNotations.emptyBoard
-      );
-      expect(component.form.controls.description.value).toEqual('Empty board');
+      expect(component.form.value).toEqual({
+        notation: testCollection.fenDiagrams.emptyBoard.notation,
+        description: testCollection.fenDiagrams.emptyBoard.description
+      });
       verify(componentSpy.updateFenDiagram()).called();
     });
   });
 
   describe('updateFenDiagram()', () => {
     it('should write the form values to the fen diagram', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.eightQueensSolution;
-      component.fenDiagram.description = 'Eight queens solution';
+      component.fenDiagram = testCollection.fenDiagrams.foolsMate;
 
       component.form.controls.notation.setValue(
-        testData.testFenNotations.startingPosition
+        testCollection.fenDiagrams.startingPosition.notation
       );
-      component.form.controls.description.setValue('Starting position');
+      component.form.controls.description.setValue(
+        testCollection.fenDiagrams.startingPosition.description
+      );
 
       component.updateFenDiagram();
       expect(component.fenDiagram.notation).toEqual(
-        testData.testFenNotations.startingPosition
+        component.form.value.notation
       );
-      expect(component.fenDiagram.description).toEqual('Starting position');
+      expect(component.fenDiagram.description).toEqual(
+        component.form.value.description
+      );
     });
   });
 
   describe('onFormSubmit()', () => {
-    it('should write the updated fen diagram to the storage', () => {
-    });
+    it('should write the updated fen diagram to the storage', () => {});
   });
 
   describe('get validationMessage()', () => {
@@ -188,48 +227,41 @@ describe('FenDiagramComponent', () => {
     });
 
     it('should return "FEN notation is correct" when fen diagram is valid', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.startingPosition;
+      component.fenDiagram.notation = testNotations.startingPosition;
       expect(component.validationMessage).toEqual('FEN notation is correct');
     });
 
     it('should return "Too many pieces on rank 3" when too many pieces on a rank', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.tooManyPiecesOnRank;
+      component.fenDiagram.notation = testNotations.tooManyPiecesOnRank;
       expect(component.validationMessage).toEqual('Too many pieces on rank 3');
     });
 
     it('should return "Too many empty squares added to rank 2" when too many pieces added to a rank', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.tooManyEmptySquaresToRank;
+      component.fenDiagram.notation = testNotations.tooManyEmptySquaresToRank;
       expect(component.validationMessage).toEqual(
         'Too many empty squares added to rank 2'
       );
     });
 
     it('should return "Not enough squares defined on rank 2" when not enough squares added to a rank', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.notEnoughSquaresOnRank;
+      component.fenDiagram.notation = testNotations.notEnoughSquaresOnRank;
       expect(component.validationMessage).toEqual(
         'Not enough squares defined on rank 2'
       );
     });
 
     it('should return "Too many ranks defined" when too many ranks defined', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.tooManyRanksDefined;
+      component.fenDiagram.notation = testNotations.tooManyRanksDefined;
       expect(component.validationMessage).toEqual('Too many ranks defined');
     });
 
     it('should return "Illegal character found" when illegal character found', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.illegalCharacterFound;
+      component.fenDiagram.notation = testNotations.illegalCharacterFound;
       expect(component.validationMessage).toEqual('Illegal character found');
     });
 
     it('should return "Not enough squares defined" when not enough squares defined', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.notEnoughSquaresDefined;
+      component.fenDiagram.notation = testNotations.notEnoughSquaresDefined;
       expect(component.validationMessage).toEqual('Not enough squares defined');
     });
   });
@@ -240,14 +272,12 @@ describe('FenDiagramComponent', () => {
     });
 
     it('should return empty string when fen diagram is valid', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.startingPosition;
+      component.fenDiagram.notation = testNotations.startingPosition;
       expect(component.errorIndicator).toEqual('');
     });
 
     it('should return a text containing spaces until the error position ending with a ^ when fen positio is invalid', () => {
-      component.fenDiagram.notation =
-        testData.testFenNotations.tooManyPiecesOnRank;
+      component.fenDiagram.notation = testNotations.tooManyPiecesOnRank;
       expect(component.errorIndicator).toEqual(
         '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#94;'
       );

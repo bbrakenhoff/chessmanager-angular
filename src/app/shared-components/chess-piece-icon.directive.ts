@@ -3,7 +3,6 @@ import {
   Input,
   OnInit,
   ElementRef,
-  Renderer,
   Renderer2
 } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
@@ -28,6 +27,8 @@ export class ChessPieceIconDirective implements OnInit {
     if (!this.iconSet) {
       this.iconSet = IconSet.Alpha;
     }
+
+    console.log(`Bijoya: chess-piece-icon.directive -> oninit`);
 
     this._renderer.setAttribute(
       this._el.nativeElement,

@@ -18,13 +18,9 @@ describe('Chessboard', () => {
   describe('static create()', () => {
     it('should create an empty chessboard', () => {
       expect(chessboard).toBeDefined();
-      spyOn(Chessboard.prototype as any, '_initSquares').and.callThrough();
     });
-  });
 
-  describe('_initSquares()', () => {
     it('should create 64 squares when called', () => {
-      (chessboard as any)._initSquares();
       expect(chessboard.squares).toBeDefined();
       expect(chessboard.squares.length).toEqual(8);
 
@@ -34,8 +30,6 @@ describe('Chessboard', () => {
     });
 
     it('should create alternating white and black squares when called', () => {
-      (chessboard as any)._initSquares();
-
       let expectedColor = ChessColor.White;
 
       for (let r = 0; r < 8; r++) {
@@ -212,51 +206,6 @@ describe('Chessboard', () => {
 
       for (let r = 1; r < 8; r++) {
         for (let f = 0; f < 8; f++) {
-          expect(chessboard.squares[r][f].piece).toBeNull();
-        }
-      }
-    });
-  });
-
-  describe('_reflectionCharIndex(fenDiagram: FenDiagram)', () => {
-    it('should return the lenght of the notation when fen diagram is valid', () => {
-      fenDiagram.notation = testFenNotations.startingPosition;
-      const result = (chessboard as any)._reflectionCharIndex(fenDiagram);
-      expect(result).toEqual(fenDiagram.notation.length);
-    });
-
-    it('should return the position of the error when the fen diagram is invalid', () => {
-      fenDiagram.notation = testFenNotations.tooManyEmptySquaresToRank;
-      const result = (chessboard as any)._reflectionCharIndex(fenDiagram);
-      expect(result).toEqual(fenDiagram.error.position);
-    });
-  });
-
-  describe('_clearRemainingSquares(rank: number, file: number)', () => {
-    it('should clear the remaining squares starting from current file', () => {
-      fenDiagram.notation = testFenNotations.eightQueensSolution;
-
-      const whiteQueenPositions = [
-        { rank: 0, file: 0 },
-        { rank: 1, file: 6 },
-        { rank: 2, file: 4 },
-        { rank: 3, file: 7 },
-        { rank: 4, file: 1 },
-        { rank: 5, file: 3 },
-        { rank: 6, file: 5 },
-        { rank: 7, file: 2 }
-      ];
-
-      const whiteQueen = ChessPiece.createFromFenChar('Q');
-
-      for (const position of whiteQueenPositions) {
-        chessboard.squares[position.rank][position.file].piece = whiteQueen;
-      }
-
-      (chessboard as any)._clearRemainingSquares(4, 3);
-
-      for (let r = 4; r < 8; r++) {
-        for (let f = 3; f < 8; f++) {
           expect(chessboard.squares[r][f].piece).toBeNull();
         }
       }

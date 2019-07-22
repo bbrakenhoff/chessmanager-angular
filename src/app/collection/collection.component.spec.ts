@@ -8,9 +8,7 @@ import * as uuid from 'uuid/v4';
 import { StorageService } from '../core/storage.service';
 
 describe('CollectionComponent', () => {
-  const testData = {
-    collectionId: uuid()
-  };
+  const testCollectionId = uuid();
 
   let component: CollectionComponent;
   let fixture: ComponentFixture<CollectionComponent>;
@@ -27,7 +25,7 @@ describe('CollectionComponent', () => {
           provide: ActivatedRoute,
           useFactory: () => {
             when(activatedRouteMock.params).thenReturn(
-              of({ collectionId: testData.collectionId })
+              of({ collectionId: testCollectionId })
             );
             return instance(activatedRouteMock);
           }
@@ -54,7 +52,7 @@ describe('CollectionComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
     verify(
-      storageServiceMock.getFenDiagramsByCollectionId(testData.collectionId)
+      storageServiceMock.getFenDiagramsByCollectionId(testCollectionId)
     ).once();
   });
 });
