@@ -12,6 +12,24 @@
         <li class="_listitem -nodiagrams" *ngIf="fenDiagrams.length === 0">
           No diagrams yet
         </li>
+        <li class="_listitem">
+            <form
+              [formGroup]="form"
+              class="_form"
+              id="form"
+              (ngSubmit)="onFormSubmit()"
+              novalidate
+            >
+              <input
+                class="_forminput"
+                type="text"
+                placeholder="Description"
+                formControlName="description"
+              />
+              <button type="submit" class="_formsubmit">
+                <span class="nc-icon-plus"></span>Save</button>
+            </form>
+          </li>
       </ul>
     </div>
   </div>

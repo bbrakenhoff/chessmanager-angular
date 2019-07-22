@@ -24,7 +24,7 @@ export class FenDiagram {
   }
 
   // tslint:disable-next-line: variable-name
-  private _error: FenError = null;
+  private _error: FenError;
   get error(): FenError {
     return this._error;
   }
@@ -49,6 +49,11 @@ export class FenDiagram {
   }
 
   private _validate() {
+    if (this.notation === '') {
+      this._error = undefined;
+      return;
+    }
+
     // Wrap in vairable, so they can be updated by reference outside this method
     const validationCounters: FenDiagram.ValidationCounters = {
       charIndex: 0,

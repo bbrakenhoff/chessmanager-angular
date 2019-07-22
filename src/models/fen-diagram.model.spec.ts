@@ -14,7 +14,7 @@ describe('FenDiagram', () => {
       expect(fenDiagram.description).toEqual('');
       expect(fenDiagram.collectionId).toEqual('');
       expect(fenDiagram.notation).toEqual('');
-      expect(fenDiagram.error).toBeNull();
+      expect(fenDiagram.error).toBeUndefined();
     });
   });
 
@@ -48,14 +48,19 @@ describe('FenDiagram', () => {
     describe('valid', () => {
       it('should not result in an error when empty board represented', () => {
         fenDiagram.notation = testFenNotations.emptyBoard;
-        expect(fenDiagram.error).toBeNull();
+        expect(fenDiagram.error).toBeUndefined();
         expect(fenDiagram.isValid).toEqual(true);
       });
 
       it('should not result in an error when starting position represented', () => {
         fenDiagram.notation = testFenNotations.startingPosition;
-        expect(fenDiagram.error).toBeNull();
+        expect(fenDiagram.error).toBeUndefined();
         expect(fenDiagram.isValid).toEqual(true);
+      });
+
+      it('should not result in an error when notation empty', () => {
+        fenDiagram.notation = '';
+        expect(fenDiagram.error).toBeUndefined();
       });
     });
 

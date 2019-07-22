@@ -3,8 +3,9 @@ import { CollectionsOverviewComponent } from './collections-overview.component';
 import { mock, instance, when, verify } from 'ts-mockito';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { StorageService } from '../core/storage.service';
+import { FormBuilder } from '@angular/forms';
 
-describe('CollectionsComponent', () => {
+describe('CollectionsOverviewComponent', () => {
   let component: CollectionsOverviewComponent;
   let fixture: ComponentFixture<CollectionsOverviewComponent>;
 
@@ -21,7 +22,8 @@ describe('CollectionsComponent', () => {
             when(storageServiceMock.getCollections()).thenReturn([]);
             return instance(storageServiceMock);
           }
-        }
+        },
+        FormBuilder
       ]
     }).compileComponents();
   }));

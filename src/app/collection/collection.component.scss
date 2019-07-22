@@ -1,6 +1,9 @@
 @import '../../assets/styles/_bootstrap.scss';
 @import '../../assets/styles/_list.scss';
 @import '../../assets/styles/_link.scss';
+@import '../../assets/styles/_button.scss';
+@import '../../assets/styles/_input.scss';
+@import '../../assets/styles/_variables.scss';
 
 .fen-positions {
   @include make-container();
@@ -35,5 +38,33 @@
 
   & ._listlink {
     @include app-listlink();
+  }
+
+  & ._form {
+    display: flex;
+    width: 50%;
+  }
+
+  & ._forminput {
+    @include app-input();
+
+    margin-right: 1rem;
+  }
+
+  & ._formsubmit {
+    @include app-button-small();
+
+    background-color: $app-button-primary;
+    border-radius: $app-button-border-radius-rounded;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: $app-button-primary-active;
+    }
+
+    & .nc-icon-plus {
+      margin-right: 0.5rem;
+    }
   }
 }

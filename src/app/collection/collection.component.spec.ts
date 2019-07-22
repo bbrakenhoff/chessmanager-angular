@@ -1,11 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CollectionComponent } from './collection.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { when, instance, mock, anyString, verify } from 'ts-mockito';
 import { of } from 'rxjs';
 import * as uuid from 'uuid/v4';
 import { StorageService } from '../core/storage.service';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CollectionComponent', () => {
   const testCollectionId = uuid();
@@ -20,6 +22,7 @@ describe('CollectionComponent', () => {
     TestBed.configureTestingModule({
       declarations: [CollectionComponent],
       schemas: [NO_ERRORS_SCHEMA],
+      imports: [RouterTestingModule],
       providers: [
         {
           provide: ActivatedRoute,
@@ -38,7 +41,8 @@ describe('CollectionComponent', () => {
             ).thenReturn([]);
             return instance(storageServiceMock);
           }
-        }
+        },
+        FormBuilder
       ]
     }).compileComponents();
   }));

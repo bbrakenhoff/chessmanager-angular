@@ -31,21 +31,6 @@
 
   & ._listlink {
     @include app-listlink();
-
-    //   &.-newcollection {
-    //     font-style: italic;
-    //     line-height: 1.4rem;
-
-    //     & .nc-icon-plus::before {
-    //       padding: 0.3rem;
-    //       margin-right: 0.6rem;
-
-    //       background-color: #51cbce;
-    //       border-radius: 50%;
-    //       color: white;
-    //       font-size: .8rem;
-    //     }
-    //   }
   }
 
   & ._form {
