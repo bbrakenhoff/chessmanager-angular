@@ -3,7 +3,29 @@
     <div class="_col">
       <ul class="_list">
         <li class="_listitem" *ngFor="let collection of collections">
-          <a class="_listlink" [routerLink]="['../collection', collection.id]">{{ collection.name }}</a>
+          <a
+            class="_listlink"
+            [routerLink]="['../collection', collection.id]"
+            >{{ collection.name }}</a
+          >
+        </li>
+        <li class="_listitem">
+          <form
+            [formGroup]="form"
+            class="_form"
+            id="form"
+            (ngSubmit)="onFormSubmit()"
+            novalidate
+          >
+            <input
+              class="_forminput"
+              type="text"
+              placeholder="Name"
+              formControlName="name"
+            />
+            <button type="submit" class="_formsubmit">
+              <span class="nc-icon-plus"></span>Save</button>
+          </form>
         </li>
       </ul>
     </div>

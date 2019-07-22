@@ -1,5 +1,9 @@
 @import '../../assets/styles/_bootstrap.scss';
 @import '../../assets/styles/_list.scss';
+@import '../../assets/styles/_nucleo-icons.scss';
+@import '../../assets/styles/_input.scss';
+@import '../../assets/styles/_button.scss';
+@import '../../assets/styles/_variables.scss';
 
 .collections {
   @include make-container();
@@ -27,5 +31,48 @@
 
   & ._listlink {
     @include app-listlink();
+
+    //   &.-newcollection {
+    //     font-style: italic;
+    //     line-height: 1.4rem;
+
+    //     & .nc-icon-plus::before {
+    //       padding: 0.3rem;
+    //       margin-right: 0.6rem;
+
+    //       background-color: #51cbce;
+    //       border-radius: 50%;
+    //       color: white;
+    //       font-size: .8rem;
+    //     }
+    //   }
+  }
+
+  & ._form {
+    display: flex;
+    width: 50%;
+  }
+
+  & ._forminput {
+    @include app-input();
+
+    margin-right: 1rem;
+  }
+
+  & ._formsubmit {
+    @include app-button-small();
+
+    background-color: $app-button-primary;
+    border-radius: $app-button-border-radius-rounded;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: $app-button-primary-active;
+    }
+
+    & .nc-icon-plus {
+      margin-right: 0.5rem;
+    }
   }
 }

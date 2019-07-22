@@ -2,6 +2,7 @@
 @import '../../assets/styles/_card.scss';
 @import '../../assets/styles/_button.scss';
 @import '../../assets/styles/_variables.scss';
+@import '../../assets/styles/_input.scss';
 
 .fen-diagram {
   @include make-container();
@@ -83,17 +84,7 @@
   }
 
   & ._forminput {
-    display: block;
-    width: 100%;
-    padding: 0.65rem;
-    border: 1px solid #dddddd;
-
-    border-radius: 0.25rem;
-
-    &::placeholder {
-      color: #6c757d;
-      font-size: 0.85rem;
-    }
+    @include app-input();
   }
 
   & ._formsubmit {

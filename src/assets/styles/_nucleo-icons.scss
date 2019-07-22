@@ -3,11 +3,12 @@
   font-style: normal;
   font-weight: normal;
   src: url('/assets/fonts/nucleo-icons.eot');
-  src: url('/assets/fonts/nucleo-icons.eot') format('embedded-opentype'), url('/assets/fonts/nucleo-icons.woff2') format('woff2'),
-    url('/assets/fonts/nucleo-icons.woff') format('woff'), url('/assets/fonts/nucleo-icons.ttf') format('truetype');
+  src: url('/assets/fonts/nucleo-icons.eot') format('embedded-opentype'),
+    url('/assets/fonts/nucleo-icons.woff2') format('woff2'), url('/assets/fonts/nucleo-icons.woff') format('woff'),
+    url('/assets/fonts/nucleo-icons.ttf') format('truetype');
 }
 
-[class*='nc-icon']::before{
+[class*='nc-icon']::before {
   display: inline-block;
 
   font: normal normal normal 14px/1 'nucleo-icons';
@@ -22,5 +23,9 @@
 .nc-icon {
   &-settings-gear::before {
     content: '\ea49';
+  }
+
+  &-plus::before {
+    content: '\ea4d';
   }
 }
