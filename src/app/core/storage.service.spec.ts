@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { StorageService } from './storage.service';
-import { spy, when, anything, verify, reset } from 'ts-mockito';
+import { spy, anything, verify, reset } from 'ts-mockito';
 import { Collection } from 'src/models/collection.model';
 import { IconSet } from 'src/models/icon-set.model';
-import { TestCollection } from '../util/test-data-factory';
 import { FenDiagram } from 'src/models/fen-diagram.model';
 
 export enum StorageKey {
@@ -211,6 +210,7 @@ describe('StorageService', () => {
 
   describe('deleteCollection(collection: Collection)', () => {
     const testCollections = TestDataFactory.createTestCollections();
+    const testCollectionWithFenDiagrams = TestDataFactory.createTestCollectionWithFenDiagrams();
 
     it('should delete the collection when in storage', () => {
       localStorage.setItem(
@@ -221,6 +221,31 @@ describe('StorageService', () => {
       storageService.deleteCollection(testCollections[1].id);
       const collections = storageService.getCollections();
       expect(collections).toEqual([testCollections[0], testCollections[2]]);
+    });
+
+    it('should delete fen diagrams that belong to collection being deleted', () => {
+      localStorage.setItem(
+        StorageKey.Collections,
+        JSON.stringify([testCollectionWithFenDiagrams.collection])
+      );
+
+      localStorage.setItem(
+        StorageKey.FenDiagrams,
+        JSON.stringify([
+          testCollectionWithFenDiagrams.fenDiagrams.startingPosition,
+          testCollectionWithFenDiagrams.fenDiagrams.emptyBoard,
+          testCollectionWithFenDiagrams.fenDiagrams.eightQueensSolution,
+          testCollectionWithFenDiagrams.fenDiagrams.foolsMate
+        ])
+      );
+
+      storageService.deleteCollection(
+        testCollectionWithFenDiagrams.collection.id
+      );
+      const fenDiagrams = storageService.getFenDiagramsByCollectionId(
+        testCollectionWithFenDiagrams.collection.id
+      );
+      expect(fenDiagrams).toEqual([]);
     });
   });
 
@@ -395,6 +420,30 @@ describe('StorageService', () => {
       ).never();
     });
   });
+
+  describe('deleteFenDiagram(fenDiagramId: string)', () => {
+    const testCollection = TestDataFactory.createTestCollectionWithFenDiagrams();
+    it('should delete the fen diagram with the given id', () => {
+      localStorage.setItem(
+        StorageKey.FenDiagrams,
+        JSON.stringify([
+          testCollection.fenDiagrams.startingPosition,
+          testCollection.fenDiagrams.emptyBoard,
+          testCollection.fenDiagrams.eightQueensSolution,
+          testCollection.fenDiagrams.foolsMate
+        ])
+      );
+
+      storageService.deleteFenDiagram(testCollection.fenDiagrams.eightQueensSolution.id);
+      const fenDiagrams = localStorage.getItem(StorageKey.FenDiagrams);
+      expect(fenDiagrams).toEqual( JSON.stringify([
+        testCollection.fenDiagrams.startingPosition,
+        testCollection.fenDiagrams.emptyBoard,
+        testCollection.fenDiagrams.foolsMate
+      ]));
+    });
+  });
+
   describe('getIconSet()', () => {
     it('should return the stored icon set when in storage', () => {
       localStorage.setItem(StorageKey.PrefIconSet, IconSet.Leipzig);

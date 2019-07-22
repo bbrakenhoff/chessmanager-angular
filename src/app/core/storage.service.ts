@@ -55,7 +55,12 @@ export class StorageService {
 
     this._setItem(StorageKey.Collections, collections);
 
-    // TODO: delete belonging fen diagrams
+    this._setItem(
+      StorageKey.FenDiagrams,
+      this._getFenDiagrams().filter(
+        fenDiagram => fenDiagram.collectionId !== collectionId
+      )
+    );
   }
 
   getFenDiagramsByCollectionId(collectionId: string): FenDiagram[] {
@@ -85,6 +90,14 @@ export class StorageService {
       fenDiagrams.splice(index, isNewFenDiagram ? 0 : 1, fenDiagram);
       this._setItem(StorageKey.FenDiagrams, fenDiagrams);
     }
+  }
+
+  deleteFenDiagram(fenDiagramId: string) {
+    const fenDiagrams = this._getFenDiagrams().filter(
+      fenDiagram => fenDiagram.id !== fenDiagramId
+    );
+
+    this._setItem(StorageKey.FenDiagrams, fenDiagrams);
   }
 
   getIconSet(): IconSet {
