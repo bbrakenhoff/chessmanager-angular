@@ -140,23 +140,6 @@ describe('FenDiagramComponent', () => {
       );
     });
 
-    it('should apply starting position to a new fen diagram when nothing retrieved from storage', () => {
-      reset(storageServiceMock);
-      when(storageServiceMock.getFenDiagramById(anyString())).thenReturn(undefined);
-
-      // Recreate component, otherwise the alterations to mock do not work
-      fixture = TestBed.createComponent(FenDiagramComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-
-      verify(storageServiceMock.getFenDiagramById(anyString())).once();
-      // Cannot check if method called in constructor, so check form values
-      expect(component.form.value).toEqual({
-        notation:  'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
-        description: 'Starting position'
-      });
-    });
-
     it('should build the form', () => {
       component.fenDiagram.notation = testNotations.eightQueensSolution;
       component.fenDiagram.description = 'Test position description';

@@ -41,8 +41,14 @@
 
   & ._validation {
     padding-bottom: 1rem;
+    margin-bottom: 0.6rem;
 
     overflow-x: auto;
+
+    &.-isempty {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
   }
 
   & ._validationnotation {
@@ -54,7 +60,7 @@
   }
 
   & ._validationmessage {
-    margin-top: 0.6rem;
+    // margin-top: 0.6rem;
   }
 
   & ._form {

@@ -25,14 +25,9 @@ export class FenDiagramComponent implements OnInit {
     });
 
     this._activatedRoute.params.subscribe(params => {
-      const fenDiagramFromStorage = this._storageService.getFenDiagramById(
+      this.fenDiagram = this._storageService.getFenDiagramById(
         params.fenDiagramId
       );
-      if (fenDiagramFromStorage) {
-        this.fenDiagram = fenDiagramFromStorage;
-      } else {
-        this.applyStartingPosition();
-      }
 
       this.form.setValue({
         notation: this.fenDiagram.notation,
