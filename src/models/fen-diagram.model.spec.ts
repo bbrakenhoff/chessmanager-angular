@@ -60,7 +60,13 @@ describe('FenDiagram', () => {
 
       it('should not result in an error when notation empty', () => {
         fenDiagram.notation = '';
-        expect(fenDiagram.error).toBeUndefined();
+        expect(fenDiagram.isValid).toEqual(true);      });
+
+      it('should be valid when an invalid notation has been fixed', () => {
+        fenDiagram.notation = testFenNotations.illegalCharacterFound;
+        expect(fenDiagram.isValid).toEqual(false);
+        fenDiagram.notation = testFenNotations.eightQueensSolution;
+        expect(fenDiagram.isValid).toEqual(true);
       });
     });
 

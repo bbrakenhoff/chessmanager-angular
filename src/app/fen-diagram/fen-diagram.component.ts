@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FenDiagram } from 'src/models/fen-diagram.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FenErrorCode } from 'src/models/fen-error-code.model';
@@ -100,7 +100,13 @@ export class FenDiagramComponent implements OnInit {
   }
 
   updateFenDiagram() {
+    console.log(`%cBijoya: fen-diagram.component -> updateFenDiagram`, 'color: deeppink;');
     this.fenDiagram.notation = this.form.value.notation;
     this.fenDiagram.description = this.form.value.description;
+  }
+
+  onFormSubmit() {
+    this.updateFenDiagram();
+    this._storageService.saveFenDiagram(this.fenDiagram);
   }
 }

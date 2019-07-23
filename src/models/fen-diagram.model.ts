@@ -49,12 +49,15 @@ export class FenDiagram {
   }
 
   private _validate() {
+    // Clear the current error before validating  (again)
+    this._error = undefined;
+
     if (this.notation === '') {
-      this._error = undefined;
+      // Nothing to validate
       return;
     }
 
-    // Wrap in vairable, so they can be updated by reference outside this method
+    // Wrap in variable, so they can be updated by reference outside this method
     const validationCounters: FenDiagram.ValidationCounters = {
       charIndex: 0,
       totalRanks: 0,
