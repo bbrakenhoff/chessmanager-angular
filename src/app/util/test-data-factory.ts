@@ -26,7 +26,8 @@ export class GlobalTestDataFactory {
       tooManyRanksDefined: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR/KQBNRP',
       illegalCharacterFound: 'rnbXkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
       notEnoughSquaresDefined: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQK',
-      eightQueensSolution: 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5'
+      eightQueensSolution: 'Q7/6Q1/4Q3/7Q/1Q6/3Q4/5Q2/2Q5',
+      foolsMate: 'rnb1kbnr/pppp1ppp/8/4p3/6Pq/5P2/PPPPP2P/RNBQKBNR'
     };
   }
 

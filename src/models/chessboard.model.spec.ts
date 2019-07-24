@@ -183,25 +183,19 @@ describe('Chessboard', () => {
     });
 
     it('should clear remaining squares when fen diagram is invalid', () => {
-      fenDiagram.notation = testFenNotations.eightQueensSolution;
+      fenDiagram.notation = testFenNotations.foolsMate;
       chessboard.reflectFenNotation(fenDiagram);
 
-      fenDiagram.notation = testFenNotations.illegalCharacterFound;
+      fenDiagram.notation = testFenNotations.foolsMate.substr(0, 3) + testFenNotations.foolsMate.substr(4);
       chessboard.reflectFenNotation(fenDiagram);
 
-      expect(chessboard.squares[0][0].piece).toEqual(
-        ChessPiece.createFromFenChar('r')
-      );
-      expect(chessboard.squares[0][1].piece).toEqual(
-        ChessPiece.createFromFenChar('n')
-      );
-      expect(chessboard.squares[0][2].piece).toEqual(
-        ChessPiece.createFromFenChar('b')
-      );
-      expect(chessboard.squares[0][3].piece).toBeNull();
-      expect(chessboard.squares[0][4].piece).toBeNull();
-      expect(chessboard.squares[0][5].piece).toBeNull();
-      expect(chessboard.squares[0][6].piece).toBeNull();
+      expect(chessboard.squares[0][0].piece).toEqual(ChessPiece.createFromFenChar('r'));
+      expect(chessboard.squares[0][1].piece).toEqual(ChessPiece.createFromFenChar('n'));
+      expect(chessboard.squares[0][2].piece).toEqual(ChessPiece.createFromFenChar('b'));
+      expect(chessboard.squares[0][3].piece).toEqual(ChessPiece.createFromFenChar('k'));
+      expect(chessboard.squares[0][4].piece).toEqual(ChessPiece.createFromFenChar('b'));
+      expect(chessboard.squares[0][5].piece).toEqual(ChessPiece.createFromFenChar('n'));
+      expect(chessboard.squares[0][6].piece).toEqual(ChessPiece.createFromFenChar('r'));
       expect(chessboard.squares[0][7].piece).toBeNull();
 
       for (let r = 1; r < 8; r++) {

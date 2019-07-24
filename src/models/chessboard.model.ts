@@ -69,7 +69,7 @@ export class Chessboard {
   }
 
   private _clearRemainingSquares(rank: number, file: number): void {
-    if (file >= 7) {
+    if (file > 7) {
       file = 0;
       rank++;
     }

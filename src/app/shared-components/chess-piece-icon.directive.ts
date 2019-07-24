@@ -3,7 +3,8 @@ import {
   Input,
   OnInit,
   ElementRef,
-  Renderer2
+  Renderer2,
+  OnChanges
 } from '@angular/core';
 import { IconSet } from 'src/models/icon-set.model';
 import { EnumAware } from '../util/enum-aware.decorator';
@@ -12,7 +13,7 @@ import { EnumAware } from '../util/enum-aware.decorator';
   selector: '[appChessPieceIcon]'
 })
 @EnumAware([{ name: 'IconSet', type: IconSet }])
-export class ChessPieceIconDirective implements OnInit {
+export class ChessPieceIconDirective implements OnChanges {
   private static readonly IconsSvg = '/assets/icons/icons.svg#';
 
   @Input('appChessPieceIcon')
@@ -23,12 +24,10 @@ export class ChessPieceIconDirective implements OnInit {
 
   constructor(private _el: ElementRef, private _renderer: Renderer2) {}
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     if (!this.iconSet) {
       this.iconSet = IconSet.Alpha;
     }
-
-    console.log(`Bijoya: chess-piece-icon.directive -> oninit`);
 
     this._renderer.setAttribute(
       this._el.nativeElement,
