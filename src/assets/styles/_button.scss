@@ -7,10 +7,15 @@ $app-button-secondary-active: #403d39;
 $app-button-border-radius: 0.2rem;
 $app-button-border-radius-rounded: 2rem;
 
-@mixin app-button-base() {
+@mixin app-button() {
+  padding: 0.25rem 0.5rem;
   border: none;
+
   color: white;
   cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.5rem;
   outline: none;
   text-align: center;
   text-transform: uppercase;
@@ -18,34 +23,4 @@ $app-button-border-radius-rounded: 2rem;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-}
-
-@mixin app-button(){
-  border-width: 1px;
-  border-style: solid;
-
-  background-color: transparent;
-}
-
-@mixin app-button() {
-  @include app-button-base();
-
-  // Display & Box Model
-  padding: 0.7rem 1.5rem;
-  border: none;
-
-  // Other
-  font-size: 0.875rem;
-  font-weight: 600;
-  line-height: 1rem;
-}
-
-@mixin app-button-small() {
-  @include app-button-base();
-
-  padding: 0.25rem 0.5rem;
-
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.5rem;
 }

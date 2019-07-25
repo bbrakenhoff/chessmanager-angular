@@ -42,7 +42,11 @@
             <label class="_radiobuttonlabel">{{ iconSet.key }}</label>
             <app-icon-set [iconSet]="iconSet.value"></app-icon-set>
           </div>
-          <button type="submit" class="_formsubmit">Save</button>
+          <button type="submit" class="_formsubmit">
+            <svg viewBox="0 0 32 32" class="_formsubmiticon">
+              <use [appSvgIcon]="SvgIcons.Send" /></svg
+            >Save
+          </button>
         </form>
       </div>
     </div>

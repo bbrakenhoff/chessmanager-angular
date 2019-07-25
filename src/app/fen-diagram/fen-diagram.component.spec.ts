@@ -92,13 +92,6 @@ describe('FenDiagramComponent', () => {
           testCollection.fenDiagrams.startingPosition.id
         )
       ).once();
-      expect(component.form.value).toEqual({
-        notation: testCollection.fenDiagrams.startingPosition.notation,
-        description: testCollection.fenDiagrams.startingPosition.description
-      });
-      expect(component.fenDiagram).toEqual(
-        testCollection.fenDiagrams.startingPosition
-      );
     });
 
     it('should build the form', () => {

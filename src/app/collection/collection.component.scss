@@ -65,7 +65,7 @@
   }
 
   & ._formsubmit {
-    @include app-button-small();
+    @include app-button();
 
     background-color: $app-button-primary;
     border-radius: $app-button-border-radius-rounded;

@@ -146,12 +146,24 @@
     align-self: flex-end;
     background-color: $app-button-primary;
     border-radius: $app-button-border-radius-rounded;
+    fill: $app-button-primary;
 
     &:active,
     &:focus,
     &:hover {
       background-color: $app-button-primary-active;
+      fill: $app-button-primary-active;
     }
+  }
+
+  & ._formsubmiticon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+
+    fill: white;
+    vertical-align: middle;
   }
 
   & ._cardcategory {

@@ -99,7 +99,7 @@
   }
 
   & ._formbutton {
-    @include app-button-small();
+    @include app-button();
 
     max-width: 20%;
     flex: 1 1 20%;
@@ -147,7 +147,7 @@
   }
 
   & ._standardnotationbutton {
-    @include app-button-small();
+    @include app-button();
 
     width: 100%;
     margin: 0.25rem 0;
