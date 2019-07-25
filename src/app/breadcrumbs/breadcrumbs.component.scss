@@ -24,13 +24,14 @@
 
     &::after {
       position: absolute;
-      top: 1px;
+      top: 50%;
       right: 0;
 
       display: inline-block;
-      border-top: 0.5rem solid transparent;
-      border-bottom: 0.5rem solid transparent;
-      border-left: 0.5rem solid #ef8157;
+      border-top: 0.3rem solid transparent;
+      border-bottom: 0.3rem solid transparent;
+      border-left: 0.3rem solid #ef8157;
+      margin-top: -0.3rem;
 
       border-radius: 4px;
       content: '';

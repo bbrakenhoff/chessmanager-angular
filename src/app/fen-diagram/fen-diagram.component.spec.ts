@@ -161,6 +161,10 @@ describe('FenDiagramComponent', () => {
     });
   });
 
+  describe('onUndo()', () => {
+    it('should undo all changes', () => {});
+  });
+
   describe('onFormSubmit()', () => {
     it('should write the updated fen diagram to the storage', () => {});
   });

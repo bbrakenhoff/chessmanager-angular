@@ -8,7 +8,7 @@
       >
         <div
           class="_validation"
-          [ngClass]="{'-isempty': fenDiagram.notation === ''}"
+          [ngClass]="{ '-isempty': fenDiagram.notation === '' }"
         >
           <div class="_validationnotation">
             {{ fenDiagram.notation }}
@@ -51,9 +51,21 @@
             placeholder="Description"
             formControlName="description"
           />
-          <!-- [value]="description.value" -->
         </fieldset>
-        <button type="submit" class="_formsubmit">Save</button>
+        <div class="_formbuttonswrapper">
+          <button class="_formbutton -undo" (click)="onUndo()">
+            <svg viewBox="0 0 32 32" class="_formbuttonicon -undo">
+              <use [appSvgIcon]="SvgIcons.Undo" />
+            </svg>
+            Undo
+          </button>
+          <button type="submit" class="_formbutton -submit">
+            <svg viewBox="0 0 32 32" class="_formbuttonicon -submit">
+              <use [appSvgIcon]="SvgIcons.Send" />
+            </svg>
+            Save
+          </button>
+        </div>
       </form>
       <button class="_standardnotationbutton" (click)="applyStartingPosition()">
         Starting position

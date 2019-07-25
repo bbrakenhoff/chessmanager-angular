@@ -4,13 +4,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FenErrorCode } from 'src/models/fen-error-code.model';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from '../core/storage.service';
+import { EnumAware } from '../util/enum-aware.decorator';
+import { SvgIcons } from '../shared-components/svg-icon/svg-icons';
 
 @Component({
   selector: 'app-fen-diagram',
   templateUrl: './fen-diagram.component.html',
   styleUrls: ['./fen-diagram.component.scss']
 })
+@EnumAware([{ name: 'SvgIcons', type: SvgIcons }])
 export class FenDiagramComponent implements OnInit {
+  private _fenDiagramFromStorage: FenDiagram;
   fenDiagram = FenDiagram.create();
   form: FormGroup;
 
@@ -25,17 +29,17 @@ export class FenDiagramComponent implements OnInit {
     });
 
     this._activatedRoute.params.subscribe(params => {
-      this.fenDiagram = this._storageService.getFenDiagramById(
+      this._fenDiagramFromStorage = this._storageService.getFenDiagramById(
         params.fenDiagramId
       );
 
-      this.form.setValue({
-        notation: this.fenDiagram.notation,
-        description: this.fenDiagram.description
-      });
-
       this.form.valueChanges.subscribe(() => {
         this.updateFenDiagram();
+      });
+
+      this.form.setValue({
+        notation: this._fenDiagramFromStorage.notation,
+        description: this._fenDiagramFromStorage.description
       });
     });
   }
@@ -100,9 +104,19 @@ export class FenDiagramComponent implements OnInit {
   }
 
   updateFenDiagram() {
-    console.log(`%cBijoya: fen-diagram.component -> updateFenDiagram`, 'color: deeppink;');
+    console.log(
+      `%cBijoya: fen-diagram.component -> updateFenDiagram`,
+      'color: deeppink;'
+    );
     this.fenDiagram.notation = this.form.value.notation;
     this.fenDiagram.description = this.form.value.description;
+  }
+
+  onUndo() {
+    this.form.setValue({
+      notation: this._fenDiagramFromStorage.notation,
+      description: this._fenDiagramFromStorage.description
+    });
   }
 
   onFormSubmit() {

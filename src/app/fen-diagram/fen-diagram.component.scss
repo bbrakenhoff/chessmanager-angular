@@ -93,18 +93,52 @@
     @include app-input();
   }
 
-  & ._formsubmit {
-    @include app-button();
+  & ._formbuttonswrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
 
-    align-self: flex-end;
-    background-color: $app-button-primary;
-    border-radius: $app-button-border-radius-rounded;
+  & ._formbutton {
+    @include app-button-small();
 
-    &:active,
-    &:focus,
-    &:hover {
-      background-color: $app-button-primary-active;
+    max-width: 20%;
+    flex: 1 1 20%;
+    margin-left: 1rem;
+
+    &.-undo {
+      border: 1px solid $app-button-primary;
+
+      border-radius: $app-button-border-radius-rounded;
+      color: $app-button-primary;
+      fill: $app-button-primary;
+
+      &:active,
+      &:focus,
+      &:hover {
+        color: $app-button-primary-active;
+        fill: $app-button-primary-active;
+      }
     }
+
+    &.-submit {
+      background-color: $app-button-primary;
+      border-radius: $app-button-border-radius-rounded;
+      fill: white;
+
+      &:active,
+      &:focus,
+      &:hover {
+        background-color: $app-button-primary-active;
+      }
+    }
+  }
+
+  & ._formbuttonicon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+
+    vertical-align: middle;
   }
 
   & ._wrapperbuttons {
