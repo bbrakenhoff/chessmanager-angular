@@ -1,17 +1,30 @@
-<nav class="app-navbar" role="navigation" [ngClass]="{ '-togglerisopen': togglerIsOpen }">
+<nav
+  class="app-navbar"
+  role="navigation"
+  [ngClass]="{ '-togglerisopen': togglerIsOpen }"
+>
   <div class="_container">
-    <div class="_brand" routerLink="/" (click)="onNavItemClicked()">Chess manager</div>
+    <div class="_brand" routerLink="/" (click)="onNavItemClicked()">
+      Chess manager
+    </div>
     <button class="_toggler" type="button" (click)="onTogglerClicked()">
       <span class="_togglerkebab"></span>
       <span class="_togglerkebab"></span>
       <span class="_togglerkebab"></span>
     </button>
-    <div class="_collapse" @togglerAnim [ngClass]="{'-togglerisopen': togglerIsOpen}">
+    <div
+      class="_collapse"
+      @togglerAnim
+      [ngClass]="{ '-togglerisopen': togglerIsOpen }"
+    >
       <ul class="_nav">
         <li class="_navitem">
-          <a routerLink="settings" (click)="onNavItemClicked()">
-            <i class="_navitemicon -settings nc-icon-settings-gear"></i>
-            <p class="_navitemtext"  *ngIf="togglerIsOpen">Settings</p>
+          <a class="_navlink" routerLink="settings" (click)="onNavItemClicked()">
+            <svg viewBox="0 0 32 32" class="_navitemicon -settings">
+              <use [appSvgIcon]="SvgIcons.SettingsGear" />
+            </svg>
+
+            <p class="_navitemtext" *ngIf="togglerIsOpen">Settings</p>
           </a>
         </li>
       </ul>

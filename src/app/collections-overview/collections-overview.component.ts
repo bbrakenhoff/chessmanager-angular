@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Collection } from 'src/models/collection.model';
 import { StorageService } from '../core/storage.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EnumAware } from '../util/enum-aware.decorator';
+import { SvgIcons } from '../shared-components/svg-icon/svg-icons';
 
 @Component({
   selector: 'app-collections',
   templateUrl: './collections-overview.component.html',
   styleUrls: ['./collections-overview.component.scss']
 })
+@EnumAware([{ name: 'SvgIcons', type: SvgIcons }])
 export class CollectionsOverviewComponent implements OnInit {
   collections: Collection[] = [];
   form: FormGroup;

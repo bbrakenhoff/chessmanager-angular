@@ -4,7 +4,6 @@
 @import '../../assets/styles/_button.scss';
 @import '../../assets/styles/_input.scss';
 @import '../../assets/styles/_variables.scss';
-@import '../../assets/styles/_nucleo-icons.scss';
 
 .fen-positions {
   @include make-container();
@@ -41,18 +40,16 @@
     @include app-listlink();
   }
 
-  & ._deletebutton {
-    color: #ef8157;
+  & ._listdeletebutton {
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
 
-    &::before {
-      font-size: 1.2rem;
-      font-weight: bold;
-      vertical-align: middle;
-    }
+    fill: #ef8157;
 
     &:hover,
     &:active {
-      color: darken(#ef8157, 20);
+      fill: darken(#ef8157, 20);
     }
   }
 
@@ -78,9 +75,15 @@
     &:hover {
       background-color: $app-button-primary-active;
     }
+  }
 
-    & .nc-icon-plus {
-      margin-right: 0.5rem;
-    }
+  & ._formsubmiticon {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+
+    fill: white;
+    vertical-align: middle;
   }
 }

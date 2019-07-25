@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { NavbarModule } from './navbar/navbar.module';
 import { SettingsModule } from './settings/settings.module';
 import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
+import { SharedComponentsModule } from './shared-components/shared-components.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,10 +15,12 @@ import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    SharedComponentsModule,
     NavbarModule,
     BreadcrumbsModule,
     SettingsModule
   ],
+  exports: [SharedComponentsModule],
   providers: [],
   bootstrap: [AppComponent]
 })

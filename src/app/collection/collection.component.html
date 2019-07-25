@@ -8,10 +8,13 @@
             [routerLink]="['../../fen-diagram', fenDiagram.id]"
             >{{ fenDiagram.description }}</a
           >
-          <i
-            class="nc-icon-cross _deletebutton"
+          <svg
+            viewBox="0 0 32 32"
+            class="_listdeletebutton"
             (click)="onDeleteButtonClicked(fenDiagram.id)"
-          ></i>
+          >
+            <use [appSvgIcon]="SvgIcons.Trash" />
+          </svg>
         </li>
         <li class="_listitem -nodiagrams" *ngIf="fenDiagrams.length === 0">
           No diagrams yet
@@ -31,7 +34,9 @@
               formControlName="description"
             />
             <button type="submit" class="_formsubmit">
-              <span class="nc-icon-plus"></span>Save
+              <svg viewBox="0 0 32 32" class="_formsubmiticon">
+                <use [appSvgIcon]="SvgIcons.Send" /></svg
+              >Save
             </button>
           </form>
         </li>

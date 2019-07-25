@@ -3,12 +3,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FenDiagram } from '../../models/fen-diagram.model';
 import { StorageService } from '../core/storage.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EnumAware } from '../util/enum-aware.decorator';
+import { SvgIcons } from '../shared-components/svg-icon/svg-icons';
 
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
   styleUrls: ['./collection.component.scss']
 })
+@EnumAware([{ name: 'SvgIcons', type: SvgIcons }])
 export class CollectionComponent implements OnInit {
   fenDiagrams: FenDiagram[] = [];
   form: FormGroup;

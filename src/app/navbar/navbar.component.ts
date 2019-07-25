@@ -6,11 +6,8 @@ import {
   transition,
   animate
 } from '@angular/animations';
-
-enum TogglerState {
-  Open = 'open',
-  Closed = 'closed'
-}
+import { EnumAware } from '../util/enum-aware.decorator';
+import { SvgIcons } from '../shared-components/svg-icon/svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -29,6 +26,7 @@ enum TogglerState {
     ])
   ]
 })
+@EnumAware([{ name: 'SvgIcons', type: SvgIcons }])
 export class NavbarComponent implements OnInit {
   togglerIsOpen = false;
 
