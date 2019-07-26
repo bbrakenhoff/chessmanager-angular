@@ -1,5 +1,5 @@
-@import '../../assets/styles/_bootstrap.scss';
-@import '../../assets/styles/_variables.scss';
+@import '../../assets/styles/bootstrap';
+@import '../../assets/styles/variables';
 
 $navbar-padding-base: 0.625rem;
 
@@ -31,7 +31,7 @@ $navbar-padding-base: 0.625rem;
   }
 
   &.-togglerisopen {
-    background-color: white;
+    background-color: $color-white;
   }
 
   & ._container {
@@ -51,7 +51,7 @@ $navbar-padding-base: 0.625rem;
     margin-right: 1rem;
 
     // Other
-    color: #66615b;
+    color: $color-grey;
     cursor: pointer;
     line-height: 1.625rem;
     outline: none;
@@ -95,7 +95,7 @@ $navbar-padding-base: 0.625rem;
     height: 3px;
     margin: 0 auto;
 
-    background-color: #66615b;
+    background-color: $color-grey;
     border-radius: 50%;
 
     & + ._togglerkebab {
@@ -166,7 +166,7 @@ $navbar-padding-base: 0.625rem;
     margin-right: 0.5rem;
 
     // Other
-    fill: #66615b;
+    fill: $color-grey;
 
     &.-settings {
       @include media-breakpoint-up('md') {
@@ -187,7 +187,7 @@ $navbar-padding-base: 0.625rem;
     margin: 0;
 
     // Other
-    color: #66615b;
+    color: $color-grey;
     font-size: 0.85rem;
     text-transform: uppercase;
 

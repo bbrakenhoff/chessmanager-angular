@@ -1,8 +1,10 @@
-$app-button-primary: #51cbce;
-$app-button-primary-active: #34b5b8;
+@import './variables';
 
-$app-button-secondary: #66615b;
-$app-button-secondary-active: #403d39;
+$app-button-primary: $color-cyan;
+$app-button-primary-active: $color-cyan-darker;
+
+$app-button-secondary: $color-grey;
+$app-button-secondary-active: $color-grey-darker;
 
 $app-button-border-radius: 0.2rem;
 $app-button-border-radius-rounded: 2rem;
@@ -11,7 +13,7 @@ $app-button-border-radius-rounded: 2rem;
   padding: 0.25rem 0.5rem;
   border: none;
 
-  color: white;
+  color: $color-white;
   cursor: pointer;
   font-size: 0.75rem;
   font-weight: 400;

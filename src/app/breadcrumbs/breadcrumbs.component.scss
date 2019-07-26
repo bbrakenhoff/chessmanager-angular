@@ -1,6 +1,6 @@
-@import '../../assets//styles/_bootstrap.scss';
-@import '../../assets/styles/_link.scss';
-@import '../../assets/styles/_variables.scss';
+@import '../../assets/styles/bootstrap';
+@import '../../assets/styles/variables';
+@import '../../assets/styles/link';
 
 .breadcrumbs {
   @include make-container();
@@ -30,7 +30,7 @@
       display: inline-block;
       border-top: 0.3rem solid transparent;
       border-bottom: 0.3rem solid transparent;
-      border-left: 0.3rem solid #ef8157;
+      border-left: 0.3rem solid $color-orange;
       margin-top: -0.3rem;
 
       border-radius: 4px;
@@ -49,12 +49,12 @@
     line-height: 1;
 
     &.-isactive {
-      color: #66615b;
+      color: $color-grey;
       cursor: default;
       text-decoration: none;
 
       &:visited {
-        color: #66615b;
+        color: $color-grey;
       }
     }
   }

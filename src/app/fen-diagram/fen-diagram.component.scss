@@ -1,8 +1,8 @@
-@import '../../assets/styles/_bootstrap.scss';
-@import '../../assets/styles/_card.scss';
-@import '../../assets/styles/_button.scss';
-@import '../../assets/styles/_variables.scss';
-@import '../../assets/styles/_input.scss';
+@import '../../assets/styles/bootstrap';
+@import '../../assets/styles/card';
+@import '../../assets/styles/button';
+@import '../../assets/styles/variables';
+@import '../../assets/styles/input';
 
 .fen-diagram {
   @include make-container();
@@ -30,12 +30,12 @@
 
   & ._validationwrapper {
     padding: 1.2rem;
-    border: 1px solid #66615b;
+    border: 1px solid $color-grey;
 
     &.-invalid {
-      border-color: #ef8157;
+      border-color:$color-orange;
 
-      color: #ef8157;
+      color: $color-orange;
     }
   }
 
@@ -123,7 +123,7 @@
     &.-submit {
       background-color: $app-button-primary;
       border-radius: $app-button-border-radius-rounded;
-      fill: white;
+      fill: $color-white;
 
       &:active,
       &:focus,

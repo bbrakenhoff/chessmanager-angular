@@ -16,7 +16,6 @@ import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { FenDiagram } from 'src/models/fen-diagram.model';
 import { StorageService } from '../core/storage.service';
-import { Collection } from 'src/models/collection.model';
 import { GlobalTestDataFactory } from '../util/test-data-factory';
 
 class TestDataFactory {

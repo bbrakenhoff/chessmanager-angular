@@ -1,9 +1,9 @@
-@import '../../assets/styles/_bootstrap.scss';
-@import '../../assets/styles/_list.scss';
-@import '../../assets/styles/_link.scss';
-@import '../../assets/styles/_button.scss';
-@import '../../assets/styles/_input.scss';
-@import '../../assets/styles/_variables.scss';
+@import '../../assets/styles/bootstrap';
+@import '../../assets/styles/variables';
+@import '../../assets/styles/list';
+@import '../../assets/styles/link';
+@import '../../assets/styles/button';
+@import '../../assets/styles/input';
 
 .fen-positions {
   @include make-container();
@@ -29,7 +29,7 @@
     @include app-listitem();
 
     &.-nodiagrams {
-      color: #66615b;
+      color: $color-grey;
       cursor: default;
       font-style: italic;
       font-weight: 300;
@@ -45,11 +45,12 @@
     width: 1.2rem;
     height: 1.2rem;
 
-    fill: #ef8157;
+    fill: $color-orange;
+    transition: all 0.15s linear;
 
     &:hover,
     &:active {
-      fill: darken(#ef8157, 20);
+      fill: $color-orange-darker;
     }
   }
 
@@ -83,7 +84,7 @@
     height: 1rem;
     margin-right: 0.5rem;
 
-    fill: white;
+    fill: $color-white;
     vertical-align: middle;
   }
 }

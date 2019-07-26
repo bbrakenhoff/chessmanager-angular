@@ -1,6 +1,9 @@
+@import './variables';
+
 @mixin app-link() {
-  color: #51cbce;
+  color: $color-cyan;
   text-decoration: none;
+  transition: all 0.15s linear;
 
   &:hover,
   &:active,
@@ -10,6 +13,6 @@
   }
 
   &:visited {
-    color: darken(#51cbce, 15);
+    color: $color-cyan-darker;
   }
 }
